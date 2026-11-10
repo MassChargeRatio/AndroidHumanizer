@@ -1,0 +1,263 @@
+'use strict';
+
+/* ------------------------------------------------------------------
+ * touch-humanization · 浏览器演示
+ * 与 Python 版 kinematics 同一套算法：
+ *   三次贝塞尔 + Fitts 步数 + smoothstep 速度轮廓 + 末段高斯微颤 + 过冲回拉
+ * 随机源：mulberry32（实例级 PRNG，seed 可复现）。
+ * 注：JS 与 Python 的 PRNG 实现不同，故同 seed 不是逐位一致，
+ *     但统计特征（均值/分位/形态）一致。
+ * ------------------------------------------------------------------ */
+
+const DEFAULTS = {
+  stepsMin: 20,
+  stepsMax: 60,
+  pxPerStep: 15,
+  durationPerPx: 0.0007,
+  durationMin: 0.3,
+  durationMax: 1.5,
+  perpendicularRatio: 0.12,
+  jitterSigma: 1.2,
+  jitterTailFraction: 0.25,
+  overshootProb: 0.25,
+  overshootRatio: 0.06,
+};
+
+const $ = s => document.querySelector(s);
+const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+
+function mulberry32(seed) {
+  let a = seed >>> 0;
+  return function () {
+    a = (a + 0x6D2B79F5) >>> 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+function gauss(rnd, mu = 0, sigma = 1) {
+  let u1 = rnd();
+  if (u1 < 1e-12) u1 = 1e-12;
+  const u2 = rnd();
+  return mu + sigma * Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
+}
+
+const smoothstep = t => {
+  t = clamp(t, 0, 1);
+  return t * t * (3 - 2 * t);
+};
+
+function bezier3(p0, p1, p2, p3, t) {
+  const u = 1 - t;
+  const x = u * u * u * p0[0] + 3 * u * u * t * p1[0] +
+            3 * u * t * t * p2[0] + t * t * t * p3[0];
+  const y = u * u * u * p0[1] + 3 * u * u * t * p1[1] +
+            3 * u * t * t * p2[1] + t * t * t * p3[1];
+  return [x, y];
+}
+
+function controlPoints(rnd, start, end, dist, ratio) {
+  const dx = end[0] - start[0];
+  const dy = end[1] - start[1];
+  if (dist < 1e-6) return [start, end];
+  const nx = -dy / dist, ny = dx / dist;
+  const side = rnd() < 0.5 ? 1 : -1;
+  const amp = dist * ratio * (0.5 + rnd() * 0.9);
+  const mx = (start[0] + end[0]) / 2;
+  const my = (start[1] + end[1]) / 2;
+  return [
+    [mx + nx * side * amp, my + ny * side * amp],
+    [mx + nx * side * amp * (0.5 + rnd() * 0.7),
+     my + ny * side * amp * (0.5 + rnd() * 0.7)],
+  ];
+}
+
+function generate(start, end, opts) {
+  const o = Object.assign({}, DEFAULTS, opts || {});
+  const rnd = mulberry32(o.seed >>> 0);
+  const p0 = [start[0], start[1]];
+  const p3 = [end[0], end[1]];
+  const dx = p3[0] - p0[0], dy = p3[1] - p0[1];
+  const dist = Math.hypot(dx, dy);
+
+  if (dist < 1.0) {
+    return { points: [p0, p3], intervals: [0.02], duration: 0.02,
+             distance: dist, steps: 2, slider: !!o.forSlider, seed: o.seed };
+  }
+
+  const steps = Math.round(clamp(dist / o.pxPerStep, o.stepsMin, o.stepsMax));
+  const duration = clamp(dist * o.durationPerPx, o.durationMin, o.durationMax);
+
+  if (o.forSlider) {
+    const ts = [];
+    for (let i = 0; i < steps; i++) ts.push(smoothstep(i / (steps - 1)));
+    const pts = [];
+    for (let i = 0; i < steps; i++) {
+      const x = p0[0] + dx * ts[i];
+      const y = (i >= 2 && i <= steps - 3) ? p0[1] + gauss(rnd, 0, 0.5)
+                                           : p0[1];
+      pts.push([x, y]);
+    }
+    const ivs = [];
+    for (let i = 1; i < steps; i++) {
+      ivs.push(duration * (ts[i] - ts[i - 1]) * (0.7 + rnd() * 0.6));
+    }
+    if (o.exactEnd !== false) pts[pts.length - 1] = p3;
+    return { points: pts.map(roundPt), intervals: ivs,
+             duration: ivs.reduce((a, b) => a + b, 0),
+             distance: dist, steps: pts.length, slider: true, seed: o.seed };
+  }
+
+  let overshoot = 0;
+  if (rnd() < o.overshootProb) overshoot = dist * o.overshootRatio * (0.6 + rnd() * 0.6);
+  const s = overshoot > 0 ? overshoot / dist : 0;
+  const p3o = [p0[0] + dx * (1 + s), p0[1] + dy * (1 + s)];
+
+  const [p1, p2] = controlPoints(rnd, p0, p3o, dist + overshoot, o.perpendicularRatio);
+  const pts = [];
+  for (let i = 0; i < steps; i++) pts.push(bezier3(p0, p1, p2, p3o, i / (steps - 1)));
+
+  if (overshoot > 0) {
+    const backN = Math.max(3, Math.floor(steps / 6));
+    for (let i = 1; i <= backN; i++) {
+      const f = 1 - i / backN;
+      pts.push([p3[0] + (p3o[0] - p3[0]) * f, p3[1] + (p3o[1] - p3[1]) * f]);
+    }
+  }
+
+  const n = pts.length;
+  const ts = [];
+  for (let i = 0; i < n; i++) ts.push(smoothstep(i / (n - 1)));
+  const ivs = [];
+  for (let i = 1; i < n; i++) ivs.push(duration * (ts[i] - ts[i - 1]) * (0.6 + rnd() * 0.8));
+
+  if (o.jitterSigma > 0) {
+    const tailFrom = Math.floor(n * (1 - o.jitterTailFraction));
+    for (let i = tailFrom; i < n - 1; i++) {
+      const f = (i - tailFrom) / Math.max(1, n - 1 - tailFrom);
+      const sigma = o.jitterSigma * (0.3 + 0.7 * f);
+      pts[i] = [pts[i][0] + gauss(rnd, 0, sigma), pts[i][1] + gauss(rnd, 0, sigma)];
+    }
+  }
+
+  if (o.exactEnd !== false) {
+    pts[pts.length - 1] = p3;
+    ivs[ivs.length - 1] += 0.05 + rnd() * 0.15;
+  }
+
+  return { points: pts.map(roundPt), intervals: ivs,
+           duration: ivs.reduce((a, b) => a + b, 0),
+           distance: dist, steps: pts.length, slider: false, seed: o.seed };
+}
+
+const roundPt = p => [Math.round(p[0]), Math.round(p[1])];
+
+/* ---------------- 绘图 ---------------- */
+function draw(g) {
+  const cv = $('#cv');
+  const ctx = cv.getContext('2d');
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.clearRect(0, 0, cv.width, cv.height);
+  ctx.fillStyle = '#0e1116';
+  ctx.fillRect(0, 0, cv.width, cv.height);
+
+  const pts = g.points;
+  const xs = pts.map(p => p[0]), ys = pts.map(p => p[1]);
+  const minX = Math.min(...xs) - 30, maxX = Math.max(...xs) + 30;
+  const minY = Math.min(...ys) - 30, maxY = Math.max(...ys) + 30;
+  const w = maxX - minX || 1, h = maxY - minY || 1;
+  const scale = Math.min((cv.width - 60) / w, (cv.height - 60) / h);
+  const ox = 30 + (cv.width - 60 - w * scale) / 2;
+  const oy = 30 + (cv.height - 60 - h * scale) / 2;
+  const tx = x => ox + (x - minX) * scale;
+  const ty = y => oy + (y - minY) * scale;
+
+  // 网格
+  ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+  ctx.lineWidth = 1;
+  for (let i = 0; i <= 10; i++) {
+    const gx = ox + (cv.width - 60) * i / 10;
+    const gy = oy + (cv.height - 60) * i / 10;
+    ctx.beginPath(); ctx.moveTo(gx, oy); ctx.lineTo(gx, oy + h * scale); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(ox, gy); ctx.lineTo(ox + w * scale, gy); ctx.stroke();
+  }
+
+  // 轨迹
+  ctx.strokeStyle = '#4c8dff';
+  ctx.lineWidth = 2;
+  ctx.lineJoin = 'round';
+  ctx.beginPath();
+  pts.forEach((p, i) => {
+    const X = tx(p[0]), Y = ty(p[1]);
+    i ? ctx.lineTo(X, Y) : ctx.moveTo(X, Y);
+  });
+  ctx.stroke();
+
+  // 采样点
+  ctx.fillStyle = 'rgba(76,141,255,0.45)';
+  pts.forEach(p => {
+    ctx.beginPath();
+    ctx.arc(tx(p[0]), ty(p[1]), 1.6, 0, Math.PI * 2);
+    ctx.fill();
+  });
+
+  // 起终点
+  ctx.fillStyle = '#2fbf71';
+  ctx.beginPath(); ctx.arc(tx(pts[0][0]), ty(pts[0][1]), 7, 0, Math.PI * 2); ctx.fill();
+  ctx.fillStyle = '#e5534b';
+  ctx.beginPath();
+  ctx.arc(tx(pts[pts.length - 1][0]), ty(pts[pts.length - 1][1]), 7, 0, Math.PI * 2);
+  ctx.fill();
+}
+
+/* ---------------- 交互 ---------------- */
+function readNum(id, dflt) {
+  const v = $(id).value;
+  return v === '' ? dflt : Number(v);
+}
+
+function render() {
+  const start = [readNum('#sx', 100), readNum('#sy', 1800)];
+  const end = [readNum('#ex', 900), readNum('#ey', 400)];
+  const seed = (readNum('#seed', Math.floor(Math.random() * 1e9)) >>> 0);
+  $('#seed').value = seed;
+
+  const opts = {
+    seed,
+    forSlider: $('#slider').checked,
+    stepsMin: readNum('#stepsMin', DEFAULTS.stepsMin),
+    stepsMax: readNum('#stepsMax', DEFAULTS.stepsMax),
+    pxPerStep: readNum('#pxPerStep', DEFAULTS.pxPerStep),
+    perpendicularRatio: readNum('#perpH', DEFAULTS.perpendicularRatio),
+    jitterSigma: readNum('#jitter', DEFAULTS.jitterSigma),
+    overshootProb: readNum('#overshoot', DEFAULTS.overshootProb),
+  };
+  const t0 = performance.now();
+  const g = generate(start, end, opts);
+  const ms = performance.now() - t0;
+
+  draw(g);
+
+  const ivs = g.intervals.slice().sort((a, b) => a - b);
+  const p = q => ivs[Math.min(ivs.length - 1, Math.round(q * (ivs.length - 1)))] || 0;
+  $('#meta').innerHTML =
+    `<span>点数 <b>${g.steps}</b></span>` +
+    `<span>直线距离 <b>${g.distance.toFixed(1)}px</b></span>` +
+    `<span>总时长 <b>${g.duration.toFixed(3)}s</b></span>` +
+    `<span>步间隔 p50 <b>${(p(0.5) * 1000).toFixed(0)}ms</b></span>` +
+    `<span>p95 <b>${(p(0.95) * 1000).toFixed(0)}ms</b></span>` +
+    `<span>模式 <b>${g.slider ? '滑块' : '滑动'}</b></span>` +
+    `<span class="ok">生成 ${ms.toFixed(1)}ms</span>`;
+}
+
+$('#go').addEventListener('click', render);
+$('#rand').addEventListener('click', () => {
+  $('#seed').value = Math.floor(Math.random() * 1e9);
+  render();
+});
+$('#slider').addEventListener('change', render);
+['#sx', '#sy', '#ex', '#ey'].forEach(id =>
+  $(id).addEventListener('change', render));
+
+render();
