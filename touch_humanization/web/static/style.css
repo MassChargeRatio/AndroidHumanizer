@@ -1,0 +1,41 @@
+:root {
+  --bg: #0e1116;
+  --bg2: #141922;
+  --line: #242c3a;
+  --fg: #e6ebf3;
+  --fg2: #9aa7bd;
+  --acc: #4c8dff;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font: 14px/1.5 "Segoe UI", "Microsoft YaHei", system-ui, sans-serif;
+}
+main { max-width: 1100px; margin: 0 auto; padding: 20px; }
+h1 { font-size: 20px; margin: 0 0 4px; }
+.muted { color: var(--fg2); font-size: 12px; margin: 0 0 16px; }
+.form {
+  display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end;
+  background: var(--bg2); border: 1px solid var(--line);
+  border-radius: 12px; padding: 14px; margin-bottom: 12px;
+}
+.form label { display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: var(--fg2); }
+.form input[type=number] {
+  width: 110px; background: var(--bg); border: 1px solid var(--line);
+  color: var(--fg); border-radius: 8px; padding: 7px 9px; font-size: 13px;
+}
+.form label.chk { flex-direction: row; align-items: center; gap: 6px; }
+.form label.chk input { accent-color: var(--acc); }
+.form button {
+  background: var(--acc); border: 0; color: #fff; border-radius: 8px;
+  padding: 9px 18px; font-size: 13px; cursor: pointer;
+}
+.form button:hover { filter: brightness(1.1); }
+.meta { font-size: 12px; color: var(--fg2); margin-bottom: 8px; font-family: ui-monospace, monospace; }
+canvas {
+  width: 100%; height: auto; max-height: 80vh;
+  background: var(--bg2); border: 1px solid var(--line); border-radius: 12px;
+  display: block;
+}

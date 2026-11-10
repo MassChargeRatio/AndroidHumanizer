@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>touch-humanization · 轨迹预览</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<main>
+  <h1>touch-humanization</h1>
+  <p class="muted">拟人化手势轨迹 · 交互式预览</p>
+
+  <section class="form">
+    <label>起点 x<input id="sx" type="number" value="100"></label>
+    <label>起点 y<input id="sy" type="number" value="1800"></label>
+    <label>终点 x<input id="ex" type="number" value="900"></label>
+    <label>终点 y<input id="ey" type="number" value="400"></label>
+    <label>seed<input id="seed" type="number" placeholder="留空=随机"></label>
+    <label class="chk"><input id="slider" type="checkbox"> 滑块模式</label>
+    <button id="go">Generate</button>
+  </section>
+
+  <section class="meta" id="meta"></section>
+  <canvas id="cv" width="1000" height="1900"></canvas>
+</main>
+<script src="/static/app.js"></script>
+</body>
+</html>
