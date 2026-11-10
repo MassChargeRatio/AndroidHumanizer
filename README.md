@@ -1,5 +1,8 @@
 # touch-humanization
 
+[![CI](https://github.com/MassChargeRatio/touch-humanization/actions/workflows/ci.yml/badge.svg)](https://github.com/MassChargeRatio/touch-humanization/actions/workflows/ci.yml)
+![Python](https://img.shields.io/badge/python-3.9%20%7C%203.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue)
+
 拟人化触摸轨迹、时序与传感器模拟，供 Android 自动化项目复用。
 
 - **零运行时依赖**：仅用 Python 标准库。
