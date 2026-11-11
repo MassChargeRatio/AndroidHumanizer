@@ -1,1 +1,211 @@
-IyAtKi0gY29kaW5nOiB1dGYtOCAtKi0KIyBXZWIgVUkgdW5pdCB0ZXN0cyAoc3RkbGliIGh0dHAuc2VydmVyKS4KIyBXZWIgVUkg5Y2V5YWD5rWL6K+V77yIc3RkbGliIGh0dHAuc2VydmVy77yJ44CCCmltcG9ydCBqc29uCmltcG9ydCB0aHJlYWRpbmcKaW1wb3J0IHVybGxpYi5lcnJvcgppbXBvcnQgdXJsbGliLnJlcXVlc3QKCmltcG9ydCBweXRlc3QKCmZyb20gdG91Y2hfaHVtYW5pemF0aW9uLndlYi5zZXJ2ZXIgaW1wb3J0IG1ha2Vfc2VydmVyCgoKQHB5dGVzdC5maXh0dXJlKCkKZGVmIHNlcnZlcigpOgogICAgIyBTdGFydCBhIHNlcnZlciBvbiBhIGZyZWUgcG9ydDsgeWllbGQgYmFzZSBVUkw7IHNodXQgZG93biBhZnRlci4KICAgICMg5Zyo56m66Zey56uv5Y+j5ZCv5Yqo5pyN5Yqh77yb5Lqn5Ye6IGJhc2UgVVJM77yb57uT5p2f5ZCO5YWz6Zet44CCCiAgICBodHRwZCA9IG1ha2Vfc2VydmVyKCIxMjcuMC4wLjEiLCAwKQogICAgcG9ydCA9IGh0dHBkLnNlcnZlcl9hZGRyZXNzWzFdCiAgICB0ID0gdGhyZWFkaW5nLlRocmVhZCh0YXJnZXQ9aHR0cGQuc2VydmVfZm9yZXZlciwgZGFlbW9uPVRydWUpCiAgICB0LnN0YXJ0KCkKICAgIHlpZWxkIGYiaHR0cDovLzEyNy4wLjAuMTp7cG9ydH0iCiAgICBodHRwZC5zaHV0ZG93bigpCiAgICBodHRwZC5zZXJ2ZXJfY2xvc2UoKQoKCmRlZiBfcG9zdCh1cmwsIGJvZHkpOgogICAgIyBQT1NUIEpTT04gYW5kIHBhcnNlIEpTT04gcmVzcG9uc2UuCiAgICAjIOWPkemAgSBKU09OIFBPU1Qg5bm26Kej5p6QIEpTT04g5ZON5bqU44CCCiAgICBkYXRhID0ganNvbi5kdW1wcyhib2R5KS5lbmNvZGUoInV0Zi04IikKICAgIHJlcSA9IHVybGxpYi5yZXF1ZXN0LlJlcXVlc3QodXJsLCBkYXRhPWRhdGEsIG1ldGhvZD0iUE9TVCIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGhlYWRlcnM9eyJDb250ZW50LVR5cGUiOiAiYXBwbGljYXRpb24vanNvbiJ9KQogICAgd2l0aCB1cmxsaWIucmVxdWVzdC51cmxvcGVuKHJlcSwgdGltZW91dD0xNSkgYXMgcjoKICAgICAgICByZXR1cm4ganNvbi5sb2FkcyhyLnJlYWQoKS5kZWNvZGUoInV0Zi04IikpCgoKZGVmIHRlc3RfaGVhbHRoX2FuZF9pbmRleChzZXJ2ZXIpOgogICAgIyAvYXBpL2hlYWx0aCBtdXN0IGJlIG9rOyAvIG11c3QgY29udGFpbiB0aGUgdGhyZWUgdGFiIGFuY2hvcnMuCiAgICAjIC9hcGkvaGVhbHRoIOW/hemhuyBva++8my8g5b+F6aG75YyF5ZCr5LiJ5LiqIHRhYiDplJrngrnjgIIKICAgIHdpdGggdXJsbGliLnJlcXVlc3QudXJsb3BlbihzZXJ2ZXIgKyAiL2FwaS9oZWFsdGgiLCB0aW1lb3V0PTUpIGFzIHI6CiAgICAgICAgYXNzZXJ0IGpzb24ubG9hZHMoci5yZWFkKCkpWyJvayJdIGlzIFRydWUKICAgIHdpdGggdXJsbGliLnJlcXVlc3QudXJsb3BlbihzZXJ2ZXIgKyAiLyIsIHRpbWVvdXQ9NSkgYXMgcjoKICAgICAgICBib2R5ID0gci5yZWFkKCkKICAgIGFzc2VydCBiInRvdWNoLWh1bWFuaXphdGlvbiIgaW4gYm9keQogICAgYXNzZXJ0IGIidGFiLWtpbmVtYXRpY3MiIGluIGJvZHkKICAgIGFzc2VydCBiInRhYi10aW1pbmciIGluIGJvZHkKICAgIGFzc2VydCBiInRhYi1zZW5zb3JzIiBpbiBib2R5CgoKIyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0ga2luZW1hdGljcwojIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSDmiYvlir/ovajov7kKCmRlZiB0ZXN0X2dlc3R1cmVfYmFzaWMoc2VydmVyKToKICAgICMgQmFzaWMgZ2VzdHVyZTogZXhhY3QgZW5kcG9pbnRzIGFuZCBpbnRlcnZhbCBjb3VudC4KICAgICMg5Z+656GA6L2o6L+577ya56uv54K557K+56Gu44CB6Ze06ZqU5pWw5q2j56Gu44CCCiAgICByID0gX3Bvc3Qoc2VydmVyICsgIi9hcGkvZ2VzdHVyZSIsIHsKICAgICAgICAic3RhcnQiOiBbMTAwLCAxODAwXSwgImVuZCI6IFs5MDAsIDQwMF0sICJzZWVkIjogNDIsCiAgICB9KQogICAgZyA9IHJbImdlc3R1cmUiXQogICAgYXNzZXJ0IGdbInBvaW50cyJdWzBdID09IFsxMDAsIDE4MDBdCiAgICBhc3NlcnQgZ1sicG9pbnRzIl1bLTFdID09IFs5MDAsIDQwMF0KICAgIGFzc2VydCBsZW4oZ1siaW50ZXJ2YWxzIl0pID09IGxlbihnWyJwb2ludHMiXSkgLSAxCgoKZGVmIHRlc3RfZ2VzdHVyZV9zZWVkX3JlcHJvZHVjaWJsZShzZXJ2ZXIpOgogICAgIyBTYW1lIHNlZWQgLT4gaWRlbnRpY2FsIGdlc3R1cmUuCiAgICAjIOWQjCBzZWVkIC0+IOi9qOi/ueS4gOiHtOOAggogICAgYm9keSA9IHsic3RhcnQiOiBbMCwgMF0sICJlbmQiOiBbNTAwLCA1MDBdLCAic2VlZCI6IDd9CiAgICBhID0gX3Bvc3Qoc2VydmVyICsgIi9hcGkvZ2VzdHVyZSIsIGJvZHkpWyJnZXN0dXJlIl0KICAgIGIgPSBfcG9zdChzZXJ2ZXIgKyAiL2FwaS9nZXN0dXJlIiwgYm9keSlbImdlc3R1cmUiXQogICAgYXNzZXJ0IGEgPT0gYgoKCmRlZiB0ZXN0X2dlc3R1cmVfc2xpZGVyX21vZGUoc2VydmVyKToKICAgICMgU2xpZGVyIG1vZGUgZmxhZyBhbmQgZXhhY3QgZW5kLgogICAgIyDmu5HlnZfmqKHlvI/moIflv5fkuI7nu4jngrnnsr7noa7jgIIKICAgIHIgPSBfcG9zdChzZXJ2ZXIgKyAiL2FwaS9nZXN0dXJlIiwgewogICAgICAgICJzdGFydCI6IFs4MCwgMTUwMF0sICJlbmQiOiBbMTIwMCwgMTUwMF0sCiAgICAgICAgInNlZWQiOiAxLCAiZm9yX3NsaWRlciI6IFRydWUsCiAgICB9KQogICAgZyA9IHJbImdlc3R1cmUiXQogICAgYXNzZXJ0IGdbImZvcl9zbGlkZXIiXSBpcyBUcnVlCiAgICBhc3NlcnQgZ1sicG9pbnRzIl1bLTFdID09IFsxMjAwLCAxNTAwXQoKCmRlZiB0ZXN0X2dlc3R1cmVfYWR2YW5jZWRfcGFyYW1zKHNlcnZlcik6CiAgICAjIEZpeGVkIHN0ZXAgY291bnQgbXVzdCBiZSBob25vcmVkLgogICAgIyDlm7rlrprmraXmlbDlv4XpobvooqvpgbXlrojjgIIKICAgIHIgPSBfcG9zdChzZXJ2ZXIgKyAiL2FwaS9nZXN0dXJlIiwgewogICAgICAgICJzdGFydCI6IFswLCAwXSwgImVuZCI6IFs1MDAsIDBdLAogICAgICAgICJzZWVkIjogMywKICAgICAgICAic3RlcHNfbWluIjogNDAsICJzdGVwc19tYXgiOiA0MCwKICAgICAgICAib3ZlcnNob290X3Byb2IiOiAwLCAgICMgbm8gcHVsbC1iYWNrIHBvaW50cyAvIOWFs+mXrei/h+WGsu+8jOmBv+WFjeWbnuaLieeCueW5suaJsOatpeaVsAogICAgfSkKICAgIGFzc2VydCByWyJnZXN0dXJlIl1bInN0ZXBzIl0gPT0gNDAKCgpkZWYgdGVzdF9nZXN0dXJlX2JhZF9ib2R5KHNlcnZlcik6CiAgICAjIE1hbGZvcm1lZCBKU09OIGJvZHkgbXVzdCBiZSByZWplY3RlZCB3aXRoIDQwMC4KICAgICMg6Z2e5rOVIEpTT04g6K+35rGC5L2T5b+F6aG76L+U5ZueIDQwMOOAggogICAgcmVxID0gdXJsbGliLnJlcXVlc3QuUmVxdWVzdChzZXJ2ZXIgKyAiL2FwaS9nZXN0dXJlIiwgZGF0YT1iIm5vdCBqc29uIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgbWV0aG9kPSJQT1NUIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgaGVhZGVycz17IkNvbnRlbnQtVHlwZSI6ICJhcHBsaWNhdGlvbi9qc29uIn0pCiAgICB0cnk6CiAgICAgICAgdXJsbGliLnJlcXVlc3QudXJsb3BlbihyZXEsIHRpbWVvdXQ9NSkKICAgIGV4Y2VwdCB1cmxsaWIuZXJyb3IuSFRUUEVycm9yIGFzIGU6CiAgICAgICAgYXNzZXJ0IGUuY29kZSA9PSA0MDAKICAgIGVsc2U6CiAgICAgICAgcmFpc2UgQXNzZXJ0aW9uRXJyb3IoIuW6lOi/lOWbniA0MDAgLyA0MDAgZXhwZWN0ZWQiKQoKCiMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tIHRpbWluZwojIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSDml7bluo8KCmRlZiB0ZXN0X3RpbWluZ19zYW1wbGUoc2VydmVyKToKICAgICMgU2FtcGxlIGRpc3RyaWJ1dGlvbiBlbmRwb2ludHMgYW5kIHN0YXRzLgogICAgIyDph4fmoLfliIbluIPnmoTnq6/ngrnkuI7nu5/orqHjgIIKICAgIHIgPSBfcG9zdChzZXJ2ZXIgKyAiL2FwaS90aW1pbmcvc2FtcGxlIiwgewogICAgICAgICJuIjogNTAwLCAibG8iOiAwLjUsICJoaSI6IDIuMCwgImxvZ25vcm1hbCI6IFRydWUsICJzZWVkIjogNDIsCiAgICB9KQogICAgYXNzZXJ0IGxlbihyWyJzYW1wbGVzIl0pID09IDUwMAogICAgYXNzZXJ0IGFsbCgwLjUgPD0gdiA8PSAyLjAgZm9yIHYgaW4gclsic2FtcGxlcyJdKQogICAgYXNzZXJ0IHJbInN0YXRzIl1bIm4iXSA9PSA1MDAKICAgIGFzc2VydCBsZW4oclsiYmlucyJdKSA+IDAKCgpkZWYgdGVzdF90aW1pbmdfc2FtcGxlX3JlcHJvZHVjaWJsZShzZXJ2ZXIpOgogICAgIyBTYW1lIHNlZWQgLT4gaWRlbnRpY2FsIHNhbXBsZXMuCiAgICAjIOWQjCBzZWVkIC0+IOmHh+agt+S4gOiHtOOAggogICAgYm9keSA9IHsibiI6IDIwMCwgImxvIjogMC41LCAiaGkiOiAyLjAsICJsb2dub3JtYWwiOiBUcnVlLCAic2VlZCI6IDl9CiAgICBhID0gX3Bvc3Qoc2VydmVyICsgIi9hcGkvdGltaW5nL3NhbXBsZSIsIGJvZHkpWyJzYW1wbGVzIl0KICAgIGIgPSBfcG9zdChzZXJ2ZXIgKyAiL2FwaS90aW1pbmcvc2FtcGxlIiwgYm9keSlbInNhbXBsZXMiXQogICAgYXNzZXJ0IGEgPT0gYgoKCmRlZiB0ZXN0X3RpbWluZ193aW5kb3dfc2ltcGxlKHNlcnZlcik6CiAgICAjIFNpbXBsZSB3aW5kb3c6IG9uZSBzZWdtZW50LCBubyBjcm9zcy1taWRuaWdodC4KICAgICMg5pmu6YCa56qX5Y+j77ya5Y2V5q6144CB6Z2e6Leo5Y2I5aSc44CCCiAgICByID0gX3Bvc3Qoc2VydmVyICsgIi9hcGkvdGltaW5nL3dpbmRvdyIsIHsKICAgICAgICAid2FrZV93aW5kb3ciOiB7InN0YXJ0IjogIjA3OjMwIiwgImVuZCI6ICIyMzowMCJ9LAogICAgfSkKICAgIGFzc2VydCByWyJzdGFydF9taW4iXSA9PSA3ICogNjAgKyAzMAogICAgYXNzZXJ0IHJbImVuZF9taW4iXSA9PSAyMyAqIDYwCiAgICBhc3NlcnQgclsiY3Jvc3NfbWlkbmlnaHQiXSBpcyBGYWxzZQogICAgYXNzZXJ0IHJbInNlZ21lbnRzIl0gPT0gW1s0NTAsIDEzODBdXQoKCmRlZiB0ZXN0X3RpbWluZ193aW5kb3dfY3Jvc3NfbWlkbmlnaHQoc2VydmVyKToKICAgICMgQ3Jvc3MtbWlkbmlnaHQgd2luZG93OiB0d28gc2VnbWVudHMuCiAgICAjIOi3qOWNiOWknOeql+WPo++8muS4pOauteOAggogICAgciA9IF9wb3N0KHNlcnZlciArICIvYXBpL3RpbWluZy93aW5kb3ciLCB7CiAgICAgICAgIndha2Vfd2luZG93IjogeyJzdGFydCI6ICIyMDowMCIsICJlbmQiOiAiMDY6MDAifSwKICAgIH0pCiAgICBhc3NlcnQgclsiY3Jvc3NfbWlkbmlnaHQiXSBpcyBUcnVlCiAgICBhc3NlcnQgclsic2VnbWVudHMiXSA9PSBbWzEyMDAsIDE0NDBdLCBbMCwgMzYwXV0KCgpkZWYgdGVzdF90aW1pbmdfY29vbGRvd24oc2VydmVyKToKICAgICMgQ29vbGRvd24gdHJpZ2dlcnMgZXZlcnkgTiB0YXBzLgogICAgIyDlhrfljbTmr48gTiDmrKHngrnlh7vop6blj5HkuIDmrKHjgIIKICAgIHIgPSBfcG9zdChzZXJ2ZXIgKyAiL2FwaS90aW1pbmcvY29vbGRvd24iLCB7CiAgICAgICAgIm4iOiAzMCwgImNvb2xkb3duX2V2ZXJ5IjogMTAsICJjb29sZG93bl9zZWNvbmRzIjogNS4wLCAic2VlZCI6IDEsCiAgICB9KQogICAgYXNzZXJ0IHJbIm4iXSA9PSAzMAogICAgYXNzZXJ0IGxlbihyWyJldmVudHMiXSkgPT0gMzAKICAgIGNkcyA9IFtldiBmb3IgZXYgaW4gclsiZXZlbnRzIl0gaWYgZXZbImNvb2xkb3duIl0gaXMgbm90IE5vbmVdCiAgICBhc3NlcnQgbGVuKGNkcykgPT0gMwogICAgYXNzZXJ0IGFsbCgzLjUgPD0gZXZbImNvb2xkb3duIl0gPD0gNi41IGZvciBldiBpbiBjZHMpCgoKIyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0gc2Vuc29ycwojIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSDkvKDmhJ/lmagKCmRlZiB0ZXN0X3NlbnNvcnNfZ2VuZXJhdGVfYWxpdmUoc2VydmVyKToKICAgICMgQWxsIG1vZGVzIG11c3QgYmUgcmVwb3J0ZWQgYWxpdmUuCiAgICAjIOaJgOacieaooeW8j+W/hemhu+aKpeWRiuS4uua0u+edgOOAggogICAgZm9yIG1vZGUgaW4gKCJyZXN0aW5nIiwgIndhbGtpbmciLCAidGFwcGluZyIsICJzY3JvbGxpbmciKToKICAgICAgICByID0gX3Bvc3Qoc2VydmVyICsgIi9hcGkvc2Vuc29ycy9nZW5lcmF0ZSIsIHsKICAgICAgICAgICAgIm1vZGUiOiBtb2RlLCAiZnMiOiAxMDAsICJkdXJhdGlvbiI6IDIuMCwgInNlZWQiOiA0MiwKICAgICAgICB9KQogICAgICAgIGFzc2VydCByWyJpc19kZWFkIl0gaXMgRmFsc2UsIG1vZGUKICAgICAgICBhc3NlcnQgclsic2FtcGxlX2NvdW50Il0gPT0gMjAwCiAgICAgICAgYXNzZXJ0IGxlbihyWyJzZXJpZXMiXVsidCJdKSA+IDAKCgpkZWYgdGVzdF9zZW5zb3JzX2dlbmVyYXRlX3JlcHJvZHVjaWJsZShzZXJ2ZXIpOgogICAgIyBTYW1lIHNlZWQgLT4gaWRlbnRpY2FsIHNlcmllcy4KICAgICMg5ZCMIHNlZWQgLT4g5bqP5YiX5LiA6Ie044CCCiAgICBib2R5ID0geyJtb2RlIjogIndhbGtpbmciLCAiZnMiOiA1MCwgImR1cmF0aW9uIjogMS4wLCAic2VlZCI6IDExfQogICAgYSA9IF9wb3N0KHNlcnZlciArICIvYXBpL3NlbnNvcnMvZ2VuZXJhdGUiLCBib2R5KVsic2VyaWVzIl0KICAgIGIgPSBfcG9zdChzZXJ2ZXIgKyAiL2FwaS9zZW5zb3JzL2dlbmVyYXRlIiwgYm9keSlbInNlcmllcyJdCiAgICBhc3NlcnQgYSA9PSBiCgoKZGVmIHRlc3Rfc2Vuc29yc19jc3ZfY29udGVudChzZXJ2ZXIpOgogICAgIyBDU1YgY29udGVudCB0eXBlLCBoZWFkZXIsIGFuZCByb3cgY291bnQuCiAgICAjIENTViDlhoXlrrnnsbvlnovjgIHooajlpLTkuI7ooYzmlbDjgIIKICAgIHJlcSA9IHVybGxpYi5yZXF1ZXN0LlJlcXVlc3QoCiAgICAgICAgc2VydmVyICsgIi9hcGkvc2Vuc29ycy9jc3YiLAogICAgICAgIGRhdGE9anNvbi5kdW1wcyh7Im1vZGUiOiAid2Fsa2luZyIsICJmcyI6IDUwLCAiZHVyYXRpb24iOiAxLjAsICJzZWVkIjogMX0pCiAgICAgICAgLmVuY29kZSgidXRmLTgiKSwKICAgICAgICBtZXRob2Q9IlBPU1QiLAogICAgICAgIGhlYWRlcnM9eyJDb250ZW50LVR5cGUiOiAiYXBwbGljYXRpb24vanNvbiJ9LAogICAgKQogICAgd2l0aCB1cmxsaWIucmVxdWVzdC51cmxvcGVuKHJlcSwgdGltZW91dD0xMCkgYXMgcjoKICAgICAgICBjdHlwZSA9IHIuaGVhZGVycy5nZXQoIkNvbnRlbnQtVHlwZSIsICIiKQogICAgICAgIGJvZHkgPSByLnJlYWQoKS5kZWNvZGUoInV0Zi04IikKICAgIGFzc2VydCAidGV4dC9jc3YiIGluIGN0eXBlCiAgICBhc3NlcnQgYm9keS5zdGFydHN3aXRoKCJ0LGFjY194IikKICAgIGxpbmVzID0gYm9keS5zdHJpcCgpLnNwbGl0bGluZXMoKQogICAgYXNzZXJ0IGxlbihsaW5lcykgPT0gMSArIDUwCg==
+# -*- coding: utf-8 -*-
+# Web UI unit tests (stdlib http.server).
+# Web UI 单元测试（stdlib http.server）。
+import json
+import threading
+import urllib.error
+import urllib.request
+
+import pytest
+
+from touch_humanization.web.server import make_server
+
+
+@pytest.fixture()
+def server():
+    # Start a server on a free port; yield base URL; shut down after.
+    # 在空闲端口启动服务；产出 base URL；结束后关闭。
+    httpd = make_server("127.0.0.1", 0)
+    port = httpd.server_address[1]
+    t = threading.Thread(target=httpd.serve_forever, daemon=True)
+    t.start()
+    yield f"http://127.0.0.1:{port}"
+    httpd.shutdown()
+    httpd.server_close()
+
+
+def _post(url, body):
+    # POST JSON and parse JSON response.
+    # 发送 JSON POST 并解析 JSON 响应。
+    data = json.dumps(body).encode("utf-8")
+    req = urllib.request.Request(url, data=data, method="POST",
+                                 headers={"Content-Type": "application/json"})
+    with urllib.request.urlopen(req, timeout=15) as r:
+        return json.loads(r.read().decode("utf-8"))
+
+
+def test_health_and_index(server):
+    # /api/health must be ok; / must contain the three tab anchors.
+    # /api/health 必须 ok；/ 必须包含三个 tab 锚点。
+    with urllib.request.urlopen(server + "/api/health", timeout=5) as r:
+        assert json.loads(r.read())["ok"] is True
+    with urllib.request.urlopen(server + "/", timeout=5) as r:
+        body = r.read()
+    assert b"touch-humanization" in body
+    assert b"tab-kinematics" in body
+    assert b"tab-timing" in body
+    assert b"tab-sensors" in body
+
+
+# ------------------------------------------------------------ kinematics
+# ------------------------------------------------------------ 手势轨迹
+
+def test_gesture_basic(server):
+    # Basic gesture: exact endpoints and interval count.
+    # 基础轨迹：端点精确、间隔数正确。
+    r = _post(server + "/api/gesture", {
+        "start": [100, 1800], "end": [900, 400], "seed": 42,
+    })
+    g = r["gesture"]
+    assert g["points"][0] == [100, 1800]
+    assert g["points"][-1] == [900, 400]
+    assert len(g["intervals"]) == len(g["points"]) - 1
+
+
+def test_gesture_seed_reproducible(server):
+    # Same seed -> identical gesture.
+    # 同 seed -> 轨迹一致。
+    body = {"start": [0, 0], "end": [500, 500], "seed": 7}
+    a = _post(server + "/api/gesture", body)["gesture"]
+    b = _post(server + "/api/gesture", body)["gesture"]
+    assert a == b
+
+
+def test_gesture_slider_mode(server):
+    # Slider mode flag and exact end.
+    # 滑块模式标志与终点精确。
+    r = _post(server + "/api/gesture", {
+        "start": [80, 1500], "end": [1200, 1500],
+        "seed": 1, "for_slider": True,
+    })
+    g = r["gesture"]
+    assert g["for_slider"] is True
+    assert g["points"][-1] == [1200, 1500]
+
+
+def test_gesture_advanced_params(server):
+    # Fixed step count must be honored.
+    # 固定步数必须被遵守。
+    r = _post(server + "/api/gesture", {
+        "start": [0, 0], "end": [500, 0],
+        "seed": 3,
+        "steps_min": 40, "steps_max": 40,
+        "overshoot_prob": 0,   # no pull-back points / 关闭过冲，避免回拉点干扰步数
+    })
+    assert r["gesture"]["steps"] == 40
+
+
+def test_gesture_bad_body(server):
+    # Malformed JSON body must be rejected with 400.
+    # 非法 JSON 请求体必须返回 400。
+    req = urllib.request.Request(server + "/api/gesture", data=b"not json",
+                                 method="POST",
+                                 headers={"Content-Type": "application/json"})
+    try:
+        urllib.request.urlopen(req, timeout=5)
+    except urllib.error.HTTPError as e:
+        assert e.code == 400
+    else:
+        raise AssertionError("应返回 400 / 400 expected")
+
+
+# ------------------------------------------------------------ timing
+# ------------------------------------------------------------ 时序
+
+def test_timing_sample(server):
+    # Sample distribution endpoints and stats.
+    # 采样分布的端点与统计。
+    r = _post(server + "/api/timing/sample", {
+        "n": 500, "lo": 0.5, "hi": 2.0, "lognormal": True, "seed": 42,
+    })
+    assert len(r["samples"]) == 500
+    assert all(0.5 <= v <= 2.0 for v in r["samples"])
+    assert r["stats"]["n"] == 500
+    assert len(r["bins"]) > 0
+
+
+def test_timing_sample_reproducible(server):
+    # Same seed -> identical samples.
+    # 同 seed -> 采样一致。
+    body = {"n": 200, "lo": 0.5, "hi": 2.0, "lognormal": True, "seed": 9}
+    a = _post(server + "/api/timing/sample", body)["samples"]
+    b = _post(server + "/api/timing/sample", body)["samples"]
+    assert a == b
+
+
+def test_timing_window_simple(server):
+    # Simple window: one segment, no cross-midnight.
+    # 普通窗口：单段、非跨午夜。
+    r = _post(server + "/api/timing/window", {
+        "wake_window": {"start": "07:30", "end": "23:00"},
+    })
+    assert r["start_min"] == 7 * 60 + 30
+    assert r["end_min"] == 23 * 60
+    assert r["cross_midnight"] is False
+    assert r["segments"] == [[450, 1380]]
+
+
+def test_timing_window_cross_midnight(server):
+    # Cross-midnight window: two segments.
+    # 跨午夜窗口：两段。
+    r = _post(server + "/api/timing/window", {
+        "wake_window": {"start": "20:00", "end": "06:00"},
+    })
+    assert r["cross_midnight"] is True
+    assert r["segments"] == [[1200, 1440], [0, 360]]
+
+
+def test_timing_cooldown(server):
+    # Cooldown triggers every N taps.
+    # 冷却每 N 次点击触发一次。
+    r = _post(server + "/api/timing/cooldown", {
+        "n": 30, "cooldown_every": 10, "cooldown_seconds": 5.0, "seed": 1,
+    })
+    assert r["n"] == 30
+    assert len(r["events"]) == 30
+    cds = [ev for ev in r["events"] if ev["cooldown"] is not None]
+    assert len(cds) == 3
+    assert all(3.5 <= ev["cooldown"] <= 6.5 for ev in cds)
+
+
+# ------------------------------------------------------------ sensors
+# ------------------------------------------------------------ 传感器
+
+def test_sensors_generate_alive(server):
+    # All modes must be reported alive.
+    # 所有模式必须报告为活着。
+    for mode in ("resting", "walking", "tapping", "scrolling"):
+        r = _post(server + "/api/sensors/generate", {
+            "mode": mode, "fs": 100, "duration": 2.0, "seed": 42,
+        })
+        assert r["is_dead"] is False, mode
+        assert r["sample_count"] == 200
+        assert len(r["series"]["t"]) > 0
+
+
+def test_sensors_generate_reproducible(server):
+    # Same seed -> identical series.
+    # 同 seed -> 序列一致。
+    body = {"mode": "walking", "fs": 50, "duration": 1.0, "seed": 11}
+    a = _post(server + "/api/sensors/generate", body)["series"]
+    b = _post(server + "/api/sensors/generate", body)["series"]
+    assert a == b
+
+
+def test_sensors_csv_content(server):
+    # CSV content type, header, and row count.
+    # CSV 内容类型、表头与行数。
+    req = urllib.request.Request(
+        server + "/api/sensors/csv",
+        data=json.dumps({"mode": "walking", "fs": 50, "duration": 1.0, "seed": 1})
+        .encode("utf-8"),
+        method="POST",
+        headers={"Content-Type": "application/json"},
+    )
+    with urllib.request.urlopen(req, timeout=10) as r:
+        ctype = r.headers.get("Content-Type", "")
+        body = r.read().decode("utf-8")
+    assert "text/csv" in ctype
+    assert body.startswith("t,acc_x")
+    lines = body.strip().splitlines()
+    assert len(lines) == 1 + 50

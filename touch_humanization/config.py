@@ -1,1 +1,70 @@
-IyAtKi0gY29kaW5nOiB1dGYtOCAtKi0KIiIiRGVmYXVsdCBjb25maWd1cmF0aW9uIGFuZCBkaWN0IG1lcmdlLiBObyBZQU1MIGRlcGVuZGVuY3kuCgrpu5jorqTphY3nva7kuI7lrZflhbjlkIjlubbjgILkuI3lvJXlhaUgWUFNTCDkvp3otZbjgIIKIiIiCmZyb20gX19mdXR1cmVfXyBpbXBvcnQgYW5ub3RhdGlvbnMKCmltcG9ydCBjb3B5CmZyb20gdHlwaW5nIGltcG9ydCBBbnkKCgojIERlZmF1bHQgdmFsdWVzIGZvciB0aGUgdGhyZWUgc3ViLW1vZHVsZXMuCiMg5LiJ5Liq5a2Q5qih5Z2X55qE6buY6K6k5YC844CCCkRFRkFVTFRTOiBkaWN0W3N0ciwgQW55XSA9IHsKICAgICJraW5lbWF0aWNzIjogewogICAgICAgICJlbmFibGVkIjogVHJ1ZSwKICAgICAgICAic3RlcHNfbWluIjogMjAsCiAgICAgICAgInN0ZXBzX21heCI6IDYwLAogICAgICAgICJweF9wZXJfc3RlcCI6IDE1LjAsCiAgICAgICAgImR1cmF0aW9uX3Blcl9weCI6IDAuMDAwNywKICAgICAgICAiZHVyYXRpb25fbWluIjogMC4zLAogICAgICAgICJkdXJhdGlvbl9tYXgiOiAxLjUsCiAgICAgICAgInBlcnBlbmRpY3VsYXJfcmF0aW8iOiAwLjEyLAogICAgICAgICJ1c2VfZWFzZV9pbl9vdXQiOiBUcnVlLAogICAgICAgICJqaXR0ZXJfc2lnbWEiOiAxLjIsCiAgICAgICAgImppdHRlcl90YWlsX2ZyYWN0aW9uIjogMC4yNSwKICAgICAgICAib3ZlcnNob290X3Byb2IiOiAwLjI1LAogICAgICAgICJvdmVyc2hvb3RfcmF0aW8iOiAwLjA2LAogICAgfSwKICAgICJ0aW1pbmciOiB7CiAgICAgICAgIm11X3JhdGlvIjogMC4xOCwKICAgICAgICAic2lnbWFfcmFuZ2UiOiAoMC40NSwgMC43NSksCiAgICAgICAgImRlbGF5X2JldHdlZW5fYWN0aW9ucyI6ICgwLjYsIDIuMiksCiAgICAgICAgImRlbGF5X2FmdGVyX29wZW4iOiAoMy4wLCA2LjApLAogICAgICAgICJ0aGlua19kZWxheSI6ICgxLjUsIDQuMCksCiAgICAgICAgInN0YXJ0X2ppdHRlciI6ICgwLCA2MDApLAogICAgICAgICJ3YWtlX3dpbmRvdyI6IHsic3RhcnQiOiAiMDc6MzAiLCAiZW5kIjogIjIzOjAwIn0sCiAgICAgICAgImNvb2xkb3duX2V2ZXJ5IjogMTIsCiAgICAgICAgImNvb2xkb3duX3NlY29uZHMiOiAyMC4wLAogICAgICAgICJjb29sZG93bl9vbl9jYXB0Y2hhIjogMzAwLjAsCiAgICB9LAogICAgInNlbnNvcnMiOiB7CiAgICAgICAgImZzIjogMTAwLjAsCiAgICAgICAgImR1cmF0aW9uIjogNS4wLAogICAgICAgICJtb2RlIjogInJlc3RpbmciLAogICAgICAgICJkZWFkX3N0ZF90aHJlc2hvbGQiOiAwLjAyLAogICAgICAgICJneXJvX2RlYWRfc3RkIjogMC4wMDEsCiAgICAgICAgImRlYWRfemVyb19yYXRpb19tYXgiOiAwLjksCiAgICB9LAp9CgoKZGVmIF9tZXJnZShiYXNlOiBkaWN0LCBvdmVycmlkZTogZGljdCkgLT4gZGljdDoKICAgICMgRGVlcC1tZXJnZTsgbmVzdGVkIGRpY3RzIGFyZSBtZXJnZWQgcmVjdXJzaXZlbHksIG90aGVycyByZXBsYWNlZC4KICAgICMg5rex5ZCI5bm277ya5bWM5aWXIGRpY3Qg6YCS5b2S5ZCI5bm277yM5YW25L2Z55u05o6l5pu/5o2i44CCCiAgICBvdXQgPSBjb3B5LmRlZXBjb3B5KGJhc2UpCiAgICBmb3IgaywgdiBpbiAob3ZlcnJpZGUgb3Ige30pLml0ZW1zKCk6CiAgICAgICAgaWYgaXNpbnN0YW5jZSh2LCBkaWN0KSBhbmQgaXNpbnN0YW5jZShvdXQuZ2V0KGspLCBkaWN0KToKICAgICAgICAgICAgb3V0W2tdID0gX21lcmdlKG91dFtrXSwgdikKICAgICAgICBlbHNlOgogICAgICAgICAgICBvdXRba10gPSBjb3B5LmRlZXBjb3B5KHYpCiAgICByZXR1cm4gb3V0CgoKZGVmIG1lcmdlX2NvbmZpZyhjb25maWc6IGRpY3QgfCBOb25lID0gTm9uZSkgLT4gZGljdDoKICAgICIiIlVzZXIgY29uZmlnIG92ZXJyaWRlcyBkZWZhdWx0cyAoZGVlcCBtZXJnZSwgcmV0dXJucyBhIG5ldyBkaWN0KS4KCiAgICDnlKjmiLfphY3nva7opobnm5bpu5jorqTlgLzvvIjmt7HlkIjlubbvvIzov5Tlm57mlrAgZGljdO+8ieOAggogICAgIiIiCiAgICByZXR1cm4gX21lcmdlKERFRkFVTFRTLCBjb25maWcgb3Ige30pCg==
+# -*- coding: utf-8 -*-
+"""Default configuration and dict merge. No YAML dependency.
+
+默认配置与字典合并。不引入 YAML 依赖。
+"""
+from __future__ import annotations
+
+import copy
+from typing import Any
+
+
+# Default values for the three sub-modules.
+# 三个子模块的默认值。
+DEFAULTS: dict[str, Any] = {
+    "kinematics": {
+        "enabled": True,
+        "steps_min": 20,
+        "steps_max": 60,
+        "px_per_step": 15.0,
+        "duration_per_px": 0.0007,
+        "duration_min": 0.3,
+        "duration_max": 1.5,
+        "perpendicular_ratio": 0.12,
+        "use_ease_in_out": True,
+        "jitter_sigma": 1.2,
+        "jitter_tail_fraction": 0.25,
+        "overshoot_prob": 0.25,
+        "overshoot_ratio": 0.06,
+    },
+    "timing": {
+        "mu_ratio": 0.18,
+        "sigma_range": (0.45, 0.75),
+        "delay_between_actions": (0.6, 2.2),
+        "delay_after_open": (3.0, 6.0),
+        "think_delay": (1.5, 4.0),
+        "start_jitter": (0, 600),
+        "wake_window": {"start": "07:30", "end": "23:00"},
+        "cooldown_every": 12,
+        "cooldown_seconds": 20.0,
+        "cooldown_on_captcha": 300.0,
+    },
+    "sensors": {
+        "fs": 100.0,
+        "duration": 5.0,
+        "mode": "resting",
+        "dead_std_threshold": 0.02,
+        "gyro_dead_std": 0.001,
+        "dead_zero_ratio_max": 0.9,
+    },
+}
+
+
+def _merge(base: dict, override: dict) -> dict:
+    # Deep-merge; nested dicts are merged recursively, others replaced.
+    # 深合并：嵌套 dict 递归合并，其余直接替换。
+    out = copy.deepcopy(base)
+    for k, v in (override or {}).items():
+        if isinstance(v, dict) and isinstance(out.get(k), dict):
+            out[k] = _merge(out[k], v)
+        else:
+            out[k] = copy.deepcopy(v)
+    return out
+
+
+def merge_config(config: dict | None = None) -> dict:
+    """User config overrides defaults (deep merge, returns a new dict).
+
+    用户配置覆盖默认值（深合并，返回新 dict）。
+    """
+    return _merge(DEFAULTS, config or {})

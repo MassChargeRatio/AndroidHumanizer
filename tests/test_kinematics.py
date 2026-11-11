@@ -1,1 +1,102 @@
-IyAtKi0gY29kaW5nOiB1dGYtOCAtKi0KIyBLaW5lbWF0aWNzIHVuaXQgdGVzdHMgKG5vIGRldmljZSBuZWVkZWQpLgojIGtpbmVtYXRpY3Mg5Y2V5YWD5rWL6K+V77yI5peg6ZyA6K6+5aSH77yJ44CCCmltcG9ydCByYW5kb20KCmltcG9ydCBweXRlc3QKCmZyb20gdG91Y2hfaHVtYW5pemF0aW9uLmtpbmVtYXRpY3MgaW1wb3J0IEtpbmVtYXRpY3MKZnJvbSB0b3VjaF9odW1hbml6YXRpb24ua2luZW1hdGljcy50cmFqZWN0b3J5IGltcG9ydCAoCiAgICBfYmV6aWVyMywgX2NvbnRyb2xfcG9pbnRzLCBfc21vb3Roc3RlcCwgX2Vhc2Vfb3V0X3F1YWQsIF9nYXVzcywKKQoKCmRlZiB0ZXN0X2JlemllcjNfZW5kcG9pbnRzKCk6CiAgICAjIEJlemllciBtdXN0IHJldHVybiBwMCBhdCB0PTAgYW5kIHAzIGF0IHQ9MS4KICAgICMg6LSd5aGe5bCU5ZyoIHQ9MCDov5Tlm54gcDDvvIzlnKggdD0xIOi/lOWbniBwM+OAggogICAgcDAsIHAxLCBwMiwgcDMgPSAoMCwgMCksICgxLCAyKSwgKDMsIDIpLCAoNCwgMCkKICAgIGFzc2VydCBfYmV6aWVyMyhwMCwgcDEsIHAyLCBwMywgMC4wKSA9PSBwMAogICAgYXNzZXJ0IF9iZXppZXIzKHAwLCBwMSwgcDIsIHAzLCAxLjApID09IHAzCgoKZGVmIHRlc3Rfc21vb3Roc3RlcF9ib3VuZHNfYW5kX21pZHBvaW50KCk6CiAgICAjIFNtb290aHN0ZXAgYm91bmRhcnkgYW5kIG1pZHBvaW50IHZhbHVlcy4KICAgICMgc21vb3Roc3RlcCDnmoTovrnnlYzkuI7kuK3ngrnlgLzjgIIKICAgIGFzc2VydCBfc21vb3Roc3RlcCgwKSA9PSAwCiAgICBhc3NlcnQgX3Ntb290aHN0ZXAoMSkgPT0gMQogICAgYXNzZXJ0IGFicyhfc21vb3Roc3RlcCgwLjUpIC0gMC41KSA8IDFlLTkKCgpkZWYgdGVzdF9lYXNlX291dF9xdWFkX2JvdW5kcygpOgogICAgIyBFYXNlT3V0UXVhZCBib3VuZGFyeSB2YWx1ZXMuCiAgICAjIGVhc2VPdXRRdWFkIOeahOi+ueeVjOWAvOOAggogICAgYXNzZXJ0IF9lYXNlX291dF9xdWFkKDApID09IDAKICAgIGFzc2VydCBfZWFzZV9vdXRfcXVhZCgxKSA9PSAxCgoKZGVmIHRlc3RfZ2F1c3NfcmVwcm9kdWNpYmxlKCk6CiAgICAjIFNhbWUgc2VlZCAtPiBzYW1lIGdhdXNzaWFuIHNhbXBsZS4KICAgICMg5ZCMIHNlZWQgLT4g5ZCM5LiA6auY5pav6YeH5qC35YC844CCCiAgICBhID0gX2dhdXNzKHJhbmRvbS5SYW5kb20oNDIpLCAwLCAxKQogICAgYiA9IF9nYXVzcyhyYW5kb20uUmFuZG9tKDQyKSwgMCwgMSkKICAgIGFzc2VydCBhID09IGIKCgpkZWYgdGVzdF9jb250cm9sX3BvaW50c19zeW1tZXRyaWNfb3JpZ2luKCk6CiAgICAjIENvbnRyb2wgcG9pbnRzIGZvciBhIGhvcml6b250YWwgbW92ZTogcGVycGVuZGljdWxhciBvZmZzZXQgbXVzdCBiZSBub24temVyby4KICAgICMg5rC05bmz56e75Yqo55qE5o6n5Yi254K577ya5Z6C55u05YGP56e75b+F6aG76Z2e6Zu244CCCiAgICBybmcgPSByYW5kb20uUmFuZG9tKDEpCiAgICBwMSwgcDIgPSBfY29udHJvbF9wb2ludHMocm5nLCAoMCwgMCksICgxMDAsIDApLCAxMDAuMCwgMC4xMikKICAgIGFzc2VydCBwMVswXSA9PSBwMlswXSA9PSA1MC4wCiAgICBhc3NlcnQgYWJzKHAxWzFdKSA+IDAKICAgIGFzc2VydCBhYnMocDJbMV0pID4gMAoKCmRlZiB0ZXN0X2dlbmVyYXRlX2V4YWN0X2VuZF9hbmRfbGVuZ3RoKCk6CiAgICAjIEV4YWN0IGVuZCBhbmQgY29uc2lzdGVudCBsZW5ndGhzLgogICAgIyDnu4jngrnnsr7noa7jgIHplb/luqbkuIDoh7TjgIIKICAgIGggPSBLaW5lbWF0aWNzKHJuZz1yYW5kb20uUmFuZG9tKDcpKQogICAgZyA9IGguZ2VuZXJhdGUoKDEwMCwgMTgwMCksICg5MDAsIDQwMCkpCiAgICBhc3NlcnQgZy5wb2ludHNbMF0gPT0gKDEwMCwgMTgwMCkKICAgIGFzc2VydCBnLnBvaW50c1stMV0gPT0gKDkwMCwgNDAwKQogICAgYXNzZXJ0IGxlbihnLmludGVydmFscykgPT0gbGVuKGcucG9pbnRzKSAtIDEKICAgIGFzc2VydCBnLmR1cmF0aW9uID09IHB5dGVzdC5hcHByb3goc3VtKGcuaW50ZXJ2YWxzKSwgcmVsPTFlLTYpCgoKZGVmIHRlc3RfZ2VuZXJhdGVfcmVwcm9kdWNpYmxlKCk6CiAgICAjIFNhbWUgc2VlZCAtPiBpZGVudGljYWwgdHJhamVjdG9yeS4KICAgICMg5ZCMIHNlZWQgLT4g6L2o6L+55a6M5YWo5LiA6Ie044CCCiAgICBhID0gS2luZW1hdGljcyhybmc9cmFuZG9tLlJhbmRvbSgzKSkuZ2VuZXJhdGUoKDAsIDApLCAoNTAwLCA1MDApKQogICAgYiA9IEtpbmVtYXRpY3Mocm5nPXJhbmRvbS5SYW5kb20oMykpLmdlbmVyYXRlKCgwLCAwKSwgKDUwMCwgNTAwKSkKICAgIGFzc2VydCBhLnBvaW50cyA9PSBiLnBvaW50cwogICAgYXNzZXJ0IGEuaW50ZXJ2YWxzID09IGIuaW50ZXJ2YWxzCgoKZGVmIHRlc3RfZ2VuZXJhdGVfZml0dHNfc3RlcHNfbW9ub3RvbmljKCk6CiAgICAjIExvbmdlciBkaXN0YW5jZSAtPiBtb3JlIHN0ZXBzIChGaXR0cyksIGNhcHBlZCBieSBzdGVwc19tYXguCiAgICAjIOi3neemu+i2iui/nOatpeaVsOi2iuWkmu+8iEZpdHRz77yJ77yM5Y+XIHN0ZXBzX21heCDkuIrpmZDnuqbmnZ/jgIIKICAgIGggPSBLaW5lbWF0aWNzKHJuZz1yYW5kb20uUmFuZG9tKDApKQogICAgc2hvcnQgPSBoLmdlbmVyYXRlKCgwLCAwKSwgKDEwMCwgMCkpCiAgICBsb25nID0gaC5nZW5lcmF0ZSgoMCwgMCksICgyMDAwLCAwKSkKICAgIGFzc2VydCBzaG9ydC5zdGVwcyA8IGxvbmcuc3RlcHMKICAgIGFzc2VydCBsb25nLnN0ZXBzIDw9IGguc3RlcHNfbWF4ICsgMQoKCmRlZiB0ZXN0X3NsaWRlcl9tb25vdG9uaWNfYW5kX2V4YWN0KCk6CiAgICAjIFNsaWRlciBtb2RlOiBtb25vdG9uaWMgeCBhbmQgZXhhY3QgZW5kLgogICAgIyDmu5HlnZfmqKHlvI/vvJp4IOWNleiwg+mAkuWinuOAgee7iOeCueeyvuehruOAggogICAgaCA9IEtpbmVtYXRpY3Mocm5nPXJhbmRvbS5SYW5kb20oMTEpKQogICAgZyA9IGguZ2VuZXJhdGUoKDgwLCAxNTAwKSwgKDEyMDAsIDE1MDApLCBmb3Jfc2xpZGVyPVRydWUpCiAgICBhc3NlcnQgZy5mb3Jfc2xpZGVyIGlzIFRydWUKICAgIGFzc2VydCBnLnBvaW50c1stMV0gPT0gKDEyMDAsIDE1MDApCiAgICB4cyA9IFtwWzBdIGZvciBwIGluIGcucG9pbnRzXQogICAgYXNzZXJ0IGFsbCh4c1tpXSA8PSB4c1tpICsgMV0gKyAxIGZvciBpIGluIHJhbmdlKGxlbih4cykgLSAxKSkKCgpkZWYgdGVzdF9kaXNhYmxlZF9yZXR1cm5zX3N0cmFpZ2h0X2xpbmUoKToKICAgICMgRGlzYWJsZWQga2luZW1hdGljczogc3RyYWlnaHQgbGluZSB3aXRoIDggcG9pbnRzLgogICAgIyBraW5lbWF0aWNzIOemgeeUqOaXtu+8mjgg54K555u057q/44CCCiAgICBoID0gS2luZW1hdGljcyh7ImVuYWJsZWQiOiBGYWxzZX0sIHJuZz1yYW5kb20uUmFuZG9tKDApKQogICAgZyA9IGguZ2VuZXJhdGUoKDAsIDApLCAoODAsIDgwKSkKICAgIGFzc2VydCBsZW4oZy5wb2ludHMpID09IDgKICAgIGFzc2VydCBnLnBvaW50c1stMV0gPT0gKDgwLCA4MCkK
+# -*- coding: utf-8 -*-
+# Kinematics unit tests (no device needed).
+# kinematics 单元测试（无需设备）。
+import random
+
+import pytest
+
+from touch_humanization.kinematics import Kinematics
+from touch_humanization.kinematics.trajectory import (
+    _bezier3, _control_points, _smoothstep, _ease_out_quad, _gauss,
+)
+
+
+def test_bezier3_endpoints():
+    # Bezier must return p0 at t=0 and p3 at t=1.
+    # 贝塞尔在 t=0 返回 p0，在 t=1 返回 p3。
+    p0, p1, p2, p3 = (0, 0), (1, 2), (3, 2), (4, 0)
+    assert _bezier3(p0, p1, p2, p3, 0.0) == p0
+    assert _bezier3(p0, p1, p2, p3, 1.0) == p3
+
+
+def test_smoothstep_bounds_and_midpoint():
+    # Smoothstep boundary and midpoint values.
+    # smoothstep 的边界与中点值。
+    assert _smoothstep(0) == 0
+    assert _smoothstep(1) == 1
+    assert abs(_smoothstep(0.5) - 0.5) < 1e-9
+
+
+def test_ease_out_quad_bounds():
+    # EaseOutQuad boundary values.
+    # easeOutQuad 的边界值。
+    assert _ease_out_quad(0) == 0
+    assert _ease_out_quad(1) == 1
+
+
+def test_gauss_reproducible():
+    # Same seed -> same gaussian sample.
+    # 同 seed -> 同一高斯采样值。
+    a = _gauss(random.Random(42), 0, 1)
+    b = _gauss(random.Random(42), 0, 1)
+    assert a == b
+
+
+def test_control_points_symmetric_origin():
+    # Control points for a horizontal move: perpendicular offset must be non-zero.
+    # 水平移动的控制点：垂直偏移必须非零。
+    rng = random.Random(1)
+    p1, p2 = _control_points(rng, (0, 0), (100, 0), 100.0, 0.12)
+    assert p1[0] == p2[0] == 50.0
+    assert abs(p1[1]) > 0
+    assert abs(p2[1]) > 0
+
+
+def test_generate_exact_end_and_length():
+    # Exact end and consistent lengths.
+    # 终点精确、长度一致。
+    h = Kinematics(rng=random.Random(7))
+    g = h.generate((100, 1800), (900, 400))
+    assert g.points[0] == (100, 1800)
+    assert g.points[-1] == (900, 400)
+    assert len(g.intervals) == len(g.points) - 1
+    assert g.duration == pytest.approx(sum(g.intervals), rel=1e-6)
+
+
+def test_generate_reproducible():
+    # Same seed -> identical trajectory.
+    # 同 seed -> 轨迹完全一致。
+    a = Kinematics(rng=random.Random(3)).generate((0, 0), (500, 500))
+    b = Kinematics(rng=random.Random(3)).generate((0, 0), (500, 500))
+    assert a.points == b.points
+    assert a.intervals == b.intervals
+
+
+def test_generate_fitts_steps_monotonic():
+    # Longer distance -> more steps (Fitts), capped by steps_max.
+    # 距离越远步数越多（Fitts），受 steps_max 上限约束。
+    h = Kinematics(rng=random.Random(0))
+    short = h.generate((0, 0), (100, 0))
+    long = h.generate((0, 0), (2000, 0))
+    assert short.steps < long.steps
+    assert long.steps <= h.steps_max + 1
+
+
+def test_slider_monotonic_and_exact():
+    # Slider mode: monotonic x and exact end.
+    # 滑块模式：x 单调递增、终点精确。
+    h = Kinematics(rng=random.Random(11))
+    g = h.generate((80, 1500), (1200, 1500), for_slider=True)
+    assert g.for_slider is True
+    assert g.points[-1] == (1200, 1500)
+    xs = [p[0] for p in g.points]
+    assert all(xs[i] <= xs[i + 1] + 1 for i in range(len(xs) - 1))
+
+
+def test_disabled_returns_straight_line():
+    # Disabled kinematics: straight line with 8 points.
+    # kinematics 禁用时：8 点直线。
+    h = Kinematics({"enabled": False}, rng=random.Random(0))
+    g = h.generate((0, 0), (80, 80))
+    assert len(g.points) == 8
+    assert g.points[-1] == (80, 80)

@@ -1,1 +1,6 @@
-IyAtKi0gY29kaW5nOiB1dGYtOCAtKi0KIyBTZW5zb3JzIHN1Yi1wYWNrYWdlIGV4cG9ydHMuCiMgc2Vuc29ycyDlrZDljIXlr7zlh7rjgIIKZnJvbSAucHJvZmlsZSBpbXBvcnQgU2Vuc29ycywgU2Vuc29yUHJvZmlsZQoKX19hbGxfXyA9IFsiU2Vuc29ycyIsICJTZW5zb3JQcm9maWxlIl0K
+# -*- coding: utf-8 -*-
+# Sensors sub-package exports.
+# sensors 子包导出。
+from .profile import Sensors, SensorProfile
+
+__all__ = ["Sensors", "SensorProfile"]

@@ -1,1 +1,6 @@
-IyAtKi0gY29kaW5nOiB1dGYtOCAtKi0KIyBUaW1pbmcgc3ViLXBhY2thZ2UgZXhwb3J0cy4KIyB0aW1pbmcg5a2Q5YyF5a+85Ye644CCCmZyb20gLnNhbXBsaW5nIGltcG9ydCBUaW1pbmcKCl9fYWxsX18gPSBbIlRpbWluZyJdCg==
+# -*- coding: utf-8 -*-
+# Timing sub-package exports.
+# timing 子包导出。
+from .sampling import Timing
+
+__all__ = ["Timing"]

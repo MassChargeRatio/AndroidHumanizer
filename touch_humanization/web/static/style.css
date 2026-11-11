@@ -1,1 +1,128 @@
-LyogdG91Y2gtaHVtYW5pemF0aW9uIFdlYiBVSSBzdHlsZS4KICAgWmVybyBmcmFtZXdvcms7IGRhcmsgdGhlbWUuCgogICB0b3VjaC1odW1hbml6YXRpb24gV2ViIFVJIOagt+W8j+OAggogICDpm7bmoYbmnrbvvJvmt7HoibLkuLvpopjjgIIgKi8KCjpyb290IHsKICAtLWJnOiAjMGUxMTE2OwogIC0tYmcyOiAjMTQxOTIyOwogIC0tYmczOiAjMWEyMTMwOwogIC0tbGluZTogIzI0MmMzYTsKICAtLWZnOiAjZTZlYmYzOwogIC0tZmcyOiAjOWFhN2JkOwogIC0tZmczOiAjNmI3ODhlOwogIC0tYWNjOiAjNGM4ZGZmOwogIC0tb2s6ICMyZmJmNzE7CiAgLS1lcnI6ICNlNTUzNGI7Cn0KCi8qIEJveCBzaXppbmcuCiAgIOebkuaooeWei+OAgiAqLwoqIHsgYm94LXNpemluZzogYm9yZGVyLWJveDsgfQoKYm9keSB7CiAgbWFyZ2luOiAwOwogIGJhY2tncm91bmQ6IHZhcigtLWJnKTsKICBjb2xvcjogdmFyKC0tZmcpOwogIGZvbnQ6IDE0cHgvMS41ICJTZWdvZSBVSSIsICJNaWNyb3NvZnQgWWFIZWkiLCBzeXN0ZW0tdWksIHNhbnMtc2VyaWY7Cn0KCi8qIFBhZ2UgY29udGFpbmVyLgogICDpobXpnaLlrrnlmajjgIIgKi8KbWFpbiB7IG1heC13aWR0aDogMTIwMHB4OyBtYXJnaW46IDAgYXV0bzsgcGFkZGluZzogMjBweDsgfQpoMSB7IGZvbnQtc2l6ZTogMjBweDsgbWFyZ2luOiAwIDAgNHB4OyB9CmgyIHsgZm9udC1zaXplOiAxNXB4OyBtYXJnaW46IDIwcHggMCAxMHB4OyBjb2xvcjogdmFyKC0tZmcpOyB9Ci5tdXRlZCB7IGNvbG9yOiB2YXIoLS1mZzIpOyBmb250LXNpemU6IDEycHg7IG1hcmdpbjogMCAwIDEycHg7IH0KCi8qIFRhYnMuCiAgIFRhYiDmoIfnrb7jgIIgKi8KbmF2LnRhYnMgewogIGRpc3BsYXk6IGZsZXg7IGdhcDogNHB4OyBtYXJnaW46IDE2cHggMCAxMnB4OwogIGJvcmRlci1ib3R0b206IDFweCBzb2xpZCB2YXIoLS1saW5lKTsKfQpuYXYudGFicyBidXR0b24gewogIGJhY2tncm91bmQ6IHRyYW5zcGFyZW50OyBjb2xvcjogdmFyKC0tZmcyKTsgYm9yZGVyOiAwOwogIHBhZGRpbmc6IDlweCAxNnB4OyBmb250LXNpemU6IDEzcHg7IGN1cnNvcjogcG9pbnRlcjsKICBib3JkZXItYm90dG9tOiAycHggc29saWQgdHJhbnNwYXJlbnQ7IG1hcmdpbi1ib3R0b206IC0xcHg7Cn0KbmF2LnRhYnMgYnV0dG9uOmhvdmVyIHsgY29sb3I6IHZhcigtLWZnKTsgfQpuYXYudGFicyBidXR0b24ub24gewogIGNvbG9yOiB2YXIoLS1hY2MpOyBib3JkZXItYm90dG9tLWNvbG9yOiB2YXIoLS1hY2MpOwp9CnNlY3Rpb24udGFiIHsgZGlzcGxheTogbm9uZTsgfQpzZWN0aW9uLnRhYi5vbiB7IGRpc3BsYXk6IGJsb2NrOyB9CgovKiBGb3Jtcy4KICAg6KGo5Y2V44CCICovCi5mb3JtIHsKICBkaXNwbGF5OiBmbGV4OyBmbGV4LXdyYXA6IHdyYXA7IGdhcDogMTBweDsgYWxpZ24taXRlbXM6IGZsZXgtZW5kOwogIGJhY2tncm91bmQ6IHZhcigtLWJnMik7IGJvcmRlcjogMXB4IHNvbGlkIHZhcigtLWxpbmUpOwogIGJvcmRlci1yYWRpdXM6IDEycHg7IHBhZGRpbmc6IDEycHg7IG1hcmdpbi1ib3R0b206IDEycHg7Cn0KLmZvcm0gbGFiZWwgewogIGRpc3BsYXk6IGZsZXg7IGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47IGdhcDogNHB4OwogIGZvbnQtc2l6ZTogMTJweDsgY29sb3I6IHZhcigtLWZnMik7Cn0KLmZvcm0gaW5wdXRbdHlwZT1udW1iZXJdLCAuZm9ybSBpbnB1dFt0eXBlPXRleHRdLCAuZm9ybSBzZWxlY3QgewogIHdpZHRoOiAxMTBweDsgYmFja2dyb3VuZDogdmFyKC0tYmcpOyBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1saW5lKTsKICBjb2xvcjogdmFyKC0tZmcpOyBib3JkZXItcmFkaXVzOiA4cHg7IHBhZGRpbmc6IDZweCA4cHg7IGZvbnQtc2l6ZTogMTNweDsKfQouZm9ybSBsYWJlbC5jaGsgeyBmbGV4LWRpcmVjdGlvbjogcm93OyBhbGlnbi1pdGVtczogY2VudGVyOyBnYXA6IDZweDsgfQouZm9ybSBsYWJlbC5jaGsgaW5wdXQgeyBhY2NlbnQtY29sb3I6IHZhcigtLWFjYyk7IH0KLmZvcm0gYnV0dG9uIHsKICBiYWNrZ3JvdW5kOiB2YXIoLS1hY2MpOyBib3JkZXI6IDA7IGNvbG9yOiAjZmZmOyBib3JkZXItcmFkaXVzOiA4cHg7CiAgcGFkZGluZzogOHB4IDE2cHg7IGZvbnQtc2l6ZTogMTNweDsgY3Vyc29yOiBwb2ludGVyOwp9Ci5mb3JtIGJ1dHRvbjpob3ZlciB7IGZpbHRlcjogYnJpZ2h0bmVzcygxLjEpOyB9Ci5mb3JtIGJ1dHRvbi5zbWFsbCB7IHBhZGRpbmc6IDVweCAxMHB4OyBmb250LXNpemU6IDEycHg7IH0KCmRldGFpbHMuYWR2YW5jZWQgeyBtYXJnaW4tYm90dG9tOiAxMnB4OyB9CmRldGFpbHMuYWR2YW5jZWQgc3VtbWFyeSB7CiAgY3Vyc29yOiBwb2ludGVyOyBmb250LXNpemU6IDEyLjVweDsgY29sb3I6IHZhcigtLWZnMik7CiAgcGFkZGluZzogNnB4IDJweDsKfQoKLyogUm93IGxheW91dDogY2FudmFzICsgbWV0YSBwYW5lbC4KICAg6KGM5biD5bGA77yaY2FudmFzICsg5YWD5L+h5oGv6Z2i5p2/44CCICovCi5yb3cgewogIGRpc3BsYXk6IGZsZXg7IGdhcDogMTJweDsgYWxpZ24taXRlbXM6IGZsZXgtc3RhcnQ7IG1hcmdpbi1ib3R0b206IDEycHg7Cn0KLnJvdyBjYW52YXMgeyBmbGV4OiAxOyBtaW4td2lkdGg6IDA7IH0KLm1ldGEgewogIHdpZHRoOiAyNDBweDsgZmxleDogMCAwIDI0MHB4OwogIGJhY2tncm91bmQ6IHZhcigtLWJnMik7IGJvcmRlcjogMXB4IHNvbGlkIHZhcigtLWxpbmUpOwogIGJvcmRlci1yYWRpdXM6IDEycHg7IHBhZGRpbmc6IDEycHg7IGZvbnQtc2l6ZTogMTJweDsKICBmb250LWZhbWlseTogdWktbW9ub3NwYWNlLCBtb25vc3BhY2U7IGxpbmUtaGVpZ2h0OiAxLjc7IGNvbG9yOiB2YXIoLS1mZzIpOwp9Ci5tZXRhIGIgeyBjb2xvcjogdmFyKC0tZmcpOyB9CgovKiBDYW52YXMgYmFzZS4KICAgQ2FudmFzIOWfuuehgOagt+W8j+OAgiAqLwpjYW52YXMgewogIHdpZHRoOiAxMDAlOyBoZWlnaHQ6IGF1dG87IGRpc3BsYXk6IGJsb2NrOwogIGJhY2tncm91bmQ6IHZhcigtLWJnMik7IGJvcmRlcjogMXB4IHNvbGlkIHZhcigtLWxpbmUpOyBib3JkZXItcmFkaXVzOiAxMnB4Owp9CgovKiBDb29sZG93biBldmVudCBsaXN0LgogICDlhrfljbTkuovku7bliJfooajjgIIgKi8KI2NyZXN1bHQgewogIGJhY2tncm91bmQ6IHZhcigtLWJnMik7IGJvcmRlcjogMXB4IHNvbGlkIHZhcigtLWxpbmUpOwogIGJvcmRlci1yYWRpdXM6IDEycHg7IHBhZGRpbmc6IDEycHg7Cn0KLmV2bGlzdCB7CiAgZGlzcGxheTogZ3JpZDsgZ3JpZC10ZW1wbGF0ZS1jb2x1bW5zOiByZXBlYXQoYXV0by1maWxsLCBtaW5tYXgoMTIwcHgsIDFmcikpOwogIGdhcDogNHB4OyBtYXgtaGVpZ2h0OiAyNDBweDsgb3ZlcmZsb3c6IGF1dG87CiAgZm9udC1mYW1pbHk6IHVpLW1vbm9zcGFjZSwgbW9ub3NwYWNlOyBmb250LXNpemU6IDEycHg7Cn0KLmV2IHsKICBwYWRkaW5nOiA0cHggNnB4OyBiYWNrZ3JvdW5kOiB2YXIoLS1iZzMpOyBib3JkZXItcmFkaXVzOiA2cHg7CiAgY29sb3I6IHZhcigtLWZnMik7Cn0KCi8qIE5hcnJvdyBzY3JlZW5zOiBzdGFjayB0aGUgcm93LgogICDnqoTlsY/vvJrmlLnkuLrnurXlkJHloIblj6DjgIIgKi8KQG1lZGlhIChtYXgtd2lkdGg6IDkwMHB4KSB7CiAgLnJvdyB7IGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47IH0KICAubWV0YSB7IHdpZHRoOiAxMDAlOyBmbGV4OiAxIDEgYXV0bzsgfQp9Cg==
+/* touch-humanization Web UI style.
+   Zero framework; dark theme.
+
+   touch-humanization Web UI 样式。
+   零框架；深色主题。 */
+
+:root {
+  --bg: #0e1116;
+  --bg2: #141922;
+  --bg3: #1a2130;
+  --line: #242c3a;
+  --fg: #e6ebf3;
+  --fg2: #9aa7bd;
+  --fg3: #6b788e;
+  --acc: #4c8dff;
+  --ok: #2fbf71;
+  --err: #e5534b;
+}
+
+/* Box sizing.
+   盒模型。 */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font: 14px/1.5 "Segoe UI", "Microsoft YaHei", system-ui, sans-serif;
+}
+
+/* Page container.
+   页面容器。 */
+main { max-width: 1200px; margin: 0 auto; padding: 20px; }
+h1 { font-size: 20px; margin: 0 0 4px; }
+h2 { font-size: 15px; margin: 20px 0 10px; color: var(--fg); }
+.muted { color: var(--fg2); font-size: 12px; margin: 0 0 12px; }
+
+/* Tabs.
+   Tab 标签。 */
+nav.tabs {
+  display: flex; gap: 4px; margin: 16px 0 12px;
+  border-bottom: 1px solid var(--line);
+}
+nav.tabs button {
+  background: transparent; color: var(--fg2); border: 0;
+  padding: 9px 16px; font-size: 13px; cursor: pointer;
+  border-bottom: 2px solid transparent; margin-bottom: -1px;
+}
+nav.tabs button:hover { color: var(--fg); }
+nav.tabs button.on {
+  color: var(--acc); border-bottom-color: var(--acc);
+}
+section.tab { display: none; }
+section.tab.on { display: block; }
+
+/* Forms.
+   表单。 */
+.form {
+  display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end;
+  background: var(--bg2); border: 1px solid var(--line);
+  border-radius: 12px; padding: 12px; margin-bottom: 12px;
+}
+.form label {
+  display: flex; flex-direction: column; gap: 4px;
+  font-size: 12px; color: var(--fg2);
+}
+.form input[type=number], .form input[type=text], .form select {
+  width: 110px; background: var(--bg); border: 1px solid var(--line);
+  color: var(--fg); border-radius: 8px; padding: 6px 8px; font-size: 13px;
+}
+.form label.chk { flex-direction: row; align-items: center; gap: 6px; }
+.form label.chk input { accent-color: var(--acc); }
+.form button {
+  background: var(--acc); border: 0; color: #fff; border-radius: 8px;
+  padding: 8px 16px; font-size: 13px; cursor: pointer;
+}
+.form button:hover { filter: brightness(1.1); }
+.form button.small { padding: 5px 10px; font-size: 12px; }
+
+details.advanced { margin-bottom: 12px; }
+details.advanced summary {
+  cursor: pointer; font-size: 12.5px; color: var(--fg2);
+  padding: 6px 2px;
+}
+
+/* Row layout: canvas + meta panel.
+   行布局：canvas + 元信息面板。 */
+.row {
+  display: flex; gap: 12px; align-items: flex-start; margin-bottom: 12px;
+}
+.row canvas { flex: 1; min-width: 0; }
+.meta {
+  width: 240px; flex: 0 0 240px;
+  background: var(--bg2); border: 1px solid var(--line);
+  border-radius: 12px; padding: 12px; font-size: 12px;
+  font-family: ui-monospace, monospace; line-height: 1.7; color: var(--fg2);
+}
+.meta b { color: var(--fg); }
+
+/* Canvas base.
+   Canvas 基础样式。 */
+canvas {
+  width: 100%; height: auto; display: block;
+  background: var(--bg2); border: 1px solid var(--line); border-radius: 12px;
+}
+
+/* Cooldown event list.
+   冷却事件列表。 */
+#cresult {
+  background: var(--bg2); border: 1px solid var(--line);
+  border-radius: 12px; padding: 12px;
+}
+.evlist {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 4px; max-height: 240px; overflow: auto;
+  font-family: ui-monospace, monospace; font-size: 12px;
+}
+.ev {
+  padding: 4px 6px; background: var(--bg3); border-radius: 6px;
+  color: var(--fg2);
+}
+
+/* Narrow screens: stack the row.
+   窄屏：改为纵向堆叠。 */
+@media (max-width: 900px) {
+  .row { flex-direction: column; }
+  .meta { width: 100%; flex: 1 1 auto; }
+}

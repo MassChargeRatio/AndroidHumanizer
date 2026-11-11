@@ -1,1 +1,9 @@
-IyAtKi0gY29kaW5nOiB1dGYtOCAtKi0KIiIidG91Y2gtaHVtYW5pemF0aW9uOiBodW1hbi1saWtlIHRvdWNoIHRyYWplY3RvcnkgLyB0aW1pbmcgLyBzZW5zb3Igc2ltdWxhdGlvbi4KCnRvdWNoLWh1bWFuaXphdGlvbu+8muaLn+S6uuWMluinpuaRuOi9qOi/uSAvIOaXtuW6jyAvIOS8oOaEn+WZqOaooeaLn+OAggoiIiIKZnJvbSAuaHVtYW5pemUgaW1wb3J0IEh1bWFuaXplciwgR2VzdHVyZQoKX19hbGxfXyA9IFsiSHVtYW5pemVyIiwgIkdlc3R1cmUiXQpfX3ZlcnNpb25fXyA9ICIwLjEuMCIK
+# -*- coding: utf-8 -*-
+"""touch-humanization: human-like touch trajectory / timing / sensor simulation.
+
+touch-humanization：拟人化触摸轨迹 / 时序 / 传感器模拟。
+"""
+from .humanize import Humanizer, Gesture
+
+__all__ = ["Humanizer", "Gesture"]
+__version__ = "0.1.0"

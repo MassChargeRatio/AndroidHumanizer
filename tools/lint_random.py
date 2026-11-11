@@ -1,1 +1,110 @@
-IyEvdXNyL2Jpbi9lbnYgcHl0aG9uCiMgLSotIGNvZGluZzogdXRmLTggLSotCiIiIkNJIGxpbnQ6IGZvcmJpZCByYW5kb20uc2VlZCAvIGdsb2JhbCByYW5kb20uKiAvIG51bXB5LnJhbmRvbS4KCkFsbG93ZWQ6CiAgKiByYW5kb20uUmFuZG9tKC4uLikgaW5zdGFudGlhdGlvbgogICogaW5zdGFuY2UgbWV0aG9kIGNhbGxzIGxpa2Ugcm5nLnh4eCgpIC8gc2VsZi5ybmcueHh4KCkKCkZvcmJpZGRlbjoKICAqIHJhbmRvbS5zZWVkKC4uLikKICAqIG1vZHVsZS1sZXZlbCBjYWxscyBsaWtlIHJhbmRvbS5yYW5kb20oKSAvIHJhbmRvbS51bmlmb3JtKC4uLikgLyByYW5kb20uZ2F1c3MoLi4uKQogICogbnAucmFuZG9tIC8gbnVtcHkucmFuZG9tCgpFeGl0IGNvZGU6IDAgPSBjbGVhbjsgMSA9IHZpb2xhdGlvbnMgZm91bmQuCgpDSSBsaW5077ya56aB5q2iIHJhbmRvbS5zZWVkIC8g5YWo5bGAIHJhbmRvbS4qIC8gbnVtcHkucmFuZG9t44CCCgrlhYHorrjvvJoKICAqIHJhbmRvbS5SYW5kb20oLi4uKSDlrp7kvovljJYKICAqIHJuZy54eHgoKSAvIHNlbGYucm5nLnh4eCgpIOWunuS+i+aWueazleiwg+eUqAoK56aB5q2i77yaCiAgKiByYW5kb20uc2VlZCguLi4pCiAgKiByYW5kb20ucmFuZG9tKCkgLyByYW5kb20udW5pZm9ybSguLi4pIC8gcmFuZG9tLmdhdXNzKC4uLikg562J5qih5Z2X57qn6LCD55SoCiAgKiBucC5yYW5kb20gLyBudW1weS5yYW5kb20KCumAgOWHuuegge+8mjAg5bmy5YeA77ybMSDlj5HnjrDpl67popjjgIIKIiIiCmZyb20gX19mdXR1cmVfXyBpbXBvcnQgYW5ub3RhdGlvbnMKCmltcG9ydCBhcmdwYXJzZQppbXBvcnQgcmUKaW1wb3J0IHN5cwpmcm9tIHBhdGhsaWIgaW1wb3J0IFBhdGgKCiMgQmFubmVkIHBhdHRlcm5zIGFuZCB0aGVpciBleHBsYW5hdGlvbnMuCiMg56aB5q2i5qih5byP5LiO5a+55bqU6K+05piO44CCCkJBTk5FRCA9IFsKICAgIChyZS5jb21waWxlKHIiXGJyYW5kb21cLnNlZWRccypcKCIpLAogICAgICJmb3JiaWQgcmFuZG9tLnNlZWQoKSAvIOemgeatoiByYW5kb20uc2VlZCgpIiksCiAgICAocmUuY29tcGlsZShyIlxicmFuZG9tXC4ocmFuZG9tfHVuaWZvcm18Z2F1c3N8Y2hvaWNlfGNob2ljZXN8cmFuZGludHwiCiAgICAgICAgICAgICAgICByInJhbmRyYW5nZXxzaHVmZmxlfHNhbXBsZXxiZXRhdmFyaWF0ZXxleHBvdmFyaWF0ZXwiCiAgICAgICAgICAgICAgICByImdhbW1hdmFyaWF0ZXxsb2dub3JtdmFyaWF0ZXxub3JtYWx2YXJpYXRlfHRyaWFuZ3VsYXJ8IgogICAgICAgICAgICAgICAgciJ2b25taXNlc3ZhcmlhdGV8cGFyZXRvdmFyaWF0ZXx3ZWlidWxsdmFyaWF0ZSlccypcKCIpLAogICAgICJmb3JiaWQgZ2xvYmFsIHJhbmRvbS4qICh1c2UgaW5zdGFuY2Ugcm5nLnh4eCgpKSAvIOemgeatouWFqOWxgCByYW5kb20uKu+8iOivt+eUqOWunuS+iyBybmcueHh4KCnvvIkiKSwKICAgIChyZS5jb21waWxlKHIiXGJucFwucmFuZG9tXGIiKSwKICAgICAiZm9yYmlkIG51bXB5LnJhbmRvbSAoemVyby1kZXBlbmRlbmN5IHByb2plY3QpIC8g56aB5q2iIG51bXB5LnJhbmRvbe+8iOacrOmhueebrumbtuS+nei1lu+8iSIpLAogICAgKHJlLmNvbXBpbGUociJcYm51bXB5XC5yYW5kb21cYiIpLAogICAgICJmb3JiaWQgbnVtcHkucmFuZG9tICh6ZXJvLWRlcGVuZGVuY3kgcHJvamVjdCkgLyDnpoHmraIgbnVtcHkucmFuZG9t77yI5pys6aG555uu6Zu25L6d6LWW77yJIiksCl0KCiMgRXhwbGljaXRseSBhbGxvd2VkIHBhdHRlcm5zIChza2lwcGVkIHdoZW4gdGhleSBhcHBlYXIgb24gdGhlIHNhbWUgbGluZSkuCiMg5pi+5byP5YWB6K6455qE5qih5byP77yI5ZCM6KGM5Ye6546w5pe26Lez6L+H77yJ44CCCkFMTE9XRUQgPSBbCiAgICByZS5jb21waWxlKHIiXGJyYW5kb21cLlJhbmRvbVxzKlwoIiksCl0KCgpkZWYgc2NhbihwYXRoOiBQYXRoKSAtPiBsaXN0OgogICAgIyBSZXR1cm4gWyhsaW5lX25vLCByZWFzb24sIGxpbmVfdGV4dCksIC4uLl0gZm9yIHRoZSBnaXZlbiBmaWxlLgogICAgIyDov5Tlm57nu5nlrprmlofku7bnmoQgWyjooYzlj7csIOWOn+WboCwg6KGM5paH5pysKSwgLi4uXeOAggogICAgaGl0czogbGlzdCA9IFtdCiAgICB0cnk6CiAgICAgICAgdGV4dCA9IHBhdGgucmVhZF90ZXh0KGVuY29kaW5nPSJ1dGYtOCIsIGVycm9ycz0icmVwbGFjZSIpCiAgICBleGNlcHQgT1NFcnJvcjoKICAgICAgICByZXR1cm4gaGl0cwogICAgZm9yIGksIGxpbmUgaW4gZW51bWVyYXRlKHRleHQuc3BsaXRsaW5lcygpLCAxKToKICAgICAgICAjIElmIHRoZSBsaW5lIGNvbnRhaW5zIGFuIGFsbG93ZWQgcGF0dGVybiwgc3RyaXAgaXQgYmVmb3JlIGNoZWNraW5nIGJhbnMuCiAgICAgICAgIyDoi6Xor6XooYzlkKvlhYHorrjmqKHlvI/vvIjlpoIgcmFuZG9tLlJhbmRvbSjvvInvvIzlhYjliaXnprvlho3liKTnpoHmraLmqKHlvI/vvIwKICAgICAgICAjIOmBv+WFjeWQjOS4gOihjOWQjOaXtuWQqyBSYW5kb20oIOS4juWIq+eahOiwg+eUqOaXtua8j+aKpeOAggogICAgICAgIGlmIGFueShhLnNlYXJjaChsaW5lKSBmb3IgYSBpbiBBTExPV0VEKToKICAgICAgICAgICAgc3RyaXBwZWQgPSBsaW5lCiAgICAgICAgICAgIGZvciBhIGluIEFMTE9XRUQ6CiAgICAgICAgICAgICAgICBzdHJpcHBlZCA9IGEuc3ViKCIiLCBzdHJpcHBlZCkKICAgICAgICAgICAgaWYgYW55KGIuc2VhcmNoKHN0cmlwcGVkKSBmb3IgYiwgXyBpbiBCQU5ORUQpOgogICAgICAgICAgICAgICAgZm9yIGIsIHdoeSBpbiBCQU5ORUQ6CiAgICAgICAgICAgICAgICAgICAgaWYgYi5zZWFyY2goc3RyaXBwZWQpOgogICAgICAgICAgICAgICAgICAgICAgICBoaXRzLmFwcGVuZCgoaSwgd2h5LCBsaW5lLnN0cmlwKCkpKQogICAgICAgICAgICBjb250aW51ZQogICAgICAgIGZvciBiLCB3aHkgaW4gQkFOTkVEOgogICAgICAgICAgICBpZiBiLnNlYXJjaChsaW5lKToKICAgICAgICAgICAgICAgIGhpdHMuYXBwZW5kKChpLCB3aHksIGxpbmUuc3RyaXAoKSkpCiAgICAgICAgICAgICAgICBicmVhawogICAgcmV0dXJuIGhpdHMKCgpkZWYgbWFpbihhcmd2PU5vbmUpIC0+IGludDoKICAgIGFwID0gYXJncGFyc2UuQXJndW1lbnRQYXJzZXIoCiAgICAgICAgZGVzY3JpcHRpb249IkZvcmJpZCByYW5kb20uc2VlZCAvIGdsb2JhbCByYW5kb20uKiAvIG51bXB5LnJhbmRvbSIpCiAgICBhcC5hZGRfYXJndW1lbnQoInBhdGhzIiwgbmFyZ3M9IioiLCBkZWZhdWx0PVsidG91Y2hfaHVtYW5pemF0aW9uIl0pCiAgICBhcmdzID0gYXAucGFyc2VfYXJncyhhcmd2KQoKICAgIHRvdGFsID0gMAogICAgZm9yIHJvb3QgaW4gYXJncy5wYXRoczoKICAgICAgICBwID0gUGF0aChyb290KQogICAgICAgIGZpbGVzID0gW3BdIGlmIHAuaXNfZmlsZSgpIGVsc2Ugc29ydGVkKHAucmdsb2IoIioucHkiKSkKICAgICAgICBmb3IgZiBpbiBmaWxlczoKICAgICAgICAgICAgZm9yIGxpbmVubywgd2h5LCBsaW5lIGluIHNjYW4oZik6CiAgICAgICAgICAgICAgICB0b3RhbCArPSAxCiAgICAgICAgICAgICAgICBwcmludChmIntmfTp7bGluZW5vfToge3doeX1cbiAgICB7bGluZX0iKQogICAgaWYgdG90YWw6CiAgICAgICAgcHJpbnQoZiJcbuWPkeeOsCB7dG90YWx9IOWkhOi/neinhOOAgi8ge3RvdGFsfSB2aW9sYXRpb24ocykgZm91bmQuIikKICAgICAgICByZXR1cm4gMQogICAgcHJpbnQoIk9LICDmnKrlj5HnjrAgcmFuZG9tLnNlZWQgLyDlhajlsYAgcmFuZG9tLiogLyBudW1weS5yYW5kb23jgIIiCiAgICAgICAgICAiIC8gbm8gZm9yYmlkZGVuIHJhbmRvbSB1c2FnZS4iKQogICAgcmV0dXJuIDAKCgppZiBfX25hbWVfXyA9PSAiX19tYWluX18iOgogICAgc3lzLmV4aXQobWFpbigpKQo=
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""CI lint: forbid random.seed / global random.* / numpy.random.
+
+Allowed:
+  * random.Random(...) instantiation
+  * instance method calls like rng.xxx() / self.rng.xxx()
+
+Forbidden:
+  * random.seed(...)
+  * module-level calls like random.random() / random.uniform(...) / random.gauss(...)
+  * np.random / numpy.random
+
+Exit code: 0 = clean; 1 = violations found.
+
+CI lint：禁止 random.seed / 全局 random.* / numpy.random。
+
+允许：
+  * random.Random(...) 实例化
+  * rng.xxx() / self.rng.xxx() 实例方法调用
+
+禁止：
+  * random.seed(...)
+  * random.random() / random.uniform(...) / random.gauss(...) 等模块级调用
+  * np.random / numpy.random
+
+退出码：0 干净；1 发现问题。
+"""
+from __future__ import annotations
+
+import argparse
+import re
+import sys
+from pathlib import Path
+
+# Banned patterns and their explanations.
+# 禁止模式与对应说明。
+BANNED = [
+    (re.compile(r"\brandom\.seed\s*\("),
+     "forbid random.seed() / 禁止 random.seed()"),
+    (re.compile(r"\brandom\.(random|uniform|gauss|choice|choices|randint|"
+                r"randrange|shuffle|sample|betavariate|expovariate|"
+                r"gammavariate|lognormvariate|normalvariate|triangular|"
+                r"vonmisesvariate|paretovariate|weibullvariate)\s*\("),
+     "forbid global random.* (use instance rng.xxx()) / 禁止全局 random.*（请用实例 rng.xxx()）"),
+    (re.compile(r"\bnp\.random\b"),
+     "forbid numpy.random (zero-dependency project) / 禁止 numpy.random（本项目零依赖）"),
+    (re.compile(r"\bnumpy\.random\b"),
+     "forbid numpy.random (zero-dependency project) / 禁止 numpy.random（本项目零依赖）"),
+]
+
+# Explicitly allowed patterns (skipped when they appear on the same line).
+# 显式允许的模式（同行出现时跳过）。
+ALLOWED = [
+    re.compile(r"\brandom\.Random\s*\("),
+]
+
+
+def scan(path: Path) -> list:
+    # Return [(line_no, reason, line_text), ...] for the given file.
+    # 返回给定文件的 [(行号, 原因, 行文本), ...]。
+    hits: list = []
+    try:
+        text = path.read_text(encoding="utf-8", errors="replace")
+    except OSError:
+        return hits
+    for i, line in enumerate(text.splitlines(), 1):
+        # If the line contains an allowed pattern, strip it before checking bans.
+        # 若该行含允许模式（如 random.Random(），先剥离再判禁止模式，
+        # 避免同一行同时含 Random( 与别的调用时漏报。
+        if any(a.search(line) for a in ALLOWED):
+            stripped = line
+            for a in ALLOWED:
+                stripped = a.sub("", stripped)
+            if any(b.search(stripped) for b, _ in BANNED):
+                for b, why in BANNED:
+                    if b.search(stripped):
+                        hits.append((i, why, line.strip()))
+            continue
+        for b, why in BANNED:
+            if b.search(line):
+                hits.append((i, why, line.strip()))
+                break
+    return hits
+
+
+def main(argv=None) -> int:
+    ap = argparse.ArgumentParser(
+        description="Forbid random.seed / global random.* / numpy.random")
+    ap.add_argument("paths", nargs="*", default=["touch_humanization"])
+    args = ap.parse_args(argv)
+
+    total = 0
+    for root in args.paths:
+        p = Path(root)
+        files = [p] if p.is_file() else sorted(p.rglob("*.py"))
+        for f in files:
+            for lineno, why, line in scan(f):
+                total += 1
+                print(f"{f}:{lineno}: {why}\n    {line}")
+    if total:
+        print(f"\n发现 {total} 处违规。/ {total} violation(s) found.")
+        return 1
+    print("OK  未发现 random.seed / 全局 random.* / numpy.random。"
+          " / no forbidden random usage.")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

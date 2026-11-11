@@ -1,1 +1,89 @@
-IyAtKi0gY29kaW5nOiB1dGYtOCAtKi0KIiIiSHVtYW5pemVyIGZhY2FkZTogYSBzaW5nbGUgcmFuZG9tIHN0cmVhbSBzaGFyZWQgYnkga2luZW1hdGljcyAvIHRpbWluZyAvIHNlbnNvcnMuCgpIdW1hbml6ZXIg6Zeo6Z2i77ya5Y2V5LiA6ZqP5py65rWB6LSv56m/IGtpbmVtYXRpY3MgLyB0aW1pbmcgLyBzZW5zb3Jz44CCCiIiIgpmcm9tIF9fZnV0dXJlX18gaW1wb3J0IGFubm90YXRpb25zCgppbXBvcnQgcmFuZG9tCmltcG9ydCB0aW1lCgpmcm9tIC5jb25maWcgaW1wb3J0IG1lcmdlX2NvbmZpZwpmcm9tIC5raW5lbWF0aWNzIGltcG9ydCBHZXN0dXJlLCBLaW5lbWF0aWNzCmZyb20gLnNlbnNvcnMgaW1wb3J0IFNlbnNvcnMKZnJvbSAudGltaW5nIGltcG9ydCBUaW1pbmcKCl9fYWxsX18gPSBbIkh1bWFuaXplciIsICJHZXN0dXJlIl0KCgpjbGFzcyBIdW1hbml6ZXI6CiAgICAiIiJIdW1hbml6YXRpb24gZmFjYWRlLgoKICAgIC0gV2hlbiBhIHNlZWQgaXMgZ2l2ZW4sIG9uZSBpbnRlcm5hbCBgcmFuZG9tLlJhbmRvbWAgaXMgY3JlYXRlZCBhbmQgc2hhcmVkCiAgICAgIGJ5IGFsbCB0aHJlZSBzdWItbW9kdWxlcyAoc2luZ2xlIHN0cmVhbSkuCiAgICAtIFdoZW4gbm8gc2VlZCBpcyBnaXZlbiwgYW4gaW5zdGFuY2UtbG9jYWwgc3RyZWFtIGlzIHN0aWxsIGNyZWF0ZWQgc28gdGhlCiAgICAgIGdsb2JhbCBgcmFuZG9tYCBtb2R1bGUgaXMgbmV2ZXIgdG91Y2hlZC4KICAgIC0gRWFjaCBzdWItbW9kdWxlIGNhbiBhbHNvIGJlIHVzZWQgc3RhbmRhbG9uZSAoZWFjaCBob2xkaW5nIGl0cyBvd24gcm5nKS4KCiAgICBIdW1hbml6ZXIg6Zeo6Z2i77yaCgogICAgLSDkvKAgc2VlZCDml7blhoXpg6jliJvlu7rkuIDkuKogYHJhbmRvbS5SYW5kb21g77yM5LiJ5Liq5a2Q5qih5Z2X5YWx5Lqr5a6D77yI5Y2V5LiA5rWB77yJ44CCCiAgICAtIOS4jeS8oCBzZWVkIOaXtuWQjOagt+WIm+W7uuWunuS+i+a1ge+8jOS4jeaxoeafk+WFqOWxgCBgcmFuZG9tYOOAggogICAgLSDkuInkuKrlrZDmqKHlnZfkuZ/lj6/ljZXni6zkvb/nlKjvvIjlkIToh6rmjIHmnInlrp7kvosgcm5n77yJ44CCCiAgICAiIiIKCiAgICBkZWYgX19pbml0X18oc2VsZiwgY29uZmlnOiBkaWN0IHwgTm9uZSA9IE5vbmUsIHNlZWQ6IGludCB8IE5vbmUgPSBOb25lKToKICAgICAgICBzZWxmLmNvbmZpZyA9IG1lcmdlX2NvbmZpZyhjb25maWcpCiAgICAgICAgc2VsZi5ybmcgPSByYW5kb20uUmFuZG9tKHNlZWQpCiAgICAgICAgc2VsZi5raW5lbWF0aWNzID0gS2luZW1hdGljcyhzZWxmLmNvbmZpZ1sia2luZW1hdGljcyJdLCBybmc9c2VsZi5ybmcpCiAgICAgICAgc2VsZi50aW1pbmcgPSBUaW1pbmcoc2VsZi5jb25maWdbInRpbWluZyJdLCBybmc9c2VsZi5ybmcpCiAgICAgICAgc2VsZi5zZW5zb3JzID0gU2Vuc29ycyhzZWxmLmNvbmZpZ1sic2Vuc29ycyJdLCBybmc9c2VsZi5ybmcpCgogICAgZGVmIGdlc3R1cmUoc2VsZiwgc3RhcnQsIGVuZCwgKiwgZm9yX3NsaWRlcjogYm9vbCA9IEZhbHNlLAogICAgICAgICAgICAgICAgZXhhY3RfZW5kOiBib29sID0gVHJ1ZSkgLT4gR2VzdHVyZToKICAgICAgICAjIERlbGVnYXRlIHRvIGtpbmVtYXRpY3MuCiAgICAgICAgIyDlp5TmiZjnu5kga2luZW1hdGljcyDnlJ/miJDovajov7njgIIKICAgICAgICByZXR1cm4gc2VsZi5raW5lbWF0aWNzLmdlbmVyYXRlKHN0YXJ0LCBlbmQsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmb3Jfc2xpZGVyPWZvcl9zbGlkZXIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBleGFjdF9lbmQ9ZXhhY3RfZW5kKQoKICAgIGRlZiBkZWxheShzZWxmKSAtPiBmbG9hdDoKICAgICAgICAjIFNhbXBsZSB0aGVuIHNsZWVwIGZvciBpbnRlci1hY3Rpb24gZGVsYXkuCiAgICAgICAgIyDph4fmoLfliqjkvZzpl7TpmpTlubbnnJ/lrp4gc2xlZXDjgIIKICAgICAgICB2ID0gc2VsZi50aW1pbmcuZGVsYXlfYmV0d2Vlbl9hY3Rpb25zKCkKICAgICAgICB0aW1lLnNsZWVwKHYpCiAgICAgICAgcmV0dXJuIHYKCiAgICBkZWYgdGhpbmsoc2VsZikgLT4gZmxvYXQ6CiAgICAgICAgIyBTYW1wbGUgdGhlbiBzbGVlcCBmb3IgInRoaW5raW5nIiBwYXVzZS4KICAgICAgICAjIOmHh+agt+aAneiAg+WBnOmhv+W5tuecn+WuniBzbGVlcOOAggogICAgICAgIHYgPSBzZWxmLnRpbWluZy50aGluaygpCiAgICAgICAgdGltZS5zbGVlcCh2KQogICAgICAgIHJldHVybiB2CgogICAgZGVmIGFmdGVyX29wZW4oc2VsZikgLT4gZmxvYXQ6CiAgICAgICAgIyBTYW1wbGUgdGhlbiBzbGVlcCBmb3IgcG9zdC1sYXVuY2ggcGF1c2UuCiAgICAgICAgIyDph4fmoLflkK/liqjlkI7lgZznlZnlubbnnJ/lrp4gc2xlZXDjgIIKICAgICAgICB2ID0gc2VsZi50aW1pbmcuYWZ0ZXJfb3BlbigpCiAgICAgICAgdGltZS5zbGVlcCh2KQogICAgICAgIHJldHVybiB2CgogICAgZGVmIHN0YXJ0X3dhaXQoc2VsZikgLT4gZmxvYXQ6CiAgICAgICAgIyBSYW5kb20gc3RhcnQtdGltZSBqaXR0ZXIgKG5vIHNsZWVwKS4KICAgICAgICAjIOWQr+WKqOaXtuWIu+maj+acuuWBj+enu++8iOS4jSBzbGVlcO+8ieOAggogICAgICAgIHJldHVybiBzZWxmLnRpbWluZy5zdGFydF93YWl0KCkKCiAgICBkZWYgaW5fd2FrZV93aW5kb3coc2VsZiwgbm93PU5vbmUpIC0+IGJvb2w6CiAgICAgICAgIyBXaGV0aGVyIHRoZSBjdXJyZW50IHRpbWUgaXMgaW5zaWRlIHRoZSB3YWtlIHdpbmRvdy4KICAgICAgICAjIOW9k+WJjeaXtuWIu+aYr+WQpuWcqOS9nOaBr+eql+WPo+WGheOAggogICAgICAgIHJldHVybiBzZWxmLnRpbWluZy5pbl93YWtlX3dpbmRvdyhub3cpCgogICAgZGVmIHRhcChzZWxmKSAtPiBmbG9hdCB8IE5vbmU6CiAgICAgICAgIyBSZWNvcmQgb25lIHRhcDsgcmV0dXJuIGNvb2xkb3duIHNlY29uZHMgaWYgdHJpZ2dlcmVkLCBlbHNlIE5vbmUuCiAgICAgICAgIyDorrDlvZXkuIDmrKHngrnlh7vvvJvop6blj5HlhrfljbTml7bov5Tlm57np5LmlbDvvIzlkKbliJkgTm9uZeOAggogICAgICAgIHJldHVybiBzZWxmLnRpbWluZy50YXAoKQoKICAgIGRlZiBjYXB0Y2hhX2Nvb2xkb3duKHNlbGYpIC0+IGZsb2F0OgogICAgICAgICMgU2Vzc2lvbi1sZXZlbCBjb29sZG93biBhZnRlciBjYXB0Y2hhIGZhaWx1cmUuCiAgICAgICAgIyDpqozor4HnoIHlpLHotKXlkI7nmoTkvJror53nuqflhrfljbTjgIIKICAgICAgICByZXR1cm4gc2VsZi50aW1pbmcuY2FwdGNoYV9jb29sZG93bigpCg==
+# -*- coding: utf-8 -*-
+"""Humanizer facade: a single random stream shared by kinematics / timing / sensors.
+
+Humanizer 门面：单一随机流贯穿 kinematics / timing / sensors。
+"""
+from __future__ import annotations
+
+import random
+import time
+
+from .config import merge_config
+from .kinematics import Gesture, Kinematics
+from .sensors import Sensors
+from .timing import Timing
+
+__all__ = ["Humanizer", "Gesture"]
+
+
+class Humanizer:
+    """Humanization facade.
+
+    - When a seed is given, one internal `random.Random` is created and shared
+      by all three sub-modules (single stream).
+    - When no seed is given, an instance-local stream is still created so the
+      global `random` module is never touched.
+    - Each sub-module can also be used standalone (each holding its own rng).
+
+    Humanizer 门面：
+
+    - 传 seed 时内部创建一个 `random.Random`，三个子模块共享它（单一流）。
+    - 不传 seed 时同样创建实例流，不污染全局 `random`。
+    - 三个子模块也可单独使用（各自持有实例 rng）。
+    """
+
+    def __init__(self, config: dict | None = None, seed: int | None = None):
+        self.config = merge_config(config)
+        self.rng = random.Random(seed)
+        self.kinematics = Kinematics(self.config["kinematics"], rng=self.rng)
+        self.timing = Timing(self.config["timing"], rng=self.rng)
+        self.sensors = Sensors(self.config["sensors"], rng=self.rng)
+
+    def gesture(self, start, end, *, for_slider: bool = False,
+                exact_end: bool = True) -> Gesture:
+        # Delegate to kinematics.
+        # 委托给 kinematics 生成轨迹。
+        return self.kinematics.generate(start, end,
+                                        for_slider=for_slider,
+                                        exact_end=exact_end)
+
+    def delay(self) -> float:
+        # Sample then sleep for inter-action delay.
+        # 采样动作间隔并真实 sleep。
+        v = self.timing.delay_between_actions()
+        time.sleep(v)
+        return v
+
+    def think(self) -> float:
+        # Sample then sleep for "thinking" pause.
+        # 采样思考停顿并真实 sleep。
+        v = self.timing.think()
+        time.sleep(v)
+        return v
+
+    def after_open(self) -> float:
+        # Sample then sleep for post-launch pause.
+        # 采样启动后停留并真实 sleep。
+        v = self.timing.after_open()
+        time.sleep(v)
+        return v
+
+    def start_wait(self) -> float:
+        # Random start-time jitter (no sleep).
+        # 启动时刻随机偏移（不 sleep）。
+        return self.timing.start_wait()
+
+    def in_wake_window(self, now=None) -> bool:
+        # Whether the current time is inside the wake window.
+        # 当前时刻是否在作息窗口内。
+        return self.timing.in_wake_window(now)
+
+    def tap(self) -> float | None:
+        # Record one tap; return cooldown seconds if triggered, else None.
+        # 记录一次点击；触发冷却时返回秒数，否则 None。
+        return self.timing.tap()
+
+    def captcha_cooldown(self) -> float:
+        # Session-level cooldown after captcha failure.
+        # 验证码失败后的会话级冷却。
+        return self.timing.captcha_cooldown()

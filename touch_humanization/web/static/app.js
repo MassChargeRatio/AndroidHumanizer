@@ -1,1 +1,500 @@
-J3VzZSBzdHJpY3QnOwoKLyogPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09CiAgIHRvdWNoLWh1bWFuaXphdGlvbiBXZWIgVUkgZnJvbnRlbmQgbG9naWMuCiAgIFplcm8gZnJhbWV3b3JrLCB6ZXJvIENETi4KCiAgIHRvdWNoLWh1bWFuaXphdGlvbiBXZWIgVUkg5YmN56uv6YC76L6R44CCCiAgIOmbtuahhuaetuOAgembtiBDRE7jgIIKICAgPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09ICovCgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tIHF1ZXJ5IGhlbHBlcnMKCmNvbnN0ICQgPSBzID0+IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3Iocyk7CmNvbnN0ICQkID0gcyA9PiBBcnJheS5mcm9tKGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3JBbGwocykpOwoKLy8gTGluZSBjb2xvcnMgZm9yIHRoZSBzZW5zb3IgY2hhcnQuCi8vIOS8oOaEn+WZqOWbvuihqOeahOabsue6v+minOiJsuOAggpjb25zdCBDT0xPUlMgPSB7CiAgYWNjX3g6ICcjNGM4ZGZmJywgYWNjX3k6ICcjMmZiZjcxJywgYWNjX3o6ICcjZTJhMzNjJywKICBneXJvX3g6ICcjYzA4YmZmJywgZ3lyb195OiAnI2U1NTM0YicsIGd5cm9fejogJyM1ZjllYTAnLAp9OwoKLy8gLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSB0YWJzCgovLyBUYWIgc3dpdGNoaW5nOiBvbmUgPHNlY3Rpb24gY2xhc3M9InRhYiI+IHBlciB2aWV3LgovLyBUYWIg5YiH5o2i77ya5q+P5Liq6KeG5Zu+5a+55bqU5LiA5LiqIDxzZWN0aW9uIGNsYXNzPSJ0YWIiPuOAggokJCgnbmF2LnRhYnMgYnV0dG9uJykuZm9yRWFjaChidG4gPT4gewogIGJ0bi5hZGRFdmVudExpc3RlbmVyKCdjbGljaycsICgpID0+IHsKICAgICQkKCduYXYudGFicyBidXR0b24nKS5mb3JFYWNoKGIgPT4gYi5jbGFzc0xpc3QudG9nZ2xlKCdvbicsIGIgPT09IGJ0bikpOwogICAgJCQoJ3NlY3Rpb24udGFiJykuZm9yRWFjaChzID0+IHsKICAgICAgcy5jbGFzc0xpc3QudG9nZ2xlKCdvbicsIHMuaWQgPT09ICd0YWItJyArIGJ0bi5kYXRhc2V0LnRhYik7CiAgICB9KTsKICB9KTsKfSk7CgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tIEhUVFAKCi8vIFBPU1QgSlNPTiBhbmQgdGhyb3cgb24gbm9uLW9rIHJlc3BvbnNlcy4KLy8g5Y+R6YCBIEpTT04gUE9TVCDor7fmsYLvvJvpnZ4gb2sg5ZON5bqU5oqb6ZSZ44CCCmFzeW5jIGZ1bmN0aW9uIHBvc3RKU09OKHBhdGgsIGJvZHkpIHsKICBjb25zdCByZXMgPSBhd2FpdCBmZXRjaChwYXRoLCB7CiAgICBtZXRob2Q6ICdQT1NUJywKICAgIGhlYWRlcnM6IHsgJ0NvbnRlbnQtVHlwZSc6ICdhcHBsaWNhdGlvbi9qc29uJyB9LAogICAgYm9keTogSlNPTi5zdHJpbmdpZnkoYm9keSksCiAgfSk7CiAgY29uc3QgZGF0YSA9IGF3YWl0IHJlcy5qc29uKCkuY2F0Y2goKCkgPT4gKHsgb2s6IGZhbHNlLCBlcnJvcjogJ0hUVFAgJyArIHJlcy5zdGF0dXMgfSkpOwogIGlmICghZGF0YS5vaykgdGhyb3cgbmV3IEVycm9yKGRhdGEuZXJyb3IgfHwgKCdIVFRQICcgKyByZXMuc3RhdHVzKSk7CiAgcmV0dXJuIGRhdGE7Cn0KCi8vIFJlYWQgdGhlIHNlZWQgaW5wdXQ7IGVtcHR5IHN0cmluZyAtPiBudWxsIChyYW5kb20pLgovLyDor7vlj5Ygc2VlZCDovpPlhaXvvJvnqbrkuLIgLT4gbnVsbO+8iOmaj+acuu+8ieOAggpmdW5jdGlvbiBzZWVkT2YoZWwpIHsKICBjb25zdCB2ID0gZWwudmFsdWUudHJpbSgpOwogIHJldHVybiB2ID09PSAnJyA/IG51bGwgOiBOdW1iZXIodik7Cn0KCi8vID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0ga2luZW1hdGljcwoKbGV0IGxhc3RHZXN0dXJlID0gbnVsbDsKbGV0IHBsYXlUaW1lciA9IG51bGw7CgovLyBDb2xsZWN0IGFsbCBraW5lbWF0aWNzIGZvcm0gdmFsdWVzIGludG8gYSByZXF1ZXN0IGJvZHkuCi8vIOaUtumbhiBraW5lbWF0aWNzIOihqOWNleWFqOmDqOWtl+auteS4uuivt+axguS9k+OAggpmdW5jdGlvbiBrQm9keSgpIHsKICByZXR1cm4gewogICAgc3RhcnQ6IFtOdW1iZXIoJCgnI2t4MCcpLnZhbHVlKSwgTnVtYmVyKCQoJyNreTAnKS52YWx1ZSldLAogICAgZW5kOiBbTnVtYmVyKCQoJyNreDEnKS52YWx1ZSksIE51bWJlcigkKCcja3kxJykudmFsdWUpXSwKICAgIHNlZWQ6IHNlZWRPZigkKCcja3NlZWQnKSksCiAgICBmb3Jfc2xpZGVyOiAkKCcja3NsaWRlcicpLmNoZWNrZWQsCiAgICBleGFjdF9lbmQ6ICQoJyNrZXhhY3QnKS5jaGVja2VkLAogICAgLy8gQWR2YW5jZWQgcGFyYW1zLgogICAgLy8g6auY57qn5Y+C5pWw44CCCiAgICBzdGVwc19taW46IE51bWJlcigkKCcja19zdGVwc19taW4nKS52YWx1ZSksCiAgICBzdGVwc19tYXg6IE51bWJlcigkKCcja19zdGVwc19tYXgnKS52YWx1ZSksCiAgICBweF9wZXJfc3RlcDogTnVtYmVyKCQoJyNrX3B4X3Blcl9zdGVwJykudmFsdWUpLAogICAgZHVyYXRpb25fcGVyX3B4OiBOdW1iZXIoJCgnI2tfZHVyYXRpb25fcGVyX3B4JykudmFsdWUpLAogICAgZHVyYXRpb25fbWluOiBOdW1iZXIoJCgnI2tfZHVyYXRpb25fbWluJykudmFsdWUpLAogICAgZHVyYXRpb25fbWF4OiBOdW1iZXIoJCgnI2tfZHVyYXRpb25fbWF4JykudmFsdWUpLAogICAgcGVycGVuZGljdWxhcl9yYXRpbzogTnVtYmVyKCQoJyNrX3BlcnAnKS52YWx1ZSksCiAgICBqaXR0ZXJfc2lnbWE6IE51bWJlcigkKCcja19qaXR0ZXInKS52YWx1ZSksCiAgICBqaXR0ZXJfdGFpbF9mcmFjdGlvbjogTnVtYmVyKCQoJyNrX2p0YWlsJykudmFsdWUpLAogICAgb3ZlcnNob290X3Byb2I6IE51bWJlcigkKCcja19vdmVyc2hvb3QnKS52YWx1ZSksCiAgICBvdmVyc2hvb3RfcmF0aW86IE51bWJlcigkKCcja19vcmF0aW8nKS52YWx1ZSksCiAgICB1c2VfZWFzZV9pbl9vdXQ6ICQoJyNrX2Vhc2UnKS5jaGVja2VkLAogIH07Cn0KCi8vIFJlcXVlc3QgYSBnZXN0dXJlIGFuZCByZWRyYXcuCi8vIOivt+axgui9qOi/ueW5tumHjee7mOOAggphc3luYyBmdW5jdGlvbiBnZW5lcmF0ZUdlc3R1cmUoKSB7CiAgdHJ5IHsKICAgIGNvbnN0IGRhdGEgPSBhd2FpdCBwb3N0SlNPTignL2FwaS9nZXN0dXJlJywga0JvZHkoKSk7CiAgICBsYXN0R2VzdHVyZSA9IGRhdGEuZ2VzdHVyZTsKICAgIGRyYXdLaW5lbWF0aWNzKGxhc3RHZXN0dXJlKTsKICAgIGNvbnN0IGcgPSBsYXN0R2VzdHVyZTsKICAgICQoJyNrbWV0YScpLmlubmVySFRNTCA9CiAgICAgIGDngrnmlbAgPGI+JHtnLnN0ZXBzfTwvYj48YnI+6Led56a7IDxiPiR7Zy5kaXN0YW5jZS50b0ZpeGVkKDEpfTwvYj4gcHg8YnI+YCArCiAgICAgIGDml7bplb8gPGI+JHtnLmR1cmF0aW9uLnRvRml4ZWQoMyl9PC9iPiBzPGJyPmAgKwogICAgICBg5ruR5Z2X5qih5byPICR7Zy5mb3Jfc2xpZGVyID8gJ+aYrycgOiAn5ZCmJ308YnI+YCArCiAgICAgIGDpppbngrkgKCR7Zy5wb2ludHNbMF0uam9pbignLCAnKX0pPGJyPuacq+eCuSAoJHtnLnBvaW50c1tnLnBvaW50cy5sZW5ndGggLSAxXS5qb2luKCcsICcpfSlgOwogICAgJCgnI2twbGF5LXN0YXR1cycpLnRleHRDb250ZW50ID0gJyc7CiAgfSBjYXRjaCAoZSkgewogICAgJCgnI2ttZXRhJykudGV4dENvbnRlbnQgPSAn6ZSZ6K+v77yaJyArIGUubWVzc2FnZTsKICB9Cn0KCi8vIERyYXcgdGhlIHRyYWplY3Rvcnkgb24gY2FudmFzOyBjdXJzb3JJZHggbGltaXRzIGhvdyBtYW55IHBvaW50cyB0byByZW5kZXIuCi8vIOWcqCBjYW52YXMg5LiK57uY5Yi26L2o6L+577ybY3Vyc29ySWR4IOaOp+WItua4suafk+WIsOesrOWHoOS4queCue+8iOeUqOS6juWKqOeUu++8ieOAggpmdW5jdGlvbiBkcmF3S2luZW1hdGljcyhnLCBjdXJzb3JJZHgpIHsKICBjb25zdCBjdiA9ICQoJyNjdi1raW5lbWF0aWNzJyk7CiAgY29uc3QgY3R4ID0gY3YuZ2V0Q29udGV4dCgnMmQnKTsKICBjdHguY2xlYXJSZWN0KDAsIDAsIGN2LndpZHRoLCBjdi5oZWlnaHQpOwogIGN0eC5maWxsU3R5bGUgPSAnIzBlMTExNic7CiAgY3R4LmZpbGxSZWN0KDAsIDAsIGN2LndpZHRoLCBjdi5oZWlnaHQpOwoKICBjb25zdCBwdHMgPSBnLnBvaW50czsKICBpZiAoIXB0cy5sZW5ndGgpIHJldHVybjsKCiAgLy8gQXV0by1maXQgcG9pbnRzIGludG8gY2FudmFzLgogIC8vIOiHquWKqOe8qeaUvueCuembhuWIsOeUu+W4g+OAggogIGNvbnN0IHhzID0gcHRzLm1hcChwID0+IHBbMF0pLCB5cyA9IHB0cy5tYXAocCA9PiBwWzFdKTsKICBjb25zdCBwYWQgPSAzMDsKICBjb25zdCBtaW5YID0gTWF0aC5taW4oLi4ueHMpIC0gcGFkLCBtYXhYID0gTWF0aC5tYXgoLi4ueHMpICsgcGFkOwogIGNvbnN0IG1pblkgPSBNYXRoLm1pbiguLi55cykgLSBwYWQsIG1heFkgPSBNYXRoLm1heCguLi55cykgKyBwYWQ7CiAgY29uc3QgdyA9IG1heFggLSBtaW5YIHx8IDEsIGggPSBtYXhZIC0gbWluWSB8fCAxOwogIGNvbnN0IHNjYWxlID0gTWF0aC5taW4oKGN2LndpZHRoIC0gMiAqIHBhZCkgLyB3LCAoY3YuaGVpZ2h0IC0gMiAqIHBhZCkgLyBoKTsKICBjb25zdCBveCA9IHBhZCArIChjdi53aWR0aCAtIDIgKiBwYWQgLSB3ICogc2NhbGUpIC8gMjsKICBjb25zdCBveSA9IHBhZCArIChjdi5oZWlnaHQgLSAyICogcGFkIC0gaCAqIHNjYWxlKSAvIDI7CiAgY29uc3QgdHggPSB4ID0+IG94ICsgKHggLSBtaW5YKSAqIHNjYWxlOwogIGNvbnN0IHR5ID0geSA9PiBveSArICh5IC0gbWluWSkgKiBzY2FsZTsKCiAgLy8gUGF0aC4KICAvLyDovajov7nnur/jgIIKICBjdHguc3Ryb2tlU3R5bGUgPSAnIzRjOGRmZic7CiAgY3R4LmxpbmVXaWR0aCA9IDI7CiAgY3R4LmJlZ2luUGF0aCgpOwogIGNvbnN0IGxpbWl0ID0gY3Vyc29ySWR4ID09PSB1bmRlZmluZWQgPyBwdHMubGVuZ3RoIDogY3Vyc29ySWR4ICsgMTsKICBmb3IgKGxldCBpID0gMDsgaSA8IGxpbWl0OyBpKyspIHsKICAgIGNvbnN0IFggPSB0eChwdHNbaV1bMF0pLCBZID0gdHkocHRzW2ldWzFdKTsKICAgIGkgPyBjdHgubGluZVRvKFgsIFkpIDogY3R4Lm1vdmVUbyhYLCBZKTsKICB9CiAgY3R4LnN0cm9rZSgpOwoKICAvLyBTdGFydCBtYXJrZXIuCiAgLy8g6LW354K55qCH6K6w44CCCiAgY3R4LmZpbGxTdHlsZSA9ICcjMmZiZjcxJzsKICBjdHguYmVnaW5QYXRoKCk7CiAgY3R4LmFyYyh0eChwdHNbMF1bMF0pLCB0eShwdHNbMF1bMV0pLCA2LCAwLCBNYXRoLlBJICogMik7CiAgY3R4LmZpbGwoKTsKCiAgLy8gRW5kIC8gY3Vyc29yIG1hcmtlci4KICAvLyDnu4jngrkgLyDmuLjmoIfmoIforrDjgIIKICBjdHguZmlsbFN0eWxlID0gJyNlNTUzNGInOwogIGNvbnN0IGxhc3QgPSBNYXRoLm1pbihsaW1pdCAtIDEsIHB0cy5sZW5ndGggLSAxKTsKICBjdHguYmVnaW5QYXRoKCk7CiAgY3R4LmFyYyh0eChwdHNbbGFzdF1bMF0pLCB0eShwdHNbbGFzdF1bMV0pLCA2LCAwLCBNYXRoLlBJICogMik7CiAgY3R4LmZpbGwoKTsKCiAgLy8gQW5pbWF0ZWQgY3Vyc29yIGRvdC4KICAvLyDliqjnlLvmuLjmoIflsI/ngrnjgIIKICBpZiAoY3Vyc29ySWR4ICE9PSB1bmRlZmluZWQgJiYgY3Vyc29ySWR4IDwgcHRzLmxlbmd0aCkgewogICAgY3R4LmZpbGxTdHlsZSA9ICcjZmZmZmZmJzsKICAgIGN0eC5iZWdpblBhdGgoKTsKICAgIGN0eC5hcmModHgocHRzW2N1cnNvcklkeF1bMF0pLCB0eShwdHNbY3Vyc29ySWR4XVsxXSksIDQsIDAsIE1hdGguUEkgKiAyKTsKICAgIGN0eC5maWxsKCk7CiAgfQp9CgovLyBQbGF5IHRoZSBnZXN0dXJlIGF0IHVwIHRvIDQgc2Vjb25kcywgaG9ub3JpbmcgaW50ZXJ2YWxzLgovLyDmjIkgaW50ZXJ2YWxzIOaSreaUvui9qOi/ue+8jOacgOmVv+WOi+e8qeWIsCA0IOenkuOAggpmdW5jdGlvbiBwbGF5R2VzdHVyZSgpIHsKICBpZiAoIWxhc3RHZXN0dXJlKSByZXR1cm47CiAgaWYgKHBsYXlUaW1lcikgeyBjbGVhclRpbWVvdXQocGxheVRpbWVyKTsgcGxheVRpbWVyID0gbnVsbDsgfQogIGNvbnN0IGcgPSBsYXN0R2VzdHVyZTsKICBjb25zdCB0b3RhbCA9IGcuaW50ZXJ2YWxzLnJlZHVjZSgoYSwgYikgPT4gYSArIGIsIDApIHx8IDE7CiAgY29uc3Qgc3BlZWR1cCA9IHRvdGFsID4gNCA/IHRvdGFsIC8gNCA6IDE7CiAgbGV0IGkgPSAwOwogICQoJyNrcGxheS1zdGF0dXMnKS50ZXh0Q29udGVudCA9ICfmkq3mlL7kuK3igKYnOwogIGNvbnN0IHN0ZXAgPSAoKSA9PiB7CiAgICBkcmF3S2luZW1hdGljcyhnLCBpKTsKICAgIGlmIChpID49IGcucG9pbnRzLmxlbmd0aCAtIDEpIHsKICAgICAgJCgnI2twbGF5LXN0YXR1cycpLnRleHRDb250ZW50ID0gJ+aSreaUvuWujOaIkCc7CiAgICAgIHBsYXlUaW1lciA9IG51bGw7CiAgICAgIHJldHVybjsKICAgIH0KICAgIGNvbnN0IGR0ID0gTWF0aC5tYXgoMTAsIChnLmludGVydmFsc1tpXSAqIDEwMDApIC8gc3BlZWR1cCk7CiAgICBpKys7CiAgICBwbGF5VGltZXIgPSBzZXRUaW1lb3V0KHN0ZXAsIGR0KTsKICB9OwogIHN0ZXAoKTsKfQoKJCgnI2tnbycpLmFkZEV2ZW50TGlzdGVuZXIoJ2NsaWNrJywgZ2VuZXJhdGVHZXN0dXJlKTsKJCgnI2twbGF5JykuYWRkRXZlbnRMaXN0ZW5lcignY2xpY2snLCBwbGF5R2VzdHVyZSk7CgovLyA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09IHRpbWluZwoKLy8gRHJhdyBhIGhpc3RvZ3JhbSBvbiB0aGUgZ2l2ZW4gY2FudmFzLgovLyDlnKjnu5nlrpogY2FudmFzIOS4iue7mOWItuebtOaWueWbvuOAggpmdW5jdGlvbiBkcmF3SGlzdG9ncmFtKGJpbnMsIGNhbnZhcykgewogIGNvbnN0IGN0eCA9IGNhbnZhcy5nZXRDb250ZXh0KCcyZCcpOwogIGN0eC5jbGVhclJlY3QoMCwgMCwgY2FudmFzLndpZHRoLCBjYW52YXMuaGVpZ2h0KTsKICBjdHguZmlsbFN0eWxlID0gJyMwZTExMTYnOwogIGN0eC5maWxsUmVjdCgwLCAwLCBjYW52YXMud2lkdGgsIGNhbnZhcy5oZWlnaHQpOwoKICBpZiAoIWJpbnMubGVuZ3RoKSByZXR1cm47CiAgY29uc3QgcGFkID0geyBsOiA0MCwgcjogMTIsIHQ6IDE2LCBiOiAzMCB9OwogIGNvbnN0IGl3ID0gY2FudmFzLndpZHRoIC0gcGFkLmwgLSBwYWQucjsKICBjb25zdCBpaCA9IGNhbnZhcy5oZWlnaHQgLSBwYWQudCAtIHBhZC5iOwogIGNvbnN0IG1heENvdW50ID0gTWF0aC5tYXgoLi4uYmlucy5tYXAoYiA9PiBiLmNvdW50KSwgMSk7CiAgY29uc3QgYncgPSBpdyAvIGJpbnMubGVuZ3RoOwoKICAvLyBYIGF4aXMuCiAgLy8gWCDovbTjgIIKICBjdHguc3Ryb2tlU3R5bGUgPSAnIzI0MmMzYSc7CiAgY3R4LmxpbmVXaWR0aCA9IDE7CiAgY3R4LmJlZ2luUGF0aCgpOwogIGN0eC5tb3ZlVG8ocGFkLmwsIHBhZC50ICsgaWgpOwogIGN0eC5saW5lVG8ocGFkLmwgKyBpdywgcGFkLnQgKyBpaCk7CiAgY3R4LnN0cm9rZSgpOwoKICAvLyBCYXJzLgogIC8vIOafseeKtuOAggogIGJpbnMuZm9yRWFjaCgoYiwgaSkgPT4gewogICAgY29uc3QgaCA9IChiLmNvdW50IC8gbWF4Q291bnQpICogaWg7CiAgICBjb25zdCB4ID0gcGFkLmwgKyBpICogYnc7CiAgICBjdHguZmlsbFN0eWxlID0gJyM0YzhkZmYnOwogICAgY3R4LmZpbGxSZWN0KHgsIHBhZC50ICsgaWggLSBoLCBNYXRoLm1heCgxLCBidyAtIDEpLCBoKTsKICB9KTsKCiAgLy8gTGFiZWxzLgogIC8vIOagh+etvuOAggogIGN0eC5maWxsU3R5bGUgPSAnIzlhYTdiZCc7CiAgY3R4LmZvbnQgPSAnMTFweCB1aS1tb25vc3BhY2UsIG1vbm9zcGFjZSc7CiAgY3R4LmZpbGxUZXh0KGJpbnNbMF0ubG8udG9GaXhlZCgyKSwgcGFkLmwsIGNhbnZhcy5oZWlnaHQgLSAxMCk7CiAgY3R4LmZpbGxUZXh0KGJpbnNbYmlucy5sZW5ndGggLSAxXS5oaS50b0ZpeGVkKDIpLAogICAgICAgICAgICAgICBwYWQubCArIGl3IC0gNDAsIGNhbnZhcy5oZWlnaHQgLSAxMCk7CiAgY3R4LmZpbGxUZXh0KFN0cmluZyhtYXhDb3VudCksIDYsIHBhZC50ICsgMTApOwp9CgovLyBSZXF1ZXN0IGEgc2FtcGxlIGRpc3RyaWJ1dGlvbiBhbmQgZHJhdyB0aGUgaGlzdG9ncmFtLgovLyDor7fmsYLph4fmoLfliIbluIPlubbnu5jliLbnm7Tmlrnlm77jgIIKYXN5bmMgZnVuY3Rpb24gc2FtcGxlVGltaW5nKCkgewogIHRyeSB7CiAgICBjb25zdCBib2R5ID0gewogICAgICBuOiBOdW1iZXIoJCgnI3RfbicpLnZhbHVlKSwKICAgICAgbG86IE51bWJlcigkKCcjdF9sbycpLnZhbHVlKSwKICAgICAgaGk6IE51bWJlcigkKCcjdF9oaScpLnZhbHVlKSwKICAgICAgbG9nbm9ybWFsOiAkKCcjdF9sbicpLmNoZWNrZWQsCiAgICAgIHNlZWQ6IHNlZWRPZigkKCcjdF9zZWVkJykpLAogICAgfTsKICAgIGNvbnN0IGRhdGEgPSBhd2FpdCBwb3N0SlNPTignL2FwaS90aW1pbmcvc2FtcGxlJywgYm9keSk7CiAgICBkcmF3SGlzdG9ncmFtKGRhdGEuYmlucywgJCgnI2N2LXRpbWluZycpKTsKICAgIGNvbnN0IHMgPSBkYXRhLnN0YXRzOwogICAgJCgnI3RtZXRhJykuaW5uZXJIVE1MID0KICAgICAgYG4gPGI+JHtzLm59PC9iPjxicj5gICsKICAgICAgYG1pbiA8Yj4ke3MubWluLnRvRml4ZWQoMyl9PC9iPjxicj5gICsKICAgICAgYG1heCA8Yj4ke3MubWF4LnRvRml4ZWQoMyl9PC9iPjxicj5gICsKICAgICAgYG1lYW4gPGI+JHtzLm1lYW4udG9GaXhlZCgzKX08L2I+PGJyPmAgKwogICAgICBgbWVkaWFuIDxiPiR7cy5tZWRpYW4udG9GaXhlZCgzKX08L2I+PGJyPmAgKwogICAgICBgc3RkZXYgPGI+JHtzLnN0ZGV2LnRvRml4ZWQoMyl9PC9iPmA7CiAgfSBjYXRjaCAoZSkgewogICAgJCgnI3RtZXRhJykudGV4dENvbnRlbnQgPSAn6ZSZ6K+v77yaJyArIGUubWVzc2FnZTsKICB9Cn0KCiQoJyN0Z28nKS5hZGRFdmVudExpc3RlbmVyKCdjbGljaycsIHNhbXBsZVRpbWluZyk7CgovLyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tIHdha2Ugd2luZG93CgovLyBEcmF3IHRoZSAyNC1ob3VyIHdha2Ugd2luZG93IGJhci4KLy8g57uY5Yi2IDI0IOWwj+aXtuS9nOaBr+eql+WPo+adoeOAggpmdW5jdGlvbiBkcmF3V2luZG93KGluZm8pIHsKICBjb25zdCBjdiA9ICQoJyNjdi13aW5kb3cnKTsKICBjb25zdCBjdHggPSBjdi5nZXRDb250ZXh0KCcyZCcpOwogIGN0eC5jbGVhclJlY3QoMCwgMCwgY3Yud2lkdGgsIGN2LmhlaWdodCk7CiAgY3R4LmZpbGxTdHlsZSA9ICcjMGUxMTE2JzsKICBjdHguZmlsbFJlY3QoMCwgMCwgY3Yud2lkdGgsIGN2LmhlaWdodCk7CgogIGNvbnN0IHBhZCA9IHsgbDogMzAsIHI6IDMwLCB0OiAyMCwgYjogMzAgfTsKICBjb25zdCBpdyA9IGN2LndpZHRoIC0gcGFkLmwgLSBwYWQucjsKICBjb25zdCBiYXJIID0gMzA7CiAgY29uc3QgeSA9IHBhZC50OwoKICAvLyBCb3JkZXIuCiAgLy8g6L655qGG44CCCiAgY3R4LnN0cm9rZVN0eWxlID0gJyMyNDJjM2EnOwogIGN0eC5zdHJva2VSZWN0KHBhZC5sLCB5LCBpdywgYmFySCk7CgogIC8vIEluLXdpbmRvdyBzZWdtZW50cy4KICAvLyDnqpflj6PlhoXljLrpl7TjgIIKICBjdHguZmlsbFN0eWxlID0gJ3JnYmEoNzYsMTQxLDI1NSwwLjM1KSc7CiAgZm9yIChjb25zdCBbcywgZV0gb2YgaW5mby5zZWdtZW50cykgewogICAgY29uc3QgeDEgPSBwYWQubCArIChzIC8gMTQ0MCkgKiBpdzsKICAgIGNvbnN0IHgyID0gcGFkLmwgKyAoZSAvIDE0NDApICogaXc7CiAgICBjdHguZmlsbFJlY3QoeDEsIHksIHgyIC0geDEsIGJhckgpOwogIH0KCiAgLy8gSG91ciB0aWNrcy4KICAvLyDlsI/ml7bliLvluqbjgIIKICBjdHguZmlsbFN0eWxlID0gJyM5YWE3YmQnOwogIGN0eC5mb250ID0gJzExcHggdWktbW9ub3NwYWNlLCBtb25vc3BhY2UnOwogIGZvciAobGV0IGggPSAwOyBoIDw9IDI0OyBoICs9IDYpIHsKICAgIGNvbnN0IHggPSBwYWQubCArIChoICogNjAgLyAxNDQwKSAqIGl3OwogICAgY3R4LmZpbGxSZWN0KHggLSAxLCB5ICsgYmFySCwgMiwgNik7CiAgICBjdHguZmlsbFRleHQoU3RyaW5nKGgpLnBhZFN0YXJ0KDIsICcwJykgKyAnOjAwJywgeCAtIDE0LCB5ICsgYmFySCArIDIwKTsKICB9CgogICQoJyN3bWV0YScpLnRleHRDb250ZW50ID0KICAgIGBzdGFydD0ke2luZm8uc3RhcnR9ICgke2luZm8uc3RhcnRfbWlufW1pbikgwrcgZW5kPSR7aW5mby5lbmR9ICgke2luZm8uZW5kX21pbn1taW4pIMK3IGAgKwogICAgYOi3qOWNiOWknCAke2luZm8uY3Jvc3NfbWlkbmlnaHQgPyAn5pivJyA6ICflkKYnfWA7Cn0KCi8vIFJlcXVlc3Qgd2FrZS13aW5kb3cgc2VnbWVudHMgYW5kIGRyYXcgdGhlbS4KLy8g6K+35rGC5L2c5oGv56qX5Y+j5Yy66Ze05bm257uY5Yi244CCCmFzeW5jIGZ1bmN0aW9uIGNhbGNXaW5kb3coKSB7CiAgdHJ5IHsKICAgIGNvbnN0IGRhdGEgPSBhd2FpdCBwb3N0SlNPTignL2FwaS90aW1pbmcvd2luZG93JywgewogICAgICB3YWtlX3dpbmRvdzogeyBzdGFydDogJCgnI3dfc3RhcnQnKS52YWx1ZSwgZW5kOiAkKCcjd19lbmQnKS52YWx1ZSB9LAogICAgfSk7CiAgICBkcmF3V2luZG93KGRhdGEpOwogIH0gY2F0Y2ggKGUpIHsKICAgICQoJyN3bWV0YScpLnRleHRDb250ZW50ID0gJ+mUmeivr++8micgKyBlLm1lc3NhZ2U7CiAgfQp9CiQoJyN3Z28nKS5hZGRFdmVudExpc3RlbmVyKCdjbGljaycsIGNhbGNXaW5kb3cpOwoKLy8gLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSBjb29sZG93bgoKLy8gU2ltdWxhdGUgY29vbGRvd25zIGFuZCByZW5kZXIgdGhlIHBlci10YXAgZXZlbnQgbGlzdC4KLy8g5qih5ouf5Ya35Y2077yM5riy5p+T6YCQ5qyh54K55Ye75LqL5Lu25YiX6KGo44CCCmFzeW5jIGZ1bmN0aW9uIHNpbXVsYXRlQ29vbGRvd24oKSB7CiAgdHJ5IHsKICAgIGNvbnN0IGJvZHkgPSB7CiAgICAgIG46IE51bWJlcigkKCcjY19uJykudmFsdWUpLAogICAgICBjb29sZG93bl9ldmVyeTogTnVtYmVyKCQoJyNjX2V2ZXJ5JykudmFsdWUpLAogICAgICBjb29sZG93bl9zZWNvbmRzOiBOdW1iZXIoJCgnI2Nfc2Vjb25kcycpLnZhbHVlKSwKICAgICAgc2VlZDogc2VlZE9mKCQoJyNjX3NlZWQnKSksCiAgICB9OwogICAgY29uc3QgZGF0YSA9IGF3YWl0IHBvc3RKU09OKCcvYXBpL3RpbWluZy9jb29sZG93bicsIGJvZHkpOwogICAgY29uc3Qgcm93cyA9IGRhdGEuZXZlbnRzLm1hcChldiA9PiB7CiAgICAgIGNvbnN0IGNkID0gZXYuY29vbGRvd24gIT0gbnVsbCA/IGAgPGIgc3R5bGU9ImNvbG9yOiNlNTUzMmIiPkNEICR7ZXYuY29vbGRvd259czwvYj5gIDogJyc7CiAgICAgIHJldHVybiBgPGRpdiBjbGFzcz0iZXYiPiMke2V2LnRhcH0gIGRlbGF5PSR7ZXYuZGVsYXkudG9GaXhlZCgzKX1zJHtjZH08L2Rpdj5gOwogICAgfSkuam9pbignJyk7CiAgICAkKCcjY3Jlc3VsdCcpLmlubmVySFRNTCA9CiAgICAgIGA8cCBjbGFzcz0ibXV0ZWQiPuWFsSAke2RhdGEubn0g5qyh54K55Ye7IMK3IOaAu+iAl+aXtiA8Yj4ke2RhdGEudG90YWwudG9GaXhlZCgyKX1zPC9iPiDCtyBgICsKICAgICAgYOavjyAke2RhdGEuY29vbGRvd25fZXZlcnl9IOasoemVv+WBnCAke2RhdGEuY29vbGRvd25fc2Vjb25kc31zPC9wPmAgKwogICAgICBgPGRpdiBjbGFzcz0iZXZsaXN0Ij4ke3Jvd3N9PC9kaXY+YDsKICB9IGNhdGNoIChlKSB7CiAgICAkKCcjY3Jlc3VsdCcpLnRleHRDb250ZW50ID0gJ+mUmeivr++8micgKyBlLm1lc3NhZ2U7CiAgfQp9CiQoJyNjZ28nKS5hZGRFdmVudExpc3RlbmVyKCdjbGljaycsIHNpbXVsYXRlQ29vbGRvd24pOwoKLy8gPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PSBzZW5zb3JzCgpsZXQgbGFzdFNlbnNvcnMgPSBudWxsOwoKLy8gQ29sbGVjdCBzZW5zb3IgZm9ybSB2YWx1ZXMgaW50byBhIHJlcXVlc3QgYm9keS4KLy8g5pS26ZuG5Lyg5oSf5Zmo6KGo5Y2V5a2X5q615Li66K+35rGC5L2T44CCCmZ1bmN0aW9uIHNCb2R5KCkgewogIHJldHVybiB7CiAgICBtb2RlOiAkKCcjc19tb2RlJykudmFsdWUsCiAgICBmczogTnVtYmVyKCQoJyNzX2ZzJykudmFsdWUpLAogICAgZHVyYXRpb246IE51bWJlcigkKCcjc19kdXJhdGlvbicpLnZhbHVlKSwKICAgIHNlZWQ6IHNlZWRPZigkKCcjc19zZWVkJykpLAogIH07Cn0KCi8vIFJlcXVlc3QgYSBzZW5zb3Igc2VxdWVuY2UgYW5kIHJlbmRlciBpdC4KLy8g6K+35rGC5Lyg5oSf5Zmo5bqP5YiX5bm25riy5p+T44CCCmFzeW5jIGZ1bmN0aW9uIGdlbmVyYXRlU2Vuc29ycygpIHsKICB0cnkgewogICAgY29uc3QgZGF0YSA9IGF3YWl0IHBvc3RKU09OKCcvYXBpL3NlbnNvcnMvZ2VuZXJhdGUnLCBzQm9keSgpKTsKICAgIGxhc3RTZW5zb3JzID0gZGF0YTsKICAgIGRyYXdTZW5zb3JzKGRhdGEpOwogICAgY29uc3QgcyA9IGRhdGEuc3RhdHM7CiAgICBjb25zdCBkZWFkID0gZGF0YS5pc19kZWFkCiAgICAgID8gJzxzcGFuIHN0eWxlPSJjb2xvcjojZTU1MzRiIj48Yj7mmK/vvIjmrbvlr4LvvIk8L2I+PC9zcGFuPicKICAgICAgOiAnPHNwYW4gc3R5bGU9ImNvbG9yOiMyZmJmNzEiPjxiPuWQpu+8iOa0u+edgO+8iTwvYj48L3NwYW4+JzsKICAgICQoJyNzbWV0YScpLmlubmVySFRNTCA9CiAgICAgIGDmqKHlvI8gPGI+JHtkYXRhLm1vZGV9PC9iPiDCtyAke2RhdGEuc2FtcGxlX2NvdW50fSDph4fmoLfngrk8YnI+YCArCiAgICAgIGDmrbvlr4LliKTlrprvvJoke2RlYWR9PGJyPmAgKwogICAgICBgYWNjX3ggc3RkPSR7cy5hY2NfeF9zdGQudG9GaXhlZCg0KX0gemVybz0ke3MuYWNjX3hfemVyby50b0ZpeGVkKDIpfTxicj5gICsKICAgICAgYGFjY195IHN0ZD0ke3MuYWNjX3lfc3RkLnRvRml4ZWQoNCl9IHplcm89JHtzLmFjY195X3plcm8udG9GaXhlZCgyKX08YnI+YCArCiAgICAgIGBhY2NfeiBzdGQ9JHtzLmFjY196X3N0ZC50b0ZpeGVkKDQpfSB6ZXJvPSR7cy5hY2Nfel96ZXJvLnRvRml4ZWQoMil9PGJyPmAgKwogICAgICBgZ3lyb194IHN0ZD0ke3MuZ3lyb194X3N0ZC50b0ZpeGVkKDQpfSB6ZXJvPSR7cy5neXJvX3hfemVyby50b0ZpeGVkKDIpfTxicj5gICsKICAgICAgYGd5cm9feSBzdGQ9JHtzLmd5cm9feV9zdGQudG9GaXhlZCg0KX0gemVybz0ke3MuZ3lyb195X3plcm8udG9GaXhlZCgyKX08YnI+YCArCiAgICAgIGBneXJvX3ogc3RkPSR7cy5neXJvX3pfc3RkLnRvRml4ZWQoNCl9IHplcm89JHtzLmd5cm9fel96ZXJvLnRvRml4ZWQoMil9YDsKICB9IGNhdGNoIChlKSB7CiAgICAkKCcjc21ldGEnKS50ZXh0Q29udGVudCA9ICfplJnor6/vvJonICsgZS5tZXNzYWdlOwogIH0KfQoKLy8gRHJhdyB0d28gc3ViLWNoYXJ0czogYWNjICh0b3ApIGFuZCBneXJvIChib3R0b20pLgovLyDnu5jliLbkuIrkuIvkuKTkuKrlrZDlm77vvJrliqDpgJ/luqbvvIjkuIrvvInkuI7pmYDonrrku6rvvIjkuIvvvInjgIIKZnVuY3Rpb24gZHJhd1NlbnNvcnMoZGF0YSkgewogIGNvbnN0IGN2ID0gJCgnI2N2LXNlbnNvcnMnKTsKICBjb25zdCBjdHggPSBjdi5nZXRDb250ZXh0KCcyZCcpOwogIGN0eC5jbGVhclJlY3QoMCwgMCwgY3Yud2lkdGgsIGN2LmhlaWdodCk7CiAgY3R4LmZpbGxTdHlsZSA9ICcjMGUxMTE2JzsKICBjdHguZmlsbFJlY3QoMCwgMCwgY3Yud2lkdGgsIGN2LmhlaWdodCk7CgogIGNvbnN0IHNlcmllcyA9IGRhdGEuc2VyaWVzOwogIGNvbnN0IG4gPSBzZXJpZXMudC5sZW5ndGg7CiAgaWYgKCFuKSByZXR1cm47CgogIGNvbnN0IGhhbGZIID0gKGN2LmhlaWdodCAtIDYwKSAvIDI7CiAgY29uc3QgcGFkID0geyBsOiA0MCwgcjogMjAgfTsKICBjb25zdCBpdyA9IGN2LndpZHRoIC0gcGFkLmwgLSBwYWQucjsKCiAgLy8gRHJhdyBvbmUgc3ViLWNoYXJ0IHdpdGggdXAgdG8gMyBheGVzLgogIC8vIOe7mOWItuS4gOS4quacgOWkmuS4iei9tOeahOWtkOWbvuOAggogIGZ1bmN0aW9uIGRyYXdBeGlzKGtleXNBcnIsIHRvcCwgaGVpZ2h0LCB0aXRsZSkgewogICAgY3R4LmZpbGxTdHlsZSA9ICcjOWFhN2JkJzsKICAgIGN0eC5mb250ID0gJzEycHggdWktbW9ub3NwYWNlLCBtb25vc3BhY2UnOwogICAgY3R4LmZpbGxUZXh0KHRpdGxlLCBwYWQubCwgdG9wIC0gNik7CgogICAgLy8gQ29tcHV0ZSB2YWx1ZSByYW5nZSBhY3Jvc3Mga2V5cy4KICAgIC8vIOiuoeeul+ivpee7hOmUrueahOWAvOWfn+OAggogICAgbGV0IGxvID0gSW5maW5pdHksIGhpID0gLUluZmluaXR5OwogICAgZm9yIChjb25zdCBrIG9mIGtleXNBcnIpIGZvciAoY29uc3QgdiBvZiBzZXJpZXNba10pIHsKICAgICAgaWYgKHYgPCBsbykgbG8gPSB2OyBpZiAodiA+IGhpKSBoaSA9IHY7CiAgICB9CiAgICBpZiAoIWlzRmluaXRlKGxvKSB8fCAhaXNGaW5pdGUoaGkpIHx8IGhpID09PSBsbykgeyBsbyA9IC0xOyBoaSA9IDE7IH0KCiAgICAvLyBCb3JkZXIuCiAgICAvLyDovrnmoYbjgIIKICAgIGN0eC5zdHJva2VTdHlsZSA9ICcjMjQyYzNhJzsKICAgIGN0eC5zdHJva2VSZWN0KHBhZC5sLCB0b3AsIGl3LCBoZWlnaHQpOwoKICAgIGNvbnN0IHR4ID0gaSA9PiBwYWQubCArIChpIC8gTWF0aC5tYXgoMSwgbiAtIDEpKSAqIGl3OwogICAgY29uc3QgdHkgPSB2ID0+IHRvcCArIGhlaWdodCAtICgodiAtIGxvKSAvIChoaSAtIGxvKSkgKiBoZWlnaHQ7CgogICAgLy8gQ3VydmVzLgogICAgLy8g5puy57q/44CCCiAgICBmb3IgKGNvbnN0IGsgb2Yga2V5c0FycikgewogICAgICBjdHguc3Ryb2tlU3R5bGUgPSBDT0xPUlNba107CiAgICAgIGN0eC5saW5lV2lkdGggPSAxLjQ7CiAgICAgIGN0eC5iZWdpblBhdGgoKTsKICAgICAgY29uc3QgYXJyID0gc2VyaWVzW2tdOwogICAgICBmb3IgKGxldCBpID0gMDsgaSA8IGFyci5sZW5ndGg7IGkrKykgewogICAgICAgIGNvbnN0IFggPSB0eChpKSwgWSA9IHR5KGFycltpXSk7CiAgICAgICAgaSA/IGN0eC5saW5lVG8oWCwgWSkgOiBjdHgubW92ZVRvKFgsIFkpOwogICAgICB9CiAgICAgIGN0eC5zdHJva2UoKTsKICAgIH0KCiAgICAvLyBMZWdlbmQuCiAgICAvLyDlm77kvovjgIIKICAgIGN0eC5mb250ID0gJzExcHggdWktbW9ub3NwYWNlLCBtb25vc3BhY2UnOwogICAgbGV0IGx4ID0gcGFkLmwgKyA2OwogICAgZm9yIChjb25zdCBrIG9mIGtleXNBcnIpIHsKICAgICAgY3R4LmZpbGxTdHlsZSA9IENPTE9SU1trXTsKICAgICAgY3R4LmZpbGxSZWN0KGx4LCB0b3AgKyA0LCAxMCwgMTApOwogICAgICBjdHguZmlsbFN0eWxlID0gJyNjM2NkZGQnOwogICAgICBjdHguZmlsbFRleHQoaywgbHggKyAxNCwgdG9wICsgMTMpOwogICAgICBseCArPSA5MDsKICAgIH0KICB9CgogIGRyYXdBeGlzKFsnYWNjX3gnLCAnYWNjX3knLCAnYWNjX3onXSwgMjAsIGhhbGZILCAn5Yqg6YCf5bqmIChtL3PCsiknKTsKICBkcmF3QXhpcyhbJ2d5cm9feCcsICdneXJvX3knLCAnZ3lyb196J10sIDIwICsgaGFsZkggKyAyMCwgaGFsZkgsICfpmYDonrrku6ogKHJhZC9zKScpOwp9CgovLyBEb3dubG9hZCB0aGUgY3VycmVudCBzZW5zb3Igc2VxdWVuY2UgYXMgQ1NWLgovLyDmiorlvZPliY3kvKDmhJ/lmajluo/liJfkuIvovb3kuLogQ1NW44CCCmFzeW5jIGZ1bmN0aW9uIGRvd25sb2FkQ1NWKCkgewogIHRyeSB7CiAgICBjb25zdCByZXMgPSBhd2FpdCBmZXRjaCgnL2FwaS9zZW5zb3JzL2NzdicsIHsKICAgICAgbWV0aG9kOiAnUE9TVCcsCiAgICAgIGhlYWRlcnM6IHsgJ0NvbnRlbnQtVHlwZSc6ICdhcHBsaWNhdGlvbi9qc29uJyB9LAogICAgICBib2R5OiBKU09OLnN0cmluZ2lmeShzQm9keSgpKSwKICAgIH0pOwogICAgaWYgKCFyZXMub2spIHRocm93IG5ldyBFcnJvcignSFRUUCAnICsgcmVzLnN0YXR1cyk7CiAgICBjb25zdCBibG9iID0gYXdhaXQgcmVzLmJsb2IoKTsKICAgIGNvbnN0IGEgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdhJyk7CiAgICBhLmhyZWYgPSBVUkwuY3JlYXRlT2JqZWN0VVJMKGJsb2IpOwogICAgYS5kb3dubG9hZCA9IGBzZW5zb3JzXyR7JCgnI3NfbW9kZScpLnZhbHVlfS5jc3ZgOwogICAgZG9jdW1lbnQuYm9keS5hcHBlbmRDaGlsZChhKTsKICAgIGEuY2xpY2soKTsKICAgIHNldFRpbWVvdXQoKCkgPT4geyBVUkwucmV2b2tlT2JqZWN0VVJMKGEuaHJlZik7IGEucmVtb3ZlKCk7IH0sIDEwMDApOwogIH0gY2F0Y2ggKGUpIHsKICAgICQoJyNzbWV0YScpLnRleHRDb250ZW50ID0gJ+mUmeivr++8micgKyBlLm1lc3NhZ2U7CiAgfQp9CgokKCcjc2dvJykuYWRkRXZlbnRMaXN0ZW5lcignY2xpY2snLCBnZW5lcmF0ZVNlbnNvcnMpOwokKCcjc2NzdicpLmFkZEV2ZW50TGlzdGVuZXIoJ2NsaWNrJywgZG93bmxvYWRDU1YpOwoKLy8gPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PSBmaXJzdCBwYWludAoKLy8gVHJpZ2dlciBvbmUgcmVuZGVyIGZvciBldmVyeSB0YWIgb24gZmlyc3QgcGFpbnQuCi8vIOmmluWxj+inpuWPkeavj+S4qiB0YWIg55qE5LiA5qyh5riy5p+T44CCCmdlbmVyYXRlR2VzdHVyZSgpOwpzYW1wbGVUaW1pbmcoKTsKY2FsY1dpbmRvdygpOwpzaW11bGF0ZUNvb2xkb3duKCk7CmdlbmVyYXRlU2Vuc29ycygpOwo=
+'use strict';
+
+/* =========================================================
+   touch-humanization Web UI frontend logic.
+   Zero framework, zero CDN.
+
+   touch-humanization Web UI 前端逻辑。
+   零框架、零 CDN。
+   ========================================================= */
+
+// ---------------------------------------------------------- query helpers
+
+const $ = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+
+// Line colors for the sensor chart.
+// 传感器图表的曲线颜色。
+const COLORS = {
+  acc_x: '#4c8dff', acc_y: '#2fbf71', acc_z: '#e2a33c',
+  gyro_x: '#c08bff', gyro_y: '#e5534b', gyro_z: '#5f9ea0',
+};
+
+// ---------------------------------------------------------- tabs
+
+// Tab switching: one <section class="tab"> per view.
+// Tab 切换：每个视图对应一个 <section class="tab">。
+$$('nav.tabs button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    $$('nav.tabs button').forEach(b => b.classList.toggle('on', b === btn));
+    $$('section.tab').forEach(s => {
+      s.classList.toggle('on', s.id === 'tab-' + btn.dataset.tab);
+    });
+  });
+});
+
+// ---------------------------------------------------------- HTTP
+
+// POST JSON and throw on non-ok responses.
+// 发送 JSON POST 请求；非 ok 响应抛错。
+async function postJSON(path, body) {
+  const res = await fetch(path, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  });
+  const data = await res.json().catch(() => ({ ok: false, error: 'HTTP ' + res.status }));
+  if (!data.ok) throw new Error(data.error || ('HTTP ' + res.status));
+  return data;
+}
+
+// Read the seed input; empty string -> null (random).
+// 读取 seed 输入；空串 -> null（随机）。
+function seedOf(el) {
+  const v = el.value.trim();
+  return v === '' ? null : Number(v);
+}
+
+// ========================================================== kinematics
+
+let lastGesture = null;
+let playTimer = null;
+
+// Collect all kinematics form values into a request body.
+// 收集 kinematics 表单全部字段为请求体。
+function kBody() {
+  return {
+    start: [Number($('#kx0').value), Number($('#ky0').value)],
+    end: [Number($('#kx1').value), Number($('#ky1').value)],
+    seed: seedOf($('#kseed')),
+    for_slider: $('#kslider').checked,
+    exact_end: $('#kexact').checked,
+    // Advanced params.
+    // 高级参数。
+    steps_min: Number($('#k_steps_min').value),
+    steps_max: Number($('#k_steps_max').value),
+    px_per_step: Number($('#k_px_per_step').value),
+    duration_per_px: Number($('#k_duration_per_px').value),
+    duration_min: Number($('#k_duration_min').value),
+    duration_max: Number($('#k_duration_max').value),
+    perpendicular_ratio: Number($('#k_perp').value),
+    jitter_sigma: Number($('#k_jitter').value),
+    jitter_tail_fraction: Number($('#k_jtail').value),
+    overshoot_prob: Number($('#k_overshoot').value),
+    overshoot_ratio: Number($('#k_oratio').value),
+    use_ease_in_out: $('#k_ease').checked,
+  };
+}
+
+// Request a gesture and redraw.
+// 请求轨迹并重绘。
+async function generateGesture() {
+  try {
+    const data = await postJSON('/api/gesture', kBody());
+    lastGesture = data.gesture;
+    drawKinematics(lastGesture);
+    const g = lastGesture;
+    $('#kmeta').innerHTML =
+      `点数 <b>${g.steps}</b><br>距离 <b>${g.distance.toFixed(1)}</b> px<br>` +
+      `时长 <b>${g.duration.toFixed(3)}</b> s<br>` +
+      `滑块模式 ${g.for_slider ? '是' : '否'}<br>` +
+      `首点 (${g.points[0].join(', ')})<br>末点 (${g.points[g.points.length - 1].join(', ')})`;
+    $('#kplay-status').textContent = '';
+  } catch (e) {
+    $('#kmeta').textContent = '错误：' + e.message;
+  }
+}
+
+// Draw the trajectory on canvas; cursorIdx limits how many points to render.
+// 在 canvas 上绘制轨迹；cursorIdx 控制渲染到第几个点（用于动画）。
+function drawKinematics(g, cursorIdx) {
+  const cv = $('#cv-kinematics');
+  const ctx = cv.getContext('2d');
+  ctx.clearRect(0, 0, cv.width, cv.height);
+  ctx.fillStyle = '#0e1116';
+  ctx.fillRect(0, 0, cv.width, cv.height);
+
+  const pts = g.points;
+  if (!pts.length) return;
+
+  // Auto-fit points into canvas.
+  // 自动缩放点集到画布。
+  const xs = pts.map(p => p[0]), ys = pts.map(p => p[1]);
+  const pad = 30;
+  const minX = Math.min(...xs) - pad, maxX = Math.max(...xs) + pad;
+  const minY = Math.min(...ys) - pad, maxY = Math.max(...ys) + pad;
+  const w = maxX - minX || 1, h = maxY - minY || 1;
+  const scale = Math.min((cv.width - 2 * pad) / w, (cv.height - 2 * pad) / h);
+  const ox = pad + (cv.width - 2 * pad - w * scale) / 2;
+  const oy = pad + (cv.height - 2 * pad - h * scale) / 2;
+  const tx = x => ox + (x - minX) * scale;
+  const ty = y => oy + (y - minY) * scale;
+
+  // Path.
+  // 轨迹线。
+  ctx.strokeStyle = '#4c8dff';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  const limit = cursorIdx === undefined ? pts.length : cursorIdx + 1;
+  for (let i = 0; i < limit; i++) {
+    const X = tx(pts[i][0]), Y = ty(pts[i][1]);
+    i ? ctx.lineTo(X, Y) : ctx.moveTo(X, Y);
+  }
+  ctx.stroke();
+
+  // Start marker.
+  // 起点标记。
+  ctx.fillStyle = '#2fbf71';
+  ctx.beginPath();
+  ctx.arc(tx(pts[0][0]), ty(pts[0][1]), 6, 0, Math.PI * 2);
+  ctx.fill();
+
+  // End / cursor marker.
+  // 终点 / 游标标记。
+  ctx.fillStyle = '#e5534b';
+  const last = Math.min(limit - 1, pts.length - 1);
+  ctx.beginPath();
+  ctx.arc(tx(pts[last][0]), ty(pts[last][1]), 6, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Animated cursor dot.
+  // 动画游标小点。
+  if (cursorIdx !== undefined && cursorIdx < pts.length) {
+    ctx.fillStyle = '#ffffff';
+    ctx.beginPath();
+    ctx.arc(tx(pts[cursorIdx][0]), ty(pts[cursorIdx][1]), 4, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+
+// Play the gesture at up to 4 seconds, honoring intervals.
+// 按 intervals 播放轨迹，最长压缩到 4 秒。
+function playGesture() {
+  if (!lastGesture) return;
+  if (playTimer) { clearTimeout(playTimer); playTimer = null; }
+  const g = lastGesture;
+  const total = g.intervals.reduce((a, b) => a + b, 0) || 1;
+  const speedup = total > 4 ? total / 4 : 1;
+  let i = 0;
+  $('#kplay-status').textContent = '播放中…';
+  const step = () => {
+    drawKinematics(g, i);
+    if (i >= g.points.length - 1) {
+      $('#kplay-status').textContent = '播放完成';
+      playTimer = null;
+      return;
+    }
+    const dt = Math.max(10, (g.intervals[i] * 1000) / speedup);
+    i++;
+    playTimer = setTimeout(step, dt);
+  };
+  step();
+}
+
+$('#kgo').addEventListener('click', generateGesture);
+$('#kplay').addEventListener('click', playGesture);
+
+// ========================================================== timing
+
+// Draw a histogram on the given canvas.
+// 在给定 canvas 上绘制直方图。
+function drawHistogram(bins, canvas) {
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = '#0e1116';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  if (!bins.length) return;
+  const pad = { l: 40, r: 12, t: 16, b: 30 };
+  const iw = canvas.width - pad.l - pad.r;
+  const ih = canvas.height - pad.t - pad.b;
+  const maxCount = Math.max(...bins.map(b => b.count), 1);
+  const bw = iw / bins.length;
+
+  // X axis.
+  // X 轴。
+  ctx.strokeStyle = '#242c3a';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(pad.l, pad.t + ih);
+  ctx.lineTo(pad.l + iw, pad.t + ih);
+  ctx.stroke();
+
+  // Bars.
+  // 柱状。
+  bins.forEach((b, i) => {
+    const h = (b.count / maxCount) * ih;
+    const x = pad.l + i * bw;
+    ctx.fillStyle = '#4c8dff';
+    ctx.fillRect(x, pad.t + ih - h, Math.max(1, bw - 1), h);
+  });
+
+  // Labels.
+  // 标签。
+  ctx.fillStyle = '#9aa7bd';
+  ctx.font = '11px ui-monospace, monospace';
+  ctx.fillText(bins[0].lo.toFixed(2), pad.l, canvas.height - 10);
+  ctx.fillText(bins[bins.length - 1].hi.toFixed(2),
+               pad.l + iw - 40, canvas.height - 10);
+  ctx.fillText(String(maxCount), 6, pad.t + 10);
+}
+
+// Request a sample distribution and draw the histogram.
+// 请求采样分布并绘制直方图。
+async function sampleTiming() {
+  try {
+    const body = {
+      n: Number($('#t_n').value),
+      lo: Number($('#t_lo').value),
+      hi: Number($('#t_hi').value),
+      lognormal: $('#t_ln').checked,
+      seed: seedOf($('#t_seed')),
+    };
+    const data = await postJSON('/api/timing/sample', body);
+    drawHistogram(data.bins, $('#cv-timing'));
+    const s = data.stats;
+    $('#tmeta').innerHTML =
+      `n <b>${s.n}</b><br>` +
+      `min <b>${s.min.toFixed(3)}</b><br>` +
+      `max <b>${s.max.toFixed(3)}</b><br>` +
+      `mean <b>${s.mean.toFixed(3)}</b><br>` +
+      `median <b>${s.median.toFixed(3)}</b><br>` +
+      `stdev <b>${s.stdev.toFixed(3)}</b>`;
+  } catch (e) {
+    $('#tmeta').textContent = '错误：' + e.message;
+  }
+}
+
+$('#tgo').addEventListener('click', sampleTiming);
+
+// ---------------------------------------------------------- wake window
+
+// Draw the 24-hour wake window bar.
+// 绘制 24 小时作息窗口条。
+function drawWindow(info) {
+  const cv = $('#cv-window');
+  const ctx = cv.getContext('2d');
+  ctx.clearRect(0, 0, cv.width, cv.height);
+  ctx.fillStyle = '#0e1116';
+  ctx.fillRect(0, 0, cv.width, cv.height);
+
+  const pad = { l: 30, r: 30, t: 20, b: 30 };
+  const iw = cv.width - pad.l - pad.r;
+  const barH = 30;
+  const y = pad.t;
+
+  // Border.
+  // 边框。
+  ctx.strokeStyle = '#242c3a';
+  ctx.strokeRect(pad.l, y, iw, barH);
+
+  // In-window segments.
+  // 窗口内区间。
+  ctx.fillStyle = 'rgba(76,141,255,0.35)';
+  for (const [s, e] of info.segments) {
+    const x1 = pad.l + (s / 1440) * iw;
+    const x2 = pad.l + (e / 1440) * iw;
+    ctx.fillRect(x1, y, x2 - x1, barH);
+  }
+
+  // Hour ticks.
+  // 小时刻度。
+  ctx.fillStyle = '#9aa7bd';
+  ctx.font = '11px ui-monospace, monospace';
+  for (let h = 0; h <= 24; h += 6) {
+    const x = pad.l + (h * 60 / 1440) * iw;
+    ctx.fillRect(x - 1, y + barH, 2, 6);
+    ctx.fillText(String(h).padStart(2, '0') + ':00', x - 14, y + barH + 20);
+  }
+
+  $('#wmeta').textContent =
+    `start=${info.start} (${info.start_min}min) · end=${info.end} (${info.end_min}min) · ` +
+    `跨午夜 ${info.cross_midnight ? '是' : '否'}`;
+}
+
+// Request wake-window segments and draw them.
+// 请求作息窗口区间并绘制。
+async function calcWindow() {
+  try {
+    const data = await postJSON('/api/timing/window', {
+      wake_window: { start: $('#w_start').value, end: $('#w_end').value },
+    });
+    drawWindow(data);
+  } catch (e) {
+    $('#wmeta').textContent = '错误：' + e.message;
+  }
+}
+$('#wgo').addEventListener('click', calcWindow);
+
+// ---------------------------------------------------------- cooldown
+
+// Simulate cooldowns and render the per-tap event list.
+// 模拟冷却，渲染逐次点击事件列表。
+async function simulateCooldown() {
+  try {
+    const body = {
+      n: Number($('#c_n').value),
+      cooldown_every: Number($('#c_every').value),
+      cooldown_seconds: Number($('#c_seconds').value),
+      seed: seedOf($('#c_seed')),
+    };
+    const data = await postJSON('/api/timing/cooldown', body);
+    const rows = data.events.map(ev => {
+      const cd = ev.cooldown != null ? ` <b style="color:#e5532b">CD ${ev.cooldown}s</b>` : '';
+      return `<div class="ev">#${ev.tap}  delay=${ev.delay.toFixed(3)}s${cd}</div>`;
+    }).join('');
+    $('#cresult').innerHTML =
+      `<p class="muted">共 ${data.n} 次点击 · 总耗时 <b>${data.total.toFixed(2)}s</b> · ` +
+      `每 ${data.cooldown_every} 次长停 ${data.cooldown_seconds}s</p>` +
+      `<div class="evlist">${rows}</div>`;
+  } catch (e) {
+    $('#cresult').textContent = '错误：' + e.message;
+  }
+}
+$('#cgo').addEventListener('click', simulateCooldown);
+
+// ========================================================== sensors
+
+let lastSensors = null;
+
+// Collect sensor form values into a request body.
+// 收集传感器表单字段为请求体。
+function sBody() {
+  return {
+    mode: $('#s_mode').value,
+    fs: Number($('#s_fs').value),
+    duration: Number($('#s_duration').value),
+    seed: seedOf($('#s_seed')),
+  };
+}
+
+// Request a sensor sequence and render it.
+// 请求传感器序列并渲染。
+async function generateSensors() {
+  try {
+    const data = await postJSON('/api/sensors/generate', sBody());
+    lastSensors = data;
+    drawSensors(data);
+    const s = data.stats;
+    const dead = data.is_dead
+      ? '<span style="color:#e5534b"><b>是（死寂）</b></span>'
+      : '<span style="color:#2fbf71"><b>否（活着）</b></span>';
+    $('#smeta').innerHTML =
+      `模式 <b>${data.mode}</b> · ${data.sample_count} 采样点<br>` +
+      `死寂判定：${dead}<br>` +
+      `acc_x std=${s.acc_x_std.toFixed(4)} zero=${s.acc_x_zero.toFixed(2)}<br>` +
+      `acc_y std=${s.acc_y_std.toFixed(4)} zero=${s.acc_y_zero.toFixed(2)}<br>` +
+      `acc_z std=${s.acc_z_std.toFixed(4)} zero=${s.acc_z_zero.toFixed(2)}<br>` +
+      `gyro_x std=${s.gyro_x_std.toFixed(4)} zero=${s.gyro_x_zero.toFixed(2)}<br>` +
+      `gyro_y std=${s.gyro_y_std.toFixed(4)} zero=${s.gyro_y_zero.toFixed(2)}<br>` +
+      `gyro_z std=${s.gyro_z_std.toFixed(4)} zero=${s.gyro_z_zero.toFixed(2)}`;
+  } catch (e) {
+    $('#smeta').textContent = '错误：' + e.message;
+  }
+}
+
+// Draw two sub-charts: acc (top) and gyro (bottom).
+// 绘制上下两个子图：加速度（上）与陀螺仪（下）。
+function drawSensors(data) {
+  const cv = $('#cv-sensors');
+  const ctx = cv.getContext('2d');
+  ctx.clearRect(0, 0, cv.width, cv.height);
+  ctx.fillStyle = '#0e1116';
+  ctx.fillRect(0, 0, cv.width, cv.height);
+
+  const series = data.series;
+  const n = series.t.length;
+  if (!n) return;
+
+  const halfH = (cv.height - 60) / 2;
+  const pad = { l: 40, r: 20 };
+  const iw = cv.width - pad.l - pad.r;
+
+  // Draw one sub-chart with up to 3 axes.
+  // 绘制一个最多三轴的子图。
+  function drawAxis(keysArr, top, height, title) {
+    ctx.fillStyle = '#9aa7bd';
+    ctx.font = '12px ui-monospace, monospace';
+    ctx.fillText(title, pad.l, top - 6);
+
+    // Compute value range across keys.
+    // 计算该组键的值域。
+    let lo = Infinity, hi = -Infinity;
+    for (const k of keysArr) for (const v of series[k]) {
+      if (v < lo) lo = v; if (v > hi) hi = v;
+    }
+    if (!isFinite(lo) || !isFinite(hi) || hi === lo) { lo = -1; hi = 1; }
+
+    // Border.
+    // 边框。
+    ctx.strokeStyle = '#242c3a';
+    ctx.strokeRect(pad.l, top, iw, height);
+
+    const tx = i => pad.l + (i / Math.max(1, n - 1)) * iw;
+    const ty = v => top + height - ((v - lo) / (hi - lo)) * height;
+
+    // Curves.
+    // 曲线。
+    for (const k of keysArr) {
+      ctx.strokeStyle = COLORS[k];
+      ctx.lineWidth = 1.4;
+      ctx.beginPath();
+      const arr = series[k];
+      for (let i = 0; i < arr.length; i++) {
+        const X = tx(i), Y = ty(arr[i]);
+        i ? ctx.lineTo(X, Y) : ctx.moveTo(X, Y);
+      }
+      ctx.stroke();
+    }
+
+    // Legend.
+    // 图例。
+    ctx.font = '11px ui-monospace, monospace';
+    let lx = pad.l + 6;
+    for (const k of keysArr) {
+      ctx.fillStyle = COLORS[k];
+      ctx.fillRect(lx, top + 4, 10, 10);
+      ctx.fillStyle = '#c3cddd';
+      ctx.fillText(k, lx + 14, top + 13);
+      lx += 90;
+    }
+  }
+
+  drawAxis(['acc_x', 'acc_y', 'acc_z'], 20, halfH, '加速度 (m/s²)');
+  drawAxis(['gyro_x', 'gyro_y', 'gyro_z'], 20 + halfH + 20, halfH, '陀螺仪 (rad/s)');
+}
+
+// Download the current sensor sequence as CSV.
+// 把当前传感器序列下载为 CSV。
+async function downloadCSV() {
+  try {
+    const res = await fetch('/api/sensors/csv', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(sBody()),
+    });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const blob = await res.blob();
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `sensors_${$('#s_mode').value}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+  } catch (e) {
+    $('#smeta').textContent = '错误：' + e.message;
+  }
+}
+
+$('#sgo').addEventListener('click', generateSensors);
+$('#scsv').addEventListener('click', downloadCSV);
+
+// ========================================================== first paint
+
+// Trigger one render for every tab on first paint.
+// 首屏触发每个 tab 的一次渲染。
+generateGesture();
+sampleTiming();
+calcWindow();
+simulateCooldown();
+generateSensors();
