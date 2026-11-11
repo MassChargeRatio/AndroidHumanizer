@@ -1,14 +1,26 @@
 # -*- coding: utf-8 -*-
-"""本地交互式 Web UI：起终点 + seed + Generate + Canvas。
+"""本地交互式 Web UI：轨迹 / 时序 / 传感器 三模块全覆盖。
 
 只监听 127.0.0.1；零第三方依赖（stdlib http.server）。
+
+API：
+  GET  /api/health
+  POST /api/gesture          生成人类化手势轨迹
+  POST /api/timing/sample    采样延迟分布 + 直方图
+  POST /api/timing/window    作息窗口区间
+  POST /api/timing/cooldown  冷却模拟（每 N 次点击长停）
+  POST /api/sensors/generate 传感器序列 + 统计 + 死寂判定
+  POST /api/sensors/csv      导出 CSV（text/csv）
 """
 from __future__ import annotations
 
 import argparse
+import csv
+import io
 import json
 import os
 import posixpath
+import statistics
 import sys
 import urllib.parse
 import webbrowser
@@ -17,6 +29,8 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from ..humanize import Humanizer
 
 STATIC_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "static")
+
+# ---------------------------------------------------------------- 工具函数
 
 
 def _json_bytes(obj) -> bytes:
@@ -31,6 +45,83 @@ def _parse_xy(v, default):
     return default
 
 
+def _pick(body: dict, keys) -> dict:
+    out = {}
+    for k in keys:
+        if k in body and body[k] is not None:
+            out[k] = body[k]
+    return out
+
+
+KINEMATICS_KEYS = [
+    "enabled", "steps_min", "steps_max", "px_per_step",
+    "duration_per_px", "duration_min", "duration_max",
+    "perpendicular_ratio", "use_ease_in_out",
+    "jitter_sigma", "jitter_tail_fraction",
+    "overshoot_prob", "overshoot_ratio",
+]
+
+TIMING_KEYS = [
+    "mu_ratio", "sigma_range",
+    "delay_between_actions", "delay_after_open", "think_delay", "start_jitter",
+    "wake_window", "cooldown_every", "cooldown_seconds", "cooldown_on_captcha",
+]
+
+SENSORS_KEYS = [
+    "fs", "duration", "mode",
+    "dead_std_threshold", "gyro_dead_std", "dead_zero_ratio_max",
+]
+
+
+def _kinematics_cfg(body: dict) -> dict:
+    return _pick(body, KINEMATICS_KEYS)
+
+
+def _timing_cfg(body: dict) -> dict:
+    return _pick(body, TIMING_KEYS)
+
+
+def _sensors_cfg(body: dict) -> dict:
+    return _pick(body, SENSORS_KEYS)
+
+
+def _histogram(values: list, bins: int = 30) -> list:
+    if not values:
+        return []
+    lo, hi = min(values), max(values)
+    if hi <= lo:
+        return [{"lo": lo, "hi": hi, "count": len(values)}]
+    step = (hi - lo) / bins
+    out = [{"lo": lo + i * step, "hi": lo + (i + 1) * step, "count": 0}
+           for i in range(bins)]
+    for v in values:
+        idx = min(bins - 1, max(0, int((v - lo) / step)))
+        out[idx]["count"] += 1
+    return out
+
+
+def _downsample(values: list, max_points: int = 600) -> list:
+    n = len(values)
+    if n <= max_points:
+        return list(values)
+    stride = n / max_points
+    out = []
+    for i in range(max_points):
+        out.append(values[min(n - 1, int(i * stride))])
+    return out
+
+
+def _window_segments(start_min: int, end_min: int) -> list:
+    """返回 [0,1440] 内「在窗口内」的分钟区间列表。"""
+    if start_min <= end_min:
+        return [[start_min, end_min]]
+    # 跨午夜：[start, 1440] + [0, end]
+    return [[start_min, 1440], [0, end_min]]
+
+
+# ---------------------------------------------------------------- Handler
+
+
 class Handler(BaseHTTPRequestHandler):
     server_version = "touch-humanization-web"
     protocol_version = "HTTP/1.1"
@@ -38,64 +129,57 @@ class Handler(BaseHTTPRequestHandler):
     def log_message(self, fmt, *args):
         pass
 
-    def _send(self, code: int, body: bytes, ctype: str) -> None:
+    # ---------- 基础响应 ----------
+
+    def _send(self, code: int, body: bytes, ctype: str,
+              extra_headers: dict | None = None) -> None:
         self.send_response(code)
         self.send_header("Content-Type", ctype)
         self.send_header("Content-Length", str(len(body)))
         self.send_header("Cache-Control", "no-store")
+        for k, v in (extra_headers or {}).items():
+            self.send_header(k, v)
         self.end_headers()
         try:
             self.wfile.write(body)
         except (BrokenPipeError, ConnectionAbortedError):
             pass
 
+    def _json(self, obj, code: int = 200) -> None:
+        self._send(code, _json_bytes(obj), "application/json; charset=utf-8")
+
+    def _error(self, code: int, msg: str) -> None:
+        self._json({"ok": False, "error": msg}, code)
+
+    def _read_body(self) -> dict:
+        n = int(self.headers.get("Content-Length") or 0)
+        if n <= 0:
+            return {}
+        raw = self.rfile.read(n)
+        return json.loads(raw.decode("utf-8") or "{}")
+
+    # ---------- GET ----------
+
     def do_GET(self):
         u = urllib.parse.urlparse(self.path)
         path = u.path
         if path in ("/", "/index.html"):
-            return self._serve("index.html", "text/html; charset=utf-8")
+            return self._serve_page("index.html")
         if path.startswith("/static/"):
             return self._serve_static(path[len("/static/"):])
         if path == "/api/health":
-            return self._send(200, _json_bytes({"ok": True}), "application/json")
-        return self._send(404, _json_bytes({"ok": False, "error": "not found"}),
-                          "application/json")
+            return self._json({"ok": True})
+        return self._error(404, f"not found: {path}")
 
-    def do_POST(self):
-        u = urllib.parse.urlparse(self.path)
-        if u.path != "/api/gesture":
-            return self._send(404, _json_bytes({"ok": False, "error": "not found"}),
-                              "application/json")
-        try:
-            n = int(self.headers.get("Content-Length") or 0)
-            raw = self.rfile.read(n) if n > 0 else b"{}"
-            body = json.loads(raw.decode("utf-8") or "{}")
-        except Exception as e:
-            return self._send(400, _json_bytes({"ok": False, "error": str(e)}),
-                              "application/json")
-        try:
-            start = _parse_xy(body.get("start"), (100, 1800))
-            end = _parse_xy(body.get("end"), (900, 400))
-            seed = body.get("seed")
-            seed = int(seed) if seed not in (None, "") else None
-            for_slider = bool(body.get("for_slider", False))
-            exact_end = bool(body.get("exact_end", True))
-            h = Humanizer(seed=seed)
-            g = h.gesture(start, end, for_slider=for_slider, exact_end=exact_end)
-            return self._send(200, _json_bytes({"ok": True, "gesture": g.as_dict()}),
-                              "application/json")
-        except Exception as e:
-            return self._send(500, _json_bytes({"ok": False, "error": str(e)}),
-                              "application/json")
-
-    def _serve(self, name: str, ctype: str) -> None:
+    def _serve_page(self, name: str) -> None:
         p = os.path.join(STATIC_DIR, name)
         try:
             with open(p, "rb") as f:
                 data = f.read()
         except OSError as e:
-            return self._send(500, str(e).encode("utf-8"), "text/plain; charset=utf-8")
-        return self._send(200, data, ctype)
+            return self._send(500, str(e).encode("utf-8"),
+                              "text/plain; charset=utf-8")
+        self._send(200, data, "text/html; charset=utf-8")
 
     def _serve_static(self, rel: str) -> None:
         rel = posixpath.normpath(urllib.parse.unquote(rel))
@@ -111,7 +195,190 @@ class Handler(BaseHTTPRequestHandler):
                  ".js": "application/javascript; charset=utf-8",
                  ".css": "text/css; charset=utf-8"}.get(ext, "application/octet-stream")
         with open(full, "rb") as f:
-            return self._send(200, f.read(), ctype)
+            self._send(200, f.read(), ctype)
+
+    # ---------- POST 分发 ----------
+
+    def do_POST(self):
+        u = urllib.parse.urlparse(self.path)
+        try:
+            body = self._read_body()
+        except Exception as e:
+            return self._error(400, f"请求体解析失败：{e}")
+
+        routes = {
+            "/api/gesture": self._api_gesture,
+            "/api/timing/sample": self._api_timing_sample,
+            "/api/timing/window": self._api_timing_window,
+            "/api/timing/cooldown": self._api_timing_cooldown,
+            "/api/sensors/generate": self._api_sensors_generate,
+            "/api/sensors/csv": self._api_sensors_csv,
+        }
+        fn = routes.get(u.path)
+        if fn is None:
+            return self._error(404, f"not found: {u.path}")
+        try:
+            fn(body)
+        except Exception as e:
+            self._error(500, f"{type(e).__name__}: {e}")
+
+    # ---------- /api/gesture ----------
+
+    def _api_gesture(self, body: dict) -> None:
+        start = _parse_xy(body.get("start"), (100, 1800))
+        end = _parse_xy(body.get("end"), (900, 400))
+        seed = body.get("seed")
+        seed = int(seed) if seed not in (None, "") else None
+        for_slider = bool(body.get("for_slider", False))
+        exact_end = bool(body.get("exact_end", True))
+        kcfg = _kinematics_cfg(body)
+        cfg = {"kinematics": kcfg} if kcfg else None
+        h = Humanizer(config=cfg, seed=seed)
+        g = h.gesture(start, end, for_slider=for_slider, exact_end=exact_end)
+        self._json({"ok": True, "gesture": g.as_dict()})
+
+    # ---------- /api/timing/sample ----------
+
+    def _api_timing_sample(self, body: dict) -> None:
+        n = max(1, min(20000, int(body.get("n", 2000))))
+        lo = float(body.get("lo", 0.6))
+        hi = float(body.get("hi", 2.2))
+        lognormal = bool(body.get("lognormal", True))
+        seed = body.get("seed")
+        seed = int(seed) if seed not in (None, "") else None
+        tcfg = _timing_cfg(body)
+        cfg = {"timing": tcfg} if tcfg else None
+        h = Humanizer(config=cfg, seed=seed)
+        samples = [h.timing.sample(lo, hi, lognormal=lognormal) for _ in range(n)]
+        stats = {
+            "n": n,
+            "min": min(samples),
+            "max": max(samples),
+            "mean": statistics.fmean(samples),
+            "median": statistics.median(samples),
+            "stdev": statistics.pstdev(samples),
+        }
+        self._json({
+            "ok": True,
+            "samples": samples,
+            "bins": _histogram(samples, bins=40),
+            "stats": stats,
+        })
+
+    # ---------- /api/timing/window ----------
+
+    def _api_timing_window(self, body: dict) -> None:
+        ww = body.get("wake_window") or {}
+        start = str(ww.get("start", "07:30"))
+        end = str(ww.get("end", "23:00"))
+
+        def _to_min(s):
+            try:
+                hh, mm = str(s).split(":")
+                return int(hh) * 60 + int(mm)
+            except Exception:
+                return 0
+
+        s_min, e_min = _to_min(start), _to_min(end)
+        segs = _window_segments(s_min, e_min)
+        self._json({
+            "ok": True,
+            "start": start,
+            "end": end,
+            "start_min": s_min,
+            "end_min": e_min,
+            "segments": segs,
+            "cross_midnight": s_min > e_min,
+        })
+
+    # ---------- /api/timing/cooldown ----------
+
+    def _api_timing_cooldown(self, body: dict) -> None:
+        n = max(1, min(500, int(body.get("n", 50))))
+        cfg_over = _timing_cfg(body)
+        seed = body.get("seed")
+        seed = int(seed) if seed not in (None, "") else None
+        h = Humanizer(config={"timing": cfg_over} if cfg_over else None, seed=seed)
+        events = []
+        total = 0.0
+        for i in range(1, n + 1):
+            delay = h.timing.delay_between_actions()
+            cd = h.timing.tap()
+            events.append({
+                "tap": i,
+                "delay": round(delay, 4),
+                "cooldown": round(cd, 4) if cd else None,
+            })
+            total += delay + (cd or 0)
+        self._json({
+            "ok": True,
+            "n": n,
+            "events": events,
+            "total": round(total, 4),
+            "cooldown_every": h.timing.cooldown_every,
+            "cooldown_seconds": h.timing.cooldown_seconds,
+        })
+
+    # ---------- /api/sensors/generate ----------
+
+    def _api_sensors_generate(self, body: dict) -> None:
+        mode = str(body.get("mode", "resting"))
+        fs = float(body.get("fs", 100.0))
+        duration = float(body.get("duration", 5.0))
+        seed = body.get("seed")
+        seed = int(seed) if seed not in (None, "") else None
+        cfg_over = _sensors_cfg(body)
+        h = Humanizer(config={"sensors": cfg_over} if cfg_over else None, seed=seed)
+        rows = h.sensors.generate(mode=mode, fs=fs, duration=duration)
+        stats = h.sensors.stats(rows)
+        is_dead = h.sensors.is_dead(rows)
+        series = {
+            "t": _downsample([r["t"] for r in rows]),
+            "acc_x": _downsample([r["acc"][0] for r in rows]),
+            "acc_y": _downsample([r["acc"][1] for r in rows]),
+            "acc_z": _downsample([r["acc"][2] for r in rows]),
+            "gyro_x": _downsample([r["gyro"][0] for r in rows]),
+            "gyro_y": _downsample([r["gyro"][1] for r in rows]),
+            "gyro_z": _downsample([r["gyro"][2] for r in rows]),
+        }
+        self._json({
+            "ok": True,
+            "mode": mode,
+            "fs": fs,
+            "duration": duration,
+            "sample_count": len(rows),
+            "series": series,
+            "stats": stats,
+            "is_dead": is_dead,
+        })
+
+    # ---------- /api/sensors/csv ----------
+
+    def _api_sensors_csv(self, body: dict) -> None:
+        mode = str(body.get("mode", "resting"))
+        fs = float(body.get("fs", 100.0))
+        duration = float(body.get("duration", 5.0))
+        seed = body.get("seed")
+        seed = int(seed) if seed not in (None, "") else None
+        cfg_over = _sensors_cfg(body)
+        h = Humanizer(config={"sensors": cfg_over} if cfg_over else None, seed=seed)
+        rows = h.sensors.generate(mode=mode, fs=fs, duration=duration)
+
+        buf = io.StringIO()
+        w = csv.writer(buf)
+        w.writerow(["t", "acc_x", "acc_y", "acc_z",
+                    "lin_x", "lin_y", "lin_z",
+                    "gyro_x", "gyro_y", "gyro_z",
+                    "mag_x", "mag_y", "mag_z"])
+        for r in rows:
+            w.writerow([r["t"], *r["acc"], *r["lin"], *r["gyro"], *r["mag"]])
+        data = buf.getvalue().encode("utf-8")
+        self._send(200, data, "text/csv; charset=utf-8", {
+            "Content-Disposition": f'attachment; filename="sensors_{mode}.csv"',
+        })
+
+
+# ---------------------------------------------------------------- Server
 
 
 class _Server(ThreadingHTTPServer):
