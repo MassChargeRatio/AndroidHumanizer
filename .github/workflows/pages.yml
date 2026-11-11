@@ -52,7 +52,22 @@ jobs:
       # GitHub Pages 会读取 site/CNAME；需与 Settings -> Pages 中的自定义域名一致。
       - name: Generate CNAME (optional)
         if: vars.PAGES_CUSTOM_DOMAIN != ''
-        run: echo "${{ vars.PAGES_CUSTOM_DOMAIN }}" > site/CNAME
+        env:
+          PAGES_CUSTOM_DOMAIN: ${{ vars.PAGES_CUSTOM_DOMAIN }}
+        run: |
+          python - <<'PY'
+          import os
+          import re
+          import sys
+
+          domain = os.environ.get("PAGES_CUSTOM_DOMAIN", "").strip()
+          if not re.fullmatch(r"[A-Za-z0-9](?:[A-Za-z0-9.-]*[A-Za-z0-9])?", domain):
+              sys.exit("PAGES_CUSTOM_DOMAIN must be a plain DNS hostname")
+          if ".." in domain or any(len(label) > 63 for label in domain.split(".")):
+              sys.exit("PAGES_CUSTOM_DOMAIN is not a valid DNS hostname")
+          with open("site/CNAME", "w", encoding="ascii", newline="\n") as f:
+              f.write(domain + "\n")
+          PY
 
       # robots.txt: allow all crawlers by default.
       # To keep the demo out of search engines, replace the printf line with:

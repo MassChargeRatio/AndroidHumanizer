@@ -131,7 +131,9 @@ class Timing:
                            lognormal=False)
 
     def reseed(self, seed=None) -> None:
-        # Reset the random stream and tap counter.
-        # 重置随机流与点击计数。
-        self.rng = random.Random(seed)
+        # Reset the existing random stream in place so a shared Humanizer RNG
+        # remains shared with the other sub-modules.
+        # 原位重置现有随机流，确保 Humanizer 子模块共享关系不被替换。
+        replacement = random.Random(seed)
+        self.rng.setstate(replacement.getstate())
         self._tap_count = 0

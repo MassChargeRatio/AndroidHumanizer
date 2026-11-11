@@ -30,7 +30,9 @@ from __future__ import annotations
 import argparse
 import csv
 import io
+import ipaddress
 import json
+import math
 import os
 import posixpath
 import statistics
@@ -44,6 +46,23 @@ from ..humanize import Humanizer
 
 STATIC_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "static")
 
+# Bound request and sensor sizes so the unauthenticated local server cannot be
+# exhausted by accidental or hostile oversized requests.
+# 限制请求体与传感器样本规模，避免本地无认证服务被异常请求耗尽资源。
+MAX_REQUEST_BODY = 256 * 1024
+MAX_SENSOR_FS = 500.0
+MAX_SENSOR_DURATION = 60.0
+MAX_SENSOR_SAMPLES = 30_000
+
+
+class _ClientError(Exception):
+    """An expected request error with an HTTP status code."""
+
+    def __init__(self, status: int, message: str):
+        super().__init__(message)
+        self.status = status
+        self.message = message
+
 # ---------------------------------------------------------------- helpers
 # ---------------------------------------------------------------- 工具函数
 
@@ -55,13 +74,66 @@ def _json_bytes(obj) -> bytes:
 
 
 def _parse_xy(v, default):
-    # Accept [x, y] or {x, y}; fall back to default.
-    # 接受 [x, y] 或 {x, y}；否则回退默认值。
-    if isinstance(v, (list, tuple)) and len(v) >= 2:
-        return float(v[0]), float(v[1])
-    if isinstance(v, dict) and "x" in v and "y" in v:
-        return float(v["x"]), float(v["y"])
-    return default
+    # Accept an exact [x, y] pair or {x, y}; omitted values use the default.
+    # 只接受恰好两个坐标的 [x, y] 或 {x, y}；未提供时才使用默认值。
+    if v is None:
+        return default
+    if isinstance(v, (list, tuple)) and len(v) == 2:
+        values = v
+    elif isinstance(v, dict) and set(v) == {"x", "y"}:
+        values = (v["x"], v["y"])
+    else:
+        raise ValueError("坐标必须是 [x, y] 或仅含 x、y 的对象")
+    try:
+        x, y = float(values[0]), float(values[1])
+    except (TypeError, ValueError, OverflowError) as exc:
+        raise ValueError("坐标必须是有限数值") from exc
+    if not math.isfinite(x) or not math.isfinite(y):
+        raise ValueError("坐标必须是有限数值")
+    return x, y
+
+
+def _parse_hhmm(value: str) -> int:
+    # Strictly parse a 24-hour HH:MM value.
+    # 严格解析 24 小时制 HH:MM。
+    try:
+        parts = str(value).split(":")
+        if len(parts) != 2:
+            raise ValueError
+        hour, minute = (int(part) for part in parts)
+    except (TypeError, ValueError) as exc:
+        raise ValueError(f"无效时间 {value!r}；格式应为 HH:MM") from exc
+    if not (0 <= hour <= 23 and 0 <= minute <= 59):
+        raise ValueError(f"无效时间 {value!r}；小时须为 00-23，分钟须为 00-59")
+    return hour * 60 + minute
+
+
+def _sensor_request(body: dict):
+    # Validate sensor request size before allocating generated rows.
+    # 在创建样本前校验采样率、时长与总点数。
+    mode = str(body.get("mode", "resting"))
+    try:
+        fs = float(body.get("fs", 100.0))
+        duration = float(body.get("duration", 5.0))
+    except (TypeError, ValueError, OverflowError) as exc:
+        raise ValueError("fs 和 duration 必须是有效数值") from exc
+    if not math.isfinite(fs) or not math.isfinite(duration):
+        raise ValueError("fs 和 duration 必须是有限数值")
+    if not (0 < fs <= MAX_SENSOR_FS):
+        raise ValueError(f"fs 必须大于 0 且不超过 {MAX_SENSOR_FS:g}")
+    if not (0 < duration <= MAX_SENSOR_DURATION):
+        raise ValueError(f"duration 必须大于 0 且不超过 {MAX_SENSOR_DURATION:g}")
+    sample_count = max(2, int(fs * duration))
+    if sample_count > MAX_SENSOR_SAMPLES:
+        raise ValueError(
+            f"样本数不能超过 {MAX_SENSOR_SAMPLES}，请降低 fs 或 duration"
+        )
+    seed = body.get("seed")
+    try:
+        seed = int(seed) if seed not in (None, "") else None
+    except (TypeError, ValueError, OverflowError) as exc:
+        raise ValueError("seed 必须是整数") from exc
+    return mode, fs, duration, seed
 
 
 def _pick(body: dict, keys: Iterable[str]) -> dict:
@@ -171,6 +243,14 @@ class Handler(BaseHTTPRequestHandler):
         self.send_header("Content-Type", ctype)
         self.send_header("Content-Length", str(len(body)))
         self.send_header("Cache-Control", "no-store")
+        self.send_header("X-Content-Type-Options", "nosniff")
+        self.send_header("X-Frame-Options", "DENY")
+        self.send_header("Referrer-Policy", "no-referrer")
+        self.send_header(
+            "Content-Security-Policy",
+            "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; "
+            "object-src 'none'; base-uri 'self'; frame-ancestors 'none'",
+        )
         for k, v in (extra_headers or {}).items():
             self.send_header(k, v)
         self.end_headers()
@@ -185,18 +265,53 @@ class Handler(BaseHTTPRequestHandler):
     def _error(self, code: int, msg: str) -> None:
         self._json({"ok": False, "error": msg}, code)
 
+    def _valid_host(self) -> bool:
+        # Defend the loopback service against cross-origin DNS-rebinding requests.
+        # 校验 Host，降低 DNS rebinding 将外部网页导向本地服务的风险。
+        raw = self.headers.get("Host", "")
+        try:
+            parsed = urllib.parse.urlsplit("//" + raw)
+            hostname = (parsed.hostname or "").lower()
+            port = parsed.port
+        except ValueError:
+            return False
+        expected_port = self.server.server_address[1]
+        return hostname in ("127.0.0.1", "localhost") and port in (None, expected_port)
+
     def _read_body(self) -> dict:
-        # Read the JSON body (empty dict if none).
-        # 读取 JSON 请求体（无内容时返回空 dict）。
-        n = int(self.headers.get("Content-Length") or 0)
-        if n <= 0:
+        # Read a bounded JSON object body.
+        # 读取有大小上限的 JSON 对象请求体。
+        raw_length = self.headers.get("Content-Length")
+        if raw_length is None:
             return {}
+        try:
+            n = int(raw_length)
+        except (TypeError, ValueError) as exc:
+            raise _ClientError(400, "无效的 Content-Length") from exc
+        if n < 0:
+            raise _ClientError(400, "无效的 Content-Length")
+        if n == 0:
+            return {}
+        if n > MAX_REQUEST_BODY:
+            raise _ClientError(413, f"请求体不能超过 {MAX_REQUEST_BODY} 字节")
+        if self.headers.get_content_type() != "application/json":
+            raise _ClientError(415, "Content-Type 必须为 application/json")
         raw = self.rfile.read(n)
-        return json.loads(raw.decode("utf-8") or "{}")
+        if len(raw) != n:
+            raise _ClientError(400, "请求体长度与 Content-Length 不匹配")
+        try:
+            body = json.loads(raw.decode("utf-8"))
+        except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+            raise _ClientError(400, "请求体必须是有效的 UTF-8 JSON") from exc
+        if not isinstance(body, dict):
+            raise _ClientError(400, "JSON 请求体必须是对象")
+        return body
 
     # ---------- GET ----------
 
     def do_GET(self):
+        if not self._valid_host():
+            return self._error(403, "forbidden host")
         u = urllib.parse.urlparse(self.path)
         path = u.path
         if path in ("/", "/index.html"):
@@ -241,12 +356,9 @@ class Handler(BaseHTTPRequestHandler):
     # ---------- POST 分发 ----------
 
     def do_POST(self):
+        if not self._valid_host():
+            return self._error(403, "forbidden host")
         u = urllib.parse.urlparse(self.path)
-        try:
-            body = self._read_body()
-        except Exception as e:
-            return self._error(400, f"请求体解析失败：{e}")
-
         routes = {
             "/api/gesture": self._api_gesture,
             "/api/timing/sample": self._api_timing_sample,
@@ -259,9 +371,17 @@ class Handler(BaseHTTPRequestHandler):
         if fn is None:
             return self._error(404, f"not found: {u.path}")
         try:
+            body = self._read_body()
+        except _ClientError as exc:
+            return self._error(exc.status, exc.message)
+        try:
             fn(body)
-        except Exception as e:
-            self._error(500, f"{type(e).__name__}: {e}")
+        except (ValueError, TypeError, OverflowError) as exc:
+            self._error(400, str(exc) or "invalid request")
+        except Exception:
+            # Do not expose stack details or local paths to HTTP clients.
+            # 不向 HTTP 客户端暴露堆栈信息或本机路径。
+            self._error(500, "internal server error")
 
     # ---------- /api/gesture ----------
 
@@ -310,17 +430,11 @@ class Handler(BaseHTTPRequestHandler):
 
     def _api_timing_window(self, body: dict) -> None:
         ww = body.get("wake_window") or {}
+        if not isinstance(ww, dict):
+            raise ValueError("wake_window 必须是对象")
         start = str(ww.get("start", "07:30"))
         end = str(ww.get("end", "23:00"))
-
-        def _to_min(s):
-            try:
-                hh, mm = str(s).split(":")
-                return int(hh) * 60 + int(mm)
-            except Exception:
-                return 0
-
-        s_min, e_min = _to_min(start), _to_min(end)
+        s_min, e_min = _parse_hhmm(start), _parse_hhmm(end)
         segs = _window_segments(s_min, e_min)
         self._json({
             "ok": True,
@@ -363,11 +477,7 @@ class Handler(BaseHTTPRequestHandler):
     # ---------- /api/sensors/generate ----------
 
     def _api_sensors_generate(self, body: dict) -> None:
-        mode = str(body.get("mode", "resting"))
-        fs = float(body.get("fs", 100.0))
-        duration = float(body.get("duration", 5.0))
-        seed = body.get("seed")
-        seed = int(seed) if seed not in (None, "") else None
+        mode, fs, duration, seed = _sensor_request(body)
         cfg_over = _sensors_cfg(body)
         h = Humanizer(config={"sensors": cfg_over} if cfg_over else None, seed=seed)
         rows = h.sensors.generate(mode=mode, fs=fs, duration=duration)
@@ -396,11 +506,7 @@ class Handler(BaseHTTPRequestHandler):
     # ---------- /api/sensors/csv ----------
 
     def _api_sensors_csv(self, body: dict) -> None:
-        mode = str(body.get("mode", "resting"))
-        fs = float(body.get("fs", 100.0))
-        duration = float(body.get("duration", 5.0))
-        seed = body.get("seed")
-        seed = int(seed) if seed not in (None, "") else None
+        mode, fs, duration, seed = _sensor_request(body)
         cfg_over = _sensors_cfg(body)
         h = Humanizer(config={"sensors": cfg_over} if cfg_over else None, seed=seed)
         rows = h.sensors.generate(mode=mode, fs=fs, duration=duration)
@@ -431,7 +537,17 @@ class _Server(ThreadingHTTPServer):
 
 
 def make_server(host: str = "127.0.0.1", port: int = 8765) -> ThreadingHTTPServer:
-    httpd = _Server((host, port), Handler)
+    # The interactive API has no authentication; it must stay on IPv4 loopback.
+    # 交互式 API 没有认证，因此只允许绑定 IPv4 回环地址。
+    try:
+        address = ipaddress.ip_address(host)
+    except ValueError as exc:
+        raise ValueError("Web UI 仅允许绑定 127.0.0.1") from exc
+    if address.version != 4 or not address.is_loopback:
+        raise ValueError("Web UI 仅允许绑定 127.0.0.1")
+    if isinstance(port, bool) or not isinstance(port, int) or not 0 <= port <= 65535:
+        raise ValueError("port 必须是 0-65535 的整数")
+    httpd = _Server((str(address), port), Handler)
     httpd.daemon_threads = True
     return httpd
 

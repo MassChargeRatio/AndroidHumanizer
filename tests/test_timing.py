@@ -103,3 +103,17 @@ def test_reseed():
     t.reseed(5)
     again = [t.sample(0.5, 2.5) for _ in range(10)]
     assert first == again
+
+
+
+def test_reseed_preserves_shared_rng_identity():
+    # Reseeding Timing must not detach it from a Humanizer shared stream.
+    # 重置 Timing 后不得破坏 Humanizer 的共享随机流对象关系。
+    from touch_humanization import Humanizer
+
+    h = Humanizer(seed=1)
+    shared = h.rng
+    h.timing.reseed(5)
+    assert h.timing.rng is shared
+    assert h.kinematics.rng is shared
+    assert h.sensors.rng is shared
