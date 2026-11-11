@@ -1,29 +1,89 @@
 'use strict';
 
 const $ = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
 
-async function generate() {
-  const body = {
-    start: [Number($('#sx').value), Number($('#sy').value)],
-    end: [Number($('#ex').value), Number($('#ey').value)],
-    seed: $('#seed').value === '' ? null : Number($('#seed').value),
-    for_slider: $('#slider').checked,
-  };
-  const res = await fetch('/api/gesture', {
+const COLORS = {
+  acc_x: '#4c8dff', acc_y: '#2fbf71', acc_z: '#e2a33c',
+  gyro_x: '#c08bff', gyro_y: '#e5534b', gyro_z: '#5f9ea0',
+};
+
+// ---------------------------------------------------------------- Tab
+
+$$('nav.tabs button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    $$('nav.tabs button').forEach(b => b.classList.toggle('on', b === btn));
+    $$('section.tab').forEach(s => {
+      s.classList.toggle('on', s.id === 'tab-' + btn.dataset.tab);
+    });
+  });
+});
+
+// ---------------------------------------------------------------- HTTP
+
+async function postJSON(path, body) {
+  const res = await fetch(path, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(body),
   });
-  const data = await res.json();
-  if (!data.ok) {
-    $('#meta').textContent = '错误：' + data.error;
-    return;
-  }
-  draw(data.gesture);
+  const data = await res.json().catch(() => ({ ok: false, error: 'HTTP ' + res.status }));
+  if (!data.ok) throw new Error(data.error || ('HTTP ' + res.status));
+  return data;
 }
 
-function draw(g) {
-  const cv = $('#cv');
+function seedOf(el) {
+  const v = el.value.trim();
+  return v === '' ? null : Number(v);
+}
+
+// ================================================================ 手势轨迹
+
+let lastGesture = null;
+let playTimer = null;
+
+function kBody() {
+  return {
+    start: [Number($('#kx0').value), Number($('#ky0').value)],
+    end: [Number($('#kx1').value), Number($('#ky1').value)],
+    seed: seedOf($('#kseed')),
+    for_slider: $('#kslider').checked,
+    exact_end: $('#kexact').checked,
+    // 高级参数
+    steps_min: Number($('#k_steps_min').value),
+    steps_max: Number($('#k_steps_max').value),
+    px_per_step: Number($('#k_px_per_step').value),
+    duration_per_px: Number($('#k_duration_per_px').value),
+    duration_min: Number($('#k_duration_min').value),
+    duration_max: Number($('#k_duration_max').value),
+    perpendicular_ratio: Number($('#k_perp').value),
+    jitter_sigma: Number($('#k_jitter').value),
+    jitter_tail_fraction: Number($('#k_jtail').value),
+    overshoot_prob: Number($('#k_overshoot').value),
+    overshoot_ratio: Number($('#k_oratio').value),
+    use_ease_in_out: $('#k_ease').checked,
+  };
+}
+
+async function generateGesture() {
+  try {
+    const data = await postJSON('/api/gesture', kBody());
+    lastGesture = data.gesture;
+    drawKinematics(lastGesture);
+    const g = lastGesture;
+    $('#kmeta').innerHTML =
+      `点数 <b>${g.steps}</b><br>距离 <b>${g.distance.toFixed(1)}</b> px<br>` +
+      `时长 <b>${g.duration.toFixed(3)}</b> s<br>` +
+      `滑块模式 ${g.for_slider ? '是' : '否'}<br>` +
+      `首点 (${g.points[0].join(', ')})<br>末点 (${g.points[g.points.length - 1].join(', ')})`;
+    $('#kplay-status').textContent = '';
+  } catch (e) {
+    $('#kmeta').textContent = '错误：' + e.message;
+  }
+}
+
+function drawKinematics(g, cursorIdx) {
+  const cv = $('#cv-kinematics');
   const ctx = cv.getContext('2d');
   ctx.clearRect(0, 0, cv.width, cv.height);
   ctx.fillStyle = '#0e1116';
@@ -31,38 +91,336 @@ function draw(g) {
 
   const pts = g.points;
   if (!pts.length) return;
+
   const xs = pts.map(p => p[0]), ys = pts.map(p => p[1]);
-  const minX = Math.min(...xs) - 20, maxX = Math.max(...xs) + 20;
-  const minY = Math.min(...ys) - 20, maxY = Math.max(...ys) + 20;
+  const pad = 30;
+  const minX = Math.min(...xs) - pad, maxX = Math.max(...xs) + pad;
+  const minY = Math.min(...ys) - pad, maxY = Math.max(...ys) + pad;
   const w = maxX - minX || 1, h = maxY - minY || 1;
-  const scale = Math.min((cv.width - 40) / w, (cv.height - 40) / h);
-  const ox = 20 + (cv.width - 40 - w * scale) / 2;
-  const oy = 20 + (cv.height - 40 - h * scale) / 2;
+  const scale = Math.min((cv.width - 2 * pad) / w, (cv.height - 2 * pad) / h);
+  const ox = pad + (cv.width - 2 * pad - w * scale) / 2;
+  const oy = pad + (cv.height - 2 * pad - h * scale) / 2;
   const tx = x => ox + (x - minX) * scale;
   const ty = y => oy + (y - minY) * scale;
 
   ctx.strokeStyle = '#4c8dff';
   ctx.lineWidth = 2;
   ctx.beginPath();
-  pts.forEach((p, i) => {
-    const X = tx(p[0]), Y = ty(p[1]);
+  const limit = cursorIdx === undefined ? pts.length : cursorIdx + 1;
+  for (let i = 0; i < limit; i++) {
+    const X = tx(pts[i][0]), Y = ty(pts[i][1]);
     i ? ctx.lineTo(X, Y) : ctx.moveTo(X, Y);
-  });
+  }
   ctx.stroke();
 
   ctx.fillStyle = '#2fbf71';
   ctx.beginPath();
   ctx.arc(tx(pts[0][0]), ty(pts[0][1]), 6, 0, Math.PI * 2);
   ctx.fill();
+
   ctx.fillStyle = '#e5534b';
+  const last = Math.min(limit - 1, pts.length - 1);
   ctx.beginPath();
-  ctx.arc(tx(pts[pts.length - 1][0]), ty(pts[pts.length - 1][1]), 6, 0, Math.PI * 2);
+  ctx.arc(tx(pts[last][0]), ty(pts[last][1]), 6, 0, Math.PI * 2);
   ctx.fill();
 
-  $('#meta').textContent =
-    `点数 ${g.steps} · 距离 ${g.distance.toFixed(1)}px · 时长 ${g.duration.toFixed(3)}s`
-    + (g.for_slider ? ' · 滑块模式' : '');
+  if (cursorIdx !== undefined && cursorIdx < pts.length) {
+    ctx.fillStyle = '#ffffff';
+    ctx.beginPath();
+    ctx.arc(tx(pts[cursorIdx][0]), ty(pts[cursorIdx][1]), 4, 0, Math.PI * 2);
+    ctx.fill();
+  }
 }
 
-$('#go').addEventListener('click', generate);
-generate();
+function playGesture() {
+  if (!lastGesture) return;
+  if (playTimer) { clearTimeout(playTimer); playTimer = null; }
+  const g = lastGesture;
+  const total = g.intervals.reduce((a, b) => a + b, 0) || 1;
+  // 压缩到最多 4 秒播完，便于观察速度轮廓
+  const speedup = total > 4 ? total / 4 : 1;
+  let i = 0;
+  $('#kplay-status').textContent = '播放中…';
+  const step = () => {
+    drawKinematics(g, i);
+    if (i >= g.points.length - 1) {
+      $('#kplay-status').textContent = '播放完成';
+      playTimer = null;
+      return;
+    }
+    const dt = Math.max(10, (g.intervals[i] * 1000) / speedup);
+    i++;
+    playTimer = setTimeout(step, dt);
+  };
+  step();
+}
+
+$('#kgo').addEventListener('click', generateGesture);
+$('#kplay').addEventListener('click', playGesture);
+
+// ================================================================ 时序
+
+function drawHistogram(bins, canvas) {
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = '#0e1116';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  if (!bins.length) return;
+  const pad = { l: 40, r: 12, t: 16, b: 30 };
+  const iw = canvas.width - pad.l - pad.r;
+  const ih = canvas.height - pad.t - pad.b;
+  const maxCount = Math.max(...bins.map(b => b.count), 1);
+  const bw = iw / bins.length;
+
+  ctx.strokeStyle = '#242c3a';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(pad.l, pad.t + ih);
+  ctx.lineTo(pad.l + iw, pad.t + ih);
+  ctx.stroke();
+
+  bins.forEach((b, i) => {
+    const h = (b.count / maxCount) * ih;
+    const x = pad.l + i * bw;
+    ctx.fillStyle = '#4c8dff';
+    ctx.fillRect(x, pad.t + ih - h, Math.max(1, bw - 1), h);
+  });
+
+  ctx.fillStyle = '#9aa7bd';
+  ctx.font = '11px ui-monospace, monospace';
+  ctx.fillText(bins[0].lo.toFixed(2), pad.l, canvas.height - 10);
+  ctx.fillText(bins[bins.length - 1].hi.toFixed(2),
+               pad.l + iw - 40, canvas.height - 10);
+  ctx.fillText(String(maxCount), 6, pad.t + 10);
+}
+
+async function sampleTiming() {
+  try {
+    const body = {
+      n: Number($('#t_n').value),
+      lo: Number($('#t_lo').value),
+      hi: Number($('#t_hi').value),
+      lognormal: $('#t_ln').checked,
+      seed: seedOf($('#t_seed')),
+    };
+    const data = await postJSON('/api/timing/sample', body);
+    drawHistogram(data.bins, $('#cv-timing'));
+    const s = data.stats;
+    $('#tmeta').innerHTML =
+      `n <b>${s.n}</b><br>` +
+      `min <b>${s.min.toFixed(3)}</b><br>` +
+      `max <b>${s.max.toFixed(3)}</b><br>` +
+      `mean <b>${s.mean.toFixed(3)}</b><br>` +
+      `median <b>${s.median.toFixed(3)}</b><br>` +
+      `stdev <b>${s.stdev.toFixed(3)}</b>`;
+  } catch (e) {
+    $('#tmeta').textContent = '错误：' + e.message;
+  }
+}
+
+$('#tgo').addEventListener('click', sampleTiming);
+
+// ---------------------------------------------------------------- 作息窗口
+
+function drawWindow(info) {
+  const cv = $('#cv-window');
+  const ctx = cv.getContext('2d');
+  ctx.clearRect(0, 0, cv.width, cv.height);
+  ctx.fillStyle = '#0e1116';
+  ctx.fillRect(0, 0, cv.width, cv.height);
+
+  const pad = { l: 30, r: 30, t: 20, b: 30 };
+  const iw = cv.width - pad.l - pad.r;
+  const barH = 30;
+  const y = pad.t;
+
+  // 轴
+  ctx.strokeStyle = '#242c3a';
+  ctx.strokeRect(pad.l, y, iw, barH);
+
+  // 窗口内区间填充
+  ctx.fillStyle = 'rgba(76,141,255,0.35)';
+  for (const [s, e] of info.segments) {
+    const x1 = pad.l + (s / 1440) * iw;
+    const x2 = pad.l + (e / 1440) * iw;
+    ctx.fillRect(x1, y, x2 - x1, barH);
+  }
+
+  // 刻度
+  ctx.fillStyle = '#9aa7bd';
+  ctx.font = '11px ui-monospace, monospace';
+  for (let h = 0; h <= 24; h += 6) {
+    const x = pad.l + (h * 60 / 1440) * iw;
+    ctx.fillRect(x - 1, y + barH, 2, 6);
+    ctx.fillText(String(h).padStart(2, '0') + ':00', x - 14, y + barH + 20);
+  }
+
+  $('#wmeta').textContent =
+    `start=${info.start} (${info.start_min}min) · end=${info.end} (${info.end_min}min) · ` +
+    `跨午夜 ${info.cross_midnight ? '是' : '否'}`;
+}
+
+async function calcWindow() {
+  try {
+    const data = await postJSON('/api/timing/window', {
+      wake_window: { start: $('#w_start').value, end: $('#w_end').value },
+    });
+    drawWindow(data);
+  } catch (e) {
+    $('#wmeta').textContent = '错误：' + e.message;
+  }
+}
+$('#wgo').addEventListener('click', calcWindow);
+
+// ---------------------------------------------------------------- 冷却模拟
+
+async function simulateCooldown() {
+  try {
+    const body = {
+      n: Number($('#c_n').value),
+      cooldown_every: Number($('#c_every').value),
+      cooldown_seconds: Number($('#c_seconds').value),
+      seed: seedOf($('#c_seed')),
+    };
+    const data = await postJSON('/api/timing/cooldown', body);
+    const rows = data.events.map(ev => {
+      const cd = ev.cooldown != null ? ` <b style="color:#e5532b">CD ${ev.cooldown}s</b>` : '';
+      return `<div class="ev">#${ev.tap}  delay=${ev.delay.toFixed(3)}s${cd}</div>`;
+    }).join('');
+    $('#cresult').innerHTML =
+      `<p class="muted">共 ${data.n} 次点击 · 总耗时 <b>${data.total.toFixed(2)}s</b> · ` +
+      `每 ${data.cooldown_every} 次长停 ${data.cooldown_seconds}s</p>` +
+      `<div class="evlist">${rows}</div>`;
+  } catch (e) {
+    $('#cresult').textContent = '错误：' + e.message;
+  }
+}
+$('#cgo').addEventListener('click', simulateCooldown);
+
+// ================================================================ 传感器
+
+function sBody() {
+  return {
+    mode: $('#s_mode').value,
+    fs: Number($('#s_fs').value),
+    duration: Number($('#s_duration').value),
+    seed: seedOf($('#s_seed')),
+  };
+}
+
+async function generateSensors() {
+  try {
+    const data = await postJSON('/api/sensors/generate', sBody());
+    drawSensors(data);
+    const s = data.stats;
+    const dead = data.is_dead
+      ? '<span style="color:#e5534b"><b>是（死寂）</b></span>'
+      : '<span style="color:#2fbf71"><b>否（活着）</b></span>';
+    $('#smeta').innerHTML =
+      `模式 <b>${data.mode}</b> · ${data.sample_count} 采样点<br>` +
+      `死寂判定：${dead}<br>` +
+      `acc_x std=${s.acc_x_std.toFixed(4)} zero=${s.acc_x_zero.toFixed(2)}<br>` +
+      `acc_y std=${s.acc_y_std.toFixed(4)} zero=${s.acc_y_zero.toFixed(2)}<br>` +
+      `acc_z std=${s.acc_z_std.toFixed(4)} zero=${s.acc_z_zero.toFixed(2)}<br>` +
+      `gyro_x std=${s.gyro_x_std.toFixed(4)} zero=${s.gyro_x_zero.toFixed(2)}<br>` +
+      `gyro_y std=${s.gyro_y_std.toFixed(4)} zero=${s.gyro_y_zero.toFixed(2)}<br>` +
+      `gyro_z std=${s.gyro_z_std.toFixed(4)} zero=${s.gyro_z_zero.toFixed(2)}`;
+  } catch (e) {
+    $('#smeta').textContent = '错误：' + e.message;
+  }
+}
+
+function drawSensors(data) {
+  const cv = $('#cv-sensors');
+  const ctx = cv.getContext('2d');
+  ctx.clearRect(0, 0, cv.width, cv.height);
+  ctx.fillStyle = '#0e1116';
+  ctx.fillRect(0, 0, cv.width, cv.height);
+
+  const series = data.series;
+  const n = series.t.length;
+  if (!n) return;
+
+  // 上：加速度三轴；下：陀螺仪三轴
+  const halfH = (cv.height - 60) / 2;
+  const pad = { l: 40, r: 20 };
+  const iw = cv.width - pad.l - pad.r;
+
+  function drawAxis(keysArr, top, height, title) {
+    ctx.fillStyle = '#9aa7bd';
+    ctx.font = '12px ui-monospace, monospace';
+    ctx.fillText(title, pad.l, top - 6);
+
+    // 计算该组值范围
+    let lo = Infinity, hi = -Infinity;
+    for (const k of keysArr) for (const v of series[k]) {
+      if (v < lo) lo = v; if (v > hi) hi = v;
+    }
+    if (!isFinite(lo) || !isFinite(hi) || hi === lo) { lo = -1; hi = 1; }
+
+    // 轴
+    ctx.strokeStyle = '#242c3a';
+    ctx.strokeRect(pad.l, top, iw, height);
+
+    const tx = i => pad.l + (i / Math.max(1, n - 1)) * iw;
+    const ty = v => top + height - ((v - lo) / (hi - lo)) * height;
+
+    for (const k of keysArr) {
+      ctx.strokeStyle = COLORS[k];
+      ctx.lineWidth = 1.4;
+      ctx.beginPath();
+      const arr = series[k];
+      for (let i = 0; i < arr.length; i++) {
+        const X = tx(i), Y = ty(arr[i]);
+        i ? ctx.lineTo(X, Y) : ctx.moveTo(X, Y);
+      }
+      ctx.stroke();
+    }
+
+    // 图例
+    ctx.font = '11px ui-monospace, monospace';
+    let lx = pad.l + 6;
+    for (const k of keysArr) {
+      ctx.fillStyle = COLORS[k];
+      ctx.fillRect(lx, top + 4, 10, 10);
+      ctx.fillStyle = '#c3cddd';
+      ctx.fillText(k, lx + 14, top + 13);
+      lx += 90;
+    }
+  }
+
+  drawAxis(['acc_x', 'acc_y', 'acc_z'], 20, halfH, '加速度 (m/s²)');
+  drawAxis(['gyro_x', 'gyro_y', 'gyro_z'], 20 + halfH + 20, halfH, '陀螺仪 (rad/s)');
+}
+
+async function downloadCSV() {
+  try {
+    const res = await fetch('/api/sensors/csv', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(sBody()),
+    });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const blob = await res.blob();
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `sensors_${$('#s_mode').value}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+  } catch (e) {
+    $('#smeta').textContent = '错误：' + e.message;
+  }
+}
+
+$('#sgo').addEventListener('click', generateSensors);
+$('#scsv').addEventListener('click', downloadCSV);
+
+// ================================================================ 首屏
+
+generateGesture();
+sampleTiming();
+calcWindow();
+simulateCooldown();
+generateSensors();
