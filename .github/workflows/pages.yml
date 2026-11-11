@@ -63,7 +63,17 @@ jobs:
           domain = os.environ.get("PAGES_CUSTOM_DOMAIN", "").strip()
           if not re.fullmatch(r"[A-Za-z0-9](?:[A-Za-z0-9.-]*[A-Za-z0-9])?", domain):
               sys.exit("PAGES_CUSTOM_DOMAIN must be a plain DNS hostname")
-          if ".." in domain or any(len(label) > 63 for label in domain.split(".")):
+          labels = domain.split(".")
+          if (
+              len(domain) > 253
+              or any(
+                  not label
+                  or len(label) > 63
+                  or label.startswith("-")
+                  or label.endswith("-")
+                  for label in labels
+              )
+          ):
               sys.exit("PAGES_CUSTOM_DOMAIN is not a valid DNS hostname")
           with open("site/CNAME", "w", encoding="ascii", newline="\n") as f:
               f.write(domain + "\n")

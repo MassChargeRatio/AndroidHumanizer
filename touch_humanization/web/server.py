@@ -275,26 +275,39 @@ class Handler(BaseHTTPRequestHandler):
             port = parsed.port
         except ValueError:
             return False
+        if parsed.username is not None or parsed.password is not None:
+            return False
+        if parsed.path or parsed.query or parsed.fragment:
+            return False
         expected_port = self.server.server_address[1]
         return hostname in ("127.0.0.1", "localhost") and port in (None, expected_port)
 
     def _read_body(self) -> dict:
         # Read a bounded JSON object body.
         # 读取有大小上限的 JSON 对象请求体。
+        # The server intentionally does not implement chunked request bodies.
+        # 本服务不实现 chunked 请求体。
+        if self.headers.get("Transfer-Encoding"):
+            self.close_connection = True
+            raise _ClientError(400, "不支持 Transfer-Encoding")
         raw_length = self.headers.get("Content-Length")
         if raw_length is None:
             return {}
         try:
             n = int(raw_length)
         except (TypeError, ValueError) as exc:
+            self.close_connection = True
             raise _ClientError(400, "无效的 Content-Length") from exc
         if n < 0:
+            self.close_connection = True
             raise _ClientError(400, "无效的 Content-Length")
         if n == 0:
             return {}
         if n > MAX_REQUEST_BODY:
+            self.close_connection = True
             raise _ClientError(413, f"请求体不能超过 {MAX_REQUEST_BODY} 字节")
         if self.headers.get_content_type() != "application/json":
+            self.close_connection = True
             raise _ClientError(415, "Content-Type 必须为 application/json")
         raw = self.rfile.read(n)
         if len(raw) != n:
@@ -429,7 +442,9 @@ class Handler(BaseHTTPRequestHandler):
     # ---------- /api/timing/window ----------
 
     def _api_timing_window(self, body: dict) -> None:
-        ww = body.get("wake_window") or {}
+        ww = body.get("wake_window", {})
+        if ww is None:
+            ww = {}
         if not isinstance(ww, dict):
             raise ValueError("wake_window 必须是对象")
         start = str(ww.get("start", "07:30"))
@@ -543,7 +558,7 @@ def make_server(host: str = "127.0.0.1", port: int = 8765) -> ThreadingHTTPServe
         address = ipaddress.ip_address(host)
     except ValueError as exc:
         raise ValueError("Web UI 仅允许绑定 127.0.0.1") from exc
-    if address.version != 4 or not address.is_loopback:
+    if address != ipaddress.IPv4Address("127.0.0.1"):
         raise ValueError("Web UI 仅允许绑定 127.0.0.1")
     if isinstance(port, bool) or not isinstance(port, int) or not 0 <= port <= 65535:
         raise ValueError("port 必须是 0-65535 的整数")
