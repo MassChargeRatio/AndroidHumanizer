@@ -8,9 +8,14 @@ on:
     paths:
       - "site/**"
       - ".github/workflows/pages.yml"
-    tags:
-      - "v*"
   workflow_dispatch:
+# NOTE: no tag trigger — a tag push coincides with the main-push deploy of the
+# same commit, and two concurrent deployments to the same Pages environment
+# collide (observed run failure). Pages always tracks main; re-deploy on
+# demand via workflow_dispatch if needed.
+# 注意：不加 tag 触发——tag push 与同一 commit 的 main push 部署并发，
+# 两个部署争用同一 Pages environment 会冲突（实测失败）。Pages 始终跟随 main；
+# 需要时用 workflow_dispatch 手动重部署。
 
 # Permissions:
 #   contents: read    - checkout the repo
