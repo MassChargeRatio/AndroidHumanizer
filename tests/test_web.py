@@ -24,7 +24,7 @@ def _post(url, body):
     data = json.dumps(body).encode("utf-8")
     req = urllib.request.Request(url, data=data, method="POST",
                                  headers={"Content-Type": "application/json"})
-    with urllib.request.urlopen(req, timeout=10) as r:
+    with urllib.request.urlopen(req, timeout=15) as r:
         return json.loads(r.read().decode("utf-8"))
 
 
@@ -32,14 +32,19 @@ def test_health_and_index(server):
     with urllib.request.urlopen(server + "/api/health", timeout=5) as r:
         assert json.loads(r.read())["ok"] is True
     with urllib.request.urlopen(server + "/", timeout=5) as r:
-        assert b"touch-humanization" in r.read()
+        body = r.read()
+    assert b"touch-humanization" in body
+    assert b"tab-kinematics" in body
+    assert b"tab-timing" in body
+    assert b"tab-sensors" in body
 
 
-def test_gesture_endpoint(server):
+# ------------------------------------------------------------ 手势轨迹
+
+def test_gesture_basic(server):
     r = _post(server + "/api/gesture", {
         "start": [100, 1800], "end": [900, 400], "seed": 42,
     })
-    assert r["ok"] is True
     g = r["gesture"]
     assert g["points"][0] == [100, 1800]
     assert g["points"][-1] == [900, 400]
@@ -53,6 +58,26 @@ def test_gesture_seed_reproducible(server):
     assert a == b
 
 
+def test_gesture_slider_mode(server):
+    r = _post(server + "/api/gesture", {
+        "start": [80, 1500], "end": [1200, 1500],
+        "seed": 1, "for_slider": True,
+    })
+    g = r["gesture"]
+    assert g["for_slider"] is True
+    assert g["points"][-1] == [1200, 1500]
+
+
+def test_gesture_advanced_params(server):
+    r = _post(server + "/api/gesture", {
+        "start": [0, 0], "end": [500, 0],
+        "seed": 3,
+        "steps_min": 40, "steps_max": 40,   # 固定步数
+        "overshoot_prob": 0,                # 关闭过冲，避免回拉点干扰步数
+    })
+    assert r["gesture"]["steps"] == 40
+
+
 def test_gesture_bad_body(server):
     req = urllib.request.Request(server + "/api/gesture", data=b"not json",
                                  method="POST",
@@ -63,3 +88,87 @@ def test_gesture_bad_body(server):
         assert e.code == 400
     else:
         raise AssertionError("应返回 400")
+
+
+# ------------------------------------------------------------ 时序
+
+def test_timing_sample(server):
+    r = _post(server + "/api/timing/sample", {
+        "n": 500, "lo": 0.5, "hi": 2.0, "lognormal": True, "seed": 42,
+    })
+    assert len(r["samples"]) == 500
+    assert all(0.5 <= v <= 2.0 for v in r["samples"])
+    assert r["stats"]["n"] == 500
+    assert len(r["bins"]) > 0
+
+
+def test_timing_sample_reproducible(server):
+    body = {"n": 200, "lo": 0.5, "hi": 2.0, "lognormal": True, "seed": 9}
+    a = _post(server + "/api/timing/sample", body)["samples"]
+    b = _post(server + "/api/timing/sample", body)["samples"]
+    assert a == b
+
+
+def test_timing_window_simple(server):
+    r = _post(server + "/api/timing/window", {
+        "wake_window": {"start": "07:30", "end": "23:00"},
+    })
+    assert r["start_min"] == 7 * 60 + 30
+    assert r["end_min"] == 23 * 60
+    assert r["cross_midnight"] is False
+    assert r["segments"] == [[450, 1380]]
+
+
+def test_timing_window_cross_midnight(server):
+    r = _post(server + "/api/timing/window", {
+        "wake_window": {"start": "20:00", "end": "06:00"},
+    })
+    assert r["cross_midnight"] is True
+    assert r["segments"] == [[1200, 1440], [0, 360]]
+
+
+def test_timing_cooldown(server):
+    r = _post(server + "/api/timing/cooldown", {
+        "n": 30, "cooldown_every": 10, "cooldown_seconds": 5.0, "seed": 1,
+    })
+    assert r["n"] == 30
+    assert len(r["events"]) == 30
+    cds = [ev for ev in r["events"] if ev["cooldown"] is not None]
+    assert len(cds) == 3     # 每 10 次点击一次长停
+    assert all(3.5 <= ev["cooldown"] <= 6.5 for ev in cds)
+
+
+# ------------------------------------------------------------ 传感器
+
+def test_sensors_generate_alive(server):
+    for mode in ("resting", "walking", "tapping", "scrolling"):
+        r = _post(server + "/api/sensors/generate", {
+            "mode": mode, "fs": 100, "duration": 2.0, "seed": 42,
+        })
+        assert r["is_dead"] is False, mode
+        assert r["sample_count"] == 200
+        assert len(r["series"]["t"]) > 0
+
+
+def test_sensors_generate_reproducible(server):
+    body = {"mode": "walking", "fs": 50, "duration": 1.0, "seed": 11}
+    a = _post(server + "/api/sensors/generate", body)["series"]
+    b = _post(server + "/api/sensors/generate", body)["series"]
+    assert a == b
+
+
+def test_sensors_csv_content(server):
+    req = urllib.request.Request(
+        server + "/api/sensors/csv",
+        data=json.dumps({"mode": "walking", "fs": 50, "duration": 1.0, "seed": 1})
+        .encode("utf-8"),
+        method="POST",
+        headers={"Content-Type": "application/json"},
+    )
+    with urllib.request.urlopen(req, timeout=10) as r:
+        ctype = r.headers.get("Content-Type", "")
+        body = r.read().decode("utf-8")
+    assert "text/csv" in ctype
+    assert body.startswith("t,acc_x")
+    lines = body.strip().splitlines()
+    assert len(lines) == 1 + 50     # 表头 + 50 采样点
