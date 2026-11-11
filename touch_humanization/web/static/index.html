@@ -19,21 +19,21 @@
     <div class="install-grid">
 
       <div class="install-card">
-        <h3>Python 包（pip）</h3>
-        <pre class="cmd">pip install touch-humanization</pre>
-        <p class="muted">从 PyPI 安装；安装后可在任意 Python 项目里 <code>from touch_humanization import Humanizer</code>。</p>
-        <a class="btn-link" href="https://pypi.org/project/touch-humanization/" target="_blank" rel="noopener">打开 PyPI 页面 →</a>
+        <h3>Python 包</h3>
+        <p class="muted">PyPI 暂不可用（未发布），请从 GitHub Releases 下载 wheel 后安装：</p>
+        <pre class="cmd">pip install touch_humanization-*.whl</pre>
+        <a class="btn-link" href="https://github.com/MassChargeRatio/touch-humanization/releases/latest" target="_blank" rel="noopener">打开最新 Release →</a>
+        <p class="muted small">安装后：<code>from touch_humanization import Humanizer</code></p>
       </div>
 
       <div class="install-card">
-        <h3>安装包 / 便携版下载</h3>
-        <p class="muted">wheel、sdist、便携版由 CI 构建后挂到 GitHub Releases。</p>
-        <a class="btn-link" href="https://github.com/MassChargeRatio/touch-humanization/releases/latest" target="_blank" rel="noopener">打开最新 Release →</a>
+        <h3>便携版 / Portable</h3>
+        <p class="muted">免 pip 的 zip 包，解压后运行启动脚本（需系统 Python 3.9+）：</p>
         <ul class="muted small">
-          <li><code>touch_humanization-*.whl</code> — 任意平台，pip 可装</li>
-          <li><code>touch_humanization-*.tar.gz</code> — sdist 源码包</li>
-          <li><code>touch-humanization-portable-*.zip</code> — 免 pip 便携包，解压后运行启动脚本（需系统 Python 3.9+）</li>
+          <li><code>touch-humanization-portable-*.zip</code></li>
+          <li>Windows: <code>run-web-ui.bat</code> · Linux/macOS: <code>./run-web-ui.sh</code></li>
         </ul>
+        <a class="btn-link" href="https://github.com/MassChargeRatio/touch-humanization/releases/latest" target="_blank" rel="noopener">下载便携版 →</a>
       </div>
 
       <div class="install-card">
@@ -63,6 +63,7 @@
       <label>终点 x<input id="kx1" type="number" value="900"></label>
       <label>终点 y<input id="ky1" type="number" value="400"></label>
       <label>seed<input id="kseed" type="number" placeholder="留空=随机"></label>
+      <label class="chk"><input id="k_enabled" type="checkbox" checked> enabled</label>
       <label class="chk"><input id="kslider" type="checkbox"> 滑块模式</label>
       <label class="chk"><input id="kexact" type="checkbox" checked> 终点精确</label>
       <button id="kgo">Generate</button>
@@ -104,6 +105,25 @@
 
   <!-- ===================== 时序 ===================== -->
   <section id="tab-timing" class="tab">
+    <h2>分布参数</h2>
+    <div class="form">
+      <label>mu_ratio<input id="t_mu_ratio" type="number" step="0.01" value="0.18"></label>
+      <label>sigma_lo<input id="t_sigma_lo" type="number" step="0.01" value="0.45"></label>
+      <label>sigma_hi<input id="t_sigma_hi" type="number" step="0.01" value="0.75"></label>
+    </div>
+
+    <h2>延迟区间（秒）</h2>
+    <div class="form">
+      <label>delay_between lo<input id="t_db_lo" type="number" step="0.1" value="0.6"></label>
+      <label>delay_between hi<input id="t_db_hi" type="number" step="0.1" value="2.2"></label>
+      <label>after_open lo<input id="t_ao_lo" type="number" step="0.1" value="3.0"></label>
+      <label>after_open hi<input id="t_ao_hi" type="number" step="0.1" value="6.0"></label>
+      <label>think lo<input id="t_th_lo" type="number" step="0.1" value="1.5"></label>
+      <label>think hi<input id="t_th_hi" type="number" step="0.1" value="4.0"></label>
+      <label>start_jitter lo<input id="t_sj_lo" type="number" step="10" value="0"></label>
+      <label>start_jitter hi<input id="t_sj_hi" type="number" step="10" value="600"></label>
+    </div>
+
     <h2>延迟分布</h2>
     <div class="form">
       <label>采样数 n<input id="t_n" type="number" value="3000"></label>
@@ -142,6 +162,7 @@
       <label>点击次数<input id="c_n" type="number" value="40"></label>
       <label>cooldown_every<input id="c_every" type="number" value="12"></label>
       <label>cooldown_seconds<input id="c_seconds" type="number" step="0.5" value="20"></label>
+      <label>cooldown_on_captcha<input id="c_on_captcha" type="number" step="10" value="300"></label>
       <label>seed<input id="c_seed" type="number" placeholder="留空=随机"></label>
       <button id="cgo">模拟</button>
     </div>
@@ -167,6 +188,9 @@
       <label>fs<input id="s_fs" type="number" step="10" value="100"></label>
       <label>duration(s)<input id="s_duration" type="number" step="0.5" value="3"></label>
       <label>seed<input id="s_seed" type="number" placeholder="留空=随机"></label>
+      <label>dead_std<input id="s_dead_std" type="number" step="0.001" value="0.02"></label>
+      <label>gyro_dead_std<input id="s_gyro_dead" type="number" step="0.0001" value="0.001"></label>
+      <label>dead_zero_ratio<input id="s_dead_zero" type="number" step="0.05" value="0.9"></label>
       <button id="sgo">Generate</button>
       <button id="scsv">下载 CSV</button>
     </div>

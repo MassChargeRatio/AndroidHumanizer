@@ -69,6 +69,7 @@ function kBody() {
     seed: seedOf($('#kseed')),
     for_slider: $('#kslider').checked,
     exact_end: $('#kexact').checked,
+    enabled: $('#k_enabled').checked,
     // Advanced params.
     // 高级参数。
     steps_min: Number($('#k_steps_min').value),
@@ -249,6 +250,12 @@ async function sampleTiming() {
       hi: Number($('#t_hi').value),
       lognormal: $('#t_ln').checked,
       seed: seedOf($('#t_seed')),
+      mu_ratio: Number($('#t_mu_ratio').value),
+      sigma_range: [Number($('#t_sigma_lo').value), Number($('#t_sigma_hi').value)],
+      delay_between_actions: [Number($('#t_db_lo').value), Number($('#t_db_hi').value)],
+      delay_after_open: [Number($('#t_ao_lo').value), Number($('#t_ao_hi').value)],
+      think_delay: [Number($('#t_th_lo').value), Number($('#t_th_hi').value)],
+      start_jitter: [Number($('#t_sj_lo').value), Number($('#t_sj_hi').value)],
     };
     const data = await postJSON('/api/timing/sample', body);
     drawHistogram(data.bins, $('#cv-timing'));
@@ -336,6 +343,7 @@ async function simulateCooldown() {
       n: Number($('#c_n').value),
       cooldown_every: Number($('#c_every').value),
       cooldown_seconds: Number($('#c_seconds').value),
+      cooldown_on_captcha: Number($('#c_on_captcha').value),
       seed: seedOf($('#c_seed')),
     };
     const data = await postJSON('/api/timing/cooldown', body);
@@ -365,6 +373,9 @@ function sBody() {
     fs: Number($('#s_fs').value),
     duration: Number($('#s_duration').value),
     seed: seedOf($('#s_seed')),
+    dead_std_threshold: Number($('#s_dead_std').value),
+    gyro_dead_std: Number($('#s_gyro_dead').value),
+    dead_zero_ratio_max: Number($('#s_dead_zero').value),
   };
 }
 
@@ -532,6 +543,7 @@ function _showCode(id, code) {
 function codeKinematics() {
   const body = kBody();
   const cfg = {
+    enabled: body.enabled,
     steps_min: body.steps_min,
     steps_max: body.steps_max,
     px_per_step: body.px_per_step,
@@ -575,10 +587,17 @@ function codeTimingSample() {
   const hi = Number($('#t_hi').value);
   const ln = $('#t_ln').checked;
   const seed = seedOf($('#t_seed'));
+  const tcfg = {
+    mu_ratio: Number($('#t_mu_ratio').value),
+    sigma_range: [Number($('#t_sigma_lo').value), Number($('#t_sigma_hi').value)],
+  };
   const code =
 `from touch_humanization import Humanizer
 
-h = Humanizer(seed=${_fmt(seed)})
+h = Humanizer(
+    config={"timing": ${JSON.stringify(tcfg)}},
+    seed=${_fmt(seed)},
+)
 samples = [h.timing.sample(${_fmt(lo)}, ${_fmt(hi)}, lognormal=${ln ? 'True' : 'False'})
            for _ in range(${_fmt(n)})]
 print(min(samples), max(samples), sum(samples) / len(samples))
@@ -609,7 +628,7 @@ function codeTimingCooldown() {
 `from touch_humanization import Humanizer
 
 h = Humanizer(
-    config={"timing": {"cooldown_every": ${_fmt(every)}, "cooldown_seconds": ${_fmt(seconds)}}},
+    config={"timing": {"cooldown_every": ${_fmt(every)}, "cooldown_seconds": ${_fmt(seconds)}, "cooldown_on_captcha": ${_fmt(Number($('#c_on_captcha').value))}}},
     seed=${_fmt(seed)},
 )
 for i in range(1, ${_fmt(n)} + 1):
@@ -623,10 +642,18 @@ for i in range(1, ${_fmt(n)} + 1):
 // Sensors codegen (incl. CSV export). 传感器代码生成（含 CSV 导出）。
 function codeSensors() {
   const body = sBody();
+  const scfg = {
+    dead_std_threshold: body.dead_std_threshold,
+    gyro_dead_std: body.gyro_dead_std,
+    dead_zero_ratio_max: body.dead_zero_ratio_max,
+  };
   const code =
 `from touch_humanization import Humanizer
 
-h = Humanizer(seed=${_fmt(body.seed)})
+h = Humanizer(
+    config={"sensors": ${JSON.stringify(scfg)}},
+    seed=${_fmt(body.seed)},
+)
 rows = h.sensors.generate(mode=${JSON.stringify(body.mode)}, fs=${_fmt(body.fs)}, duration=${_fmt(body.duration)})
 print("samples:", len(rows))
 print("dead:", h.sensors.is_dead(rows))
