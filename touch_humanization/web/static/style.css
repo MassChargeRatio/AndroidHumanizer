@@ -198,3 +198,20 @@ canvas {
   margin: 8px 0 0;
 }
 .codeblock.hidden { display: none; }
+
+/* ============================================================
+   Language switch. 语言切换：body[data-lang] 控制 zh/en 显隐。
+   ============================================================ */
+body[data-lang="en"] .zh { display: none; }
+body:not([data-lang="en"]) .en { display: none; }
+
+.head-row {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  gap: 12px;
+}
+.lang-select {
+  background: var(--bg3); color: var(--fg);
+  border: 1px solid var(--line); border-radius: 8px;
+  padding: 6px 10px; font-size: 13px; cursor: pointer;
+  flex: 0 0 auto;
+}

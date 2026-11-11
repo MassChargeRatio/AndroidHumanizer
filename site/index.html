@@ -11,12 +11,17 @@
 <header class="top">
   <div class="wrap">
     <h1>touch-humanization</h1>
-    <p class="sub">拟人化触摸轨迹 · 交互式演示 / Human-like touch trajectory · interactive demo
-      <span class="tag">v0.2.3</span>
-      <span class="tag">纯前端 / pure frontend</span>
-      <span class="tag">零依赖 / zero deps</span>
-      <span class="tag">seed 可复现 / seed-reproducible</span>
+    <p class="sub"><span class="zh">拟人化触摸轨迹 · 交互式演示</span><span class="en">Human-like touch trajectory · interactive demo</span>
+      <span class="tag">v0.2.4</span>
+      <span class="tag"><span class="zh">纯前端</span><span class="en">pure frontend</span></span>
+      <span class="tag"><span class="zh">零依赖</span><span class="en">zero deps</span></span>
+      <span class="tag"><span class="zh">seed 可复现</span><span class="en">seed-reproducible</span></span>
     </p>
+    <p class="sub"><label class="chk" for="lang"><span class="zh">语言</span><span class="en">Language</span> </label>
+      <select id="lang" class="lang-select" aria-label="language">
+        <option value="zh">中文</option>
+        <option value="en">English</option>
+      </select></p>
     <nav class="links">
       <a href="https://github.com/MassChargeRatio/touch-humanization">GitHub</a>
       <a href="https://github.com/MassChargeRatio/touch-humanization#readme">README</a>
@@ -27,30 +32,27 @@
 
 <main class="wrap">
   <section class="install" id="install">
-    <h2>安装与下载 / Install &amp; Download</h2>
+    <h2><span class="zh">安装与下载</span><span class="en">Install &amp; Download</span></h2>
     <div class="install-grid">
       <div class="install-card">
-        <h3>Python 包 / Python package</h3>
-        <p class="muted">PyPI 暂不可用（未发布），请从 GitHub Releases 下载 wheel 后安装：
-          / PyPI is not available yet (unpublished); install a wheel from GitHub Releases:</p>
+        <h3><span class="zh">Python 包</span><span class="en">Python package</span></h3>
+        <p class="muted"><span class="zh">PyPI 暂不可用（未发布），请从 GitHub Releases 下载 wheel 后安装：</span><span class="en">PyPI is not available yet (unpublished); install a wheel from GitHub Releases:</span></p>
         <pre class="cmd">pip install touch_humanization-*.whl</pre>
-        <a class="btn-link" href="https://github.com/MassChargeRatio/touch-humanization/releases/latest" target="_blank" rel="noopener">打开最新 Release / Open latest Release →</a>
-        <p class="muted small">安装后 / After install: <code>from touch_humanization import Humanizer</code></p>
+        <a class="btn-link" href="https://github.com/MassChargeRatio/touch-humanization/releases/latest" target="_blank" rel="noopener"><span class="zh">打开最新 Release →</span><span class="en">Open latest Release →</span></a>
+        <p class="muted small"><span class="zh">安装后：</span><span class="en">After install:</span> <code>from touch_humanization import Humanizer</code></p>
       </div>
       <div class="install-card">
-        <h3>便携版 / Portable</h3>
-        <p class="muted">免 pip 的 zip 包，解压后运行启动脚本（需系统 Python 3.9+）：
-          / pip-free zip; unzip and run the launcher (needs system Python 3.9+):</p>
+        <h3><span class="zh">便携版</span><span class="en">Portable</span></h3>
+        <p class="muted"><span class="zh">免 pip 的 zip 包，解压后运行启动脚本（需系统 Python 3.9+）：</span><span class="en">pip-free zip; unzip and run the launcher (needs system Python 3.9+):</span></p>
         <ul class="muted small">
           <li><code>touch-humanization-portable-*.zip</code></li>
           <li>Windows: <code>run-web-ui.bat</code> · Linux/macOS: <code>./run-web-ui.sh</code></li>
         </ul>
-        <a class="btn-link" href="https://github.com/MassChargeRatio/touch-humanization/releases/latest" target="_blank" rel="noopener">下载便携版 / Download portable →</a>
+        <a class="btn-link" href="https://github.com/MassChargeRatio/touch-humanization/releases/latest" target="_blank" rel="noopener"><span class="zh">下载便携版 →</span><span class="en">Download portable →</span></a>
       </div>
       <div class="install-card">
-        <h3>其他语言调用 / Call from other languages</h3>
-        <p class="muted">启动本地服务后，任意语言通过 HTTP 调用：
-          / Start the local server, then call it over HTTP from any language:</p>
+        <h3><span class="zh">其他语言调用</span><span class="en">Call from other languages</span></h3>
+        <p class="muted"><span class="zh">启动本地服务后，任意语言通过 HTTP 调用：</span><span class="en">Start the local server, then call it over HTTP from any language:</span></p>
         <pre class="cmd">touch-humanization-web --port 8765</pre>
         <pre class="cmd">curl -X POST http://127.0.0.1:8765/api/gesture \
   -H "Content-Type: application/json" \
@@ -61,18 +63,18 @@
 
   <section class="card">
     <div class="row">
-      <label>起点 x / start x<input id="sx" type="number" value="100"></label>
-      <label>起点 y / start y<input id="sy" type="number" value="1800"></label>
-      <label>终点 x / end x<input id="ex" type="number" value="900"></label>
-      <label>终点 y / end y<input id="ey" type="number" value="400"></label>
+      <label><span class="zh">起点 x</span><span class="en">start x</span><input id="sx" type="number" value="100"></label>
+      <label><span class="zh">起点 y</span><span class="en">start y</span><input id="sy" type="number" value="1800"></label>
+      <label><span class="zh">终点 x</span><span class="en">end x</span><input id="ex" type="number" value="900"></label>
+      <label><span class="zh">终点 y</span><span class="en">end y</span><input id="ey" type="number" value="400"></label>
       <label>seed<input id="seed" type="number" value="2026"></label>
-      <label class="chk"><input id="slider" type="checkbox"> 滑块模式 / slider</label>
-      <button id="go" class="primary">生成轨迹 / Generate</button>
-      <button id="rand">随机 seed / random seed</button>
+      <label class="chk"><input id="slider" type="checkbox"> <span class="zh">滑块模式</span><span class="en">slider</span></label>
+      <button id="go" class="primary"><span class="zh">生成轨迹</span><span class="en">Generate</span></button>
+      <button id="rand"><span class="zh">随机 seed</span><span class="en">random seed</span></button>
     </div>
 
     <details class="adv">
-      <summary>高级参数（与 Python 版 Kinematics 对齐）/ Advanced params (aligned with Python Kinematics)</summary>
+      <summary><span class="zh">高级参数（与 Python 版 Kinematics 对齐）</span><span class="en">Advanced params (aligned with Python Kinematics)</span></summary>
       <div class="row">
         <label>steps_min<input id="stepsMin" type="number" value="20"></label>
         <label>steps_max<input id="stepsMax" type="number" value="60"></label>
@@ -86,39 +88,34 @@
     <div class="meta" id="meta"></div>
     <canvas id="cv" width="1000" height="620"></canvas>
     <div class="codegen">
-      <button id="code-btn" class="btn-link">生成 Python 代码 / Generate Python code</button>
+      <button id="code-btn" class="btn-link"><span class="zh">生成 Python 代码</span><span class="en">Generate Python code</span></button>
       <pre id="code-out" class="codeblock hidden"></pre>
-      <button id="code-copy" class="btn-link small hidden">复制 / Copy</button>
+      <button id="code-copy" class="btn-link small hidden"><span class="zh">复制</span><span class="en">Copy</span></button>
     </div>
     <p class="hint">
-      起点 <span class="dot g"></span> 终点 <span class="dot r"></span>
+      <span class="zh">起点 <span class="dot g"></span> 终点 <span class="dot r"></span>
       · 轨迹由三次贝塞尔 + Fitts 步数 + smoothstep 速度轮廓 + 末段高斯微颤 + 过冲回拉生成
-      · 同 seed 可复现（PRNG：mulberry32）
-      <br>/ Start <span class="dot g"></span> End <span class="dot r"></span>
+      · 同 seed 可复现（PRNG：mulberry32）</span>
+      <span class="en">Start <span class="dot g"></span> End <span class="dot r"></span>
       · trajectory: cubic bezier + Fitts steps + smoothstep profile + tail Gaussian tremor + overshoot pull-back
-      · same seed reproduces (PRNG: mulberry32)
+      · same seed reproduces (PRNG: mulberry32)</span>
     </p>
   </section>
 
   <section class="grid">
     <div class="card">
-      <h2>它是什么 / What is it</h2>
-      <p>把 Android 自动化里「像人一样操作」的三件事抽成独立库：
-        / The three "operate like a human" concerns of Android automation, as a standalone library:</p>
+      <h2><span class="zh">它是什么</span><span class="en">What is it</span></h2>
+      <p><span class="zh">把 Android 自动化里「像人一样操作」的三件事抽成独立库：</span><span class="en">The three &#34;operate like a human&#34; concerns of Android automation, as a standalone library:</span></p>
       <ul>
-        <li><b>kinematics</b>：贝塞尔轨迹 / Fitts 步数 / 末段微颤 / 过冲回拉 / 滑块分支
-          — bezier trajectory / Fitts steps / tail tremor / overshoot / slider branch</li>
-        <li><b>timing</b>：对数正态时序（均值校正 <code>mu=ln(mean)-σ²/2</code>）/ 作息窗口 / 冷却限流
-          — lognormal timing (mean-corrected) / wake window / cooldown</li>
-        <li><b>sensors</b>：resting / walking / tapping / scrolling 序列 + 死寂检测
-          — sequences + deadness detection</li>
+        <li><b>kinematics</b>：<span class="zh">贝塞尔轨迹 / Fitts 步数 / 末段微颤 / 过冲回拉 / 滑块分支</span><span class="en">bezier trajectory / Fitts steps / tail tremor / overshoot / slider branch</span></li>
+        <li><b>timing</b>：<span class="zh">对数正态时序（均值校正 <code>mu=ln(mean)-σ²/2</code>）/ 作息窗口 / 冷却限流</span><span class="en">lognormal timing (mean-corrected <code>mu=ln(mean)-σ²/2</code>) / wake window / cooldown</span></li>
+        <li><b>sensors</b>：<span class="zh">resting / walking / tapping / scrolling 序列 + 死寂检测</span><span class="en">resting / walking / tapping / scrolling sequences + deadness detection</span></li>
       </ul>
-      <p class="muted">零运行时依赖；全部随机走实例级 <code>random.Random</code>；CI lint 禁止全局 <code>random.*</code>。
-        / Zero runtime deps; all randomness via instance-level <code>random.Random</code>; CI lint forbids global <code>random.*</code>.</p>
+      <p class="muted"><span class="zh">零运行时依赖；全部随机走实例级 <code>random.Random</code>；CI lint 禁止全局 <code>random.*</code>。</span><span class="en">Zero runtime deps; all randomness via instance-level <code>random.Random</code>; CI lint forbids global <code>random.*</code>.</span></p>
     </div>
 
     <div class="card">
-      <h2>安装与使用 / Install &amp; usage</h2>
+      <h2><span class="zh">安装与使用</span><span class="en">Install &amp; usage</span></h2>
 <pre><code>pip install touch_humanization-*.whl
 
 from touch_humanization import Humanizer
@@ -126,17 +123,17 @@ from touch_humanization import Humanizer
 h = Humanizer(seed=42)
 g = h.gesture((100, 1800), (900, 400))
 for (x, y), dt in zip(g.points, g.intervals):
-    ...  # 逐点注入 touch down/move / inject touch down/move per point</code></pre>
-      <p class="muted">本地交互版（三模块控制台）/ Local interactive console (3 modules):
+    ...  # 逐点注入 touch down/move<!-- -->inject touch down/move per point</code></pre>
+      <p class="muted"><span class="zh">本地交互版（三模块控制台）：</span><span class="en">Local interactive console (3 modules):</span>
         <code>touch-humanization-web --port 8765</code></p>
     </div>
   </section>
 
   <footer class="foot">
-    MIT License · 算法参考 / algorithm refs: pyclick (MIT) / ghost-cursor (ISC) / bezier-mouse-js (MIT)
-    <br>本页为纯静态演示，算法与 Python 版同源；PRNG 实现不同，故同 seed 非逐位一致。
-    <br>/ This page is a static demo sharing the same algorithms as the Python version;
-    PRNG implementations differ, so the same seed is not bit-identical.
+    MIT License · <span class="zh">算法参考</span><span class="en">algorithm refs</span>: pyclick (MIT) / ghost-cursor (ISC) / bezier-mouse-js (MIT)
+    <br><span class="zh">本页为纯静态演示，算法与 Python 版同源；PRNG 实现不同，故同 seed 非逐位一致。</span>
+    <br><span class="en">This page is a static demo sharing the same algorithms as the Python version;
+    PRNG implementations differ, so the same seed is not bit-identical.</span>
   </footer>
 </main>
 

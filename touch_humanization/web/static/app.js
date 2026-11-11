@@ -55,6 +55,42 @@ function seedOf(el) {
   return v === '' ? null : Number(v);
 }
 
+// ---------------------------------------------------------- language
+// ---------------------------------------------------------- 语言切换
+//
+// Current UI language ('zh' | 'en'), persisted in localStorage.
+// Static copy: <span class="zh"> / <span class="en"> toggled by
+// body[data-lang] CSS. Dynamic copy: t(zh, en).
+// 当前 UI 语言（'zh' | 'en'），localStorage 持久化。静态文案由
+// body[data-lang] 的 CSS 控制 zh/en 显隐；动态文案用 t(zh, en)。
+let LANG = localStorage.getItem('th-lang') || 'zh';
+
+function t(zh, en) {
+  return LANG === 'en' ? en : zh;
+}
+
+function applyLang() {
+  document.body.dataset.lang = LANG;
+  document.querySelectorAll('[data-ph-zh]').forEach(el => {
+    el.placeholder = LANG === 'en' ? el.dataset.phEn : el.dataset.phZh;
+  });
+  const sel = $('#lang');
+  if (sel) sel.value = LANG;
+  // Re-render every dynamic section with the current data.
+  // 用当前数据重渲染所有动态区。
+  generateGesture();
+  sampleTiming();
+  calcWindow();
+  simulateCooldown();
+  generateSensors();
+}
+
+$('#lang').addEventListener('change', e => {
+  LANG = e.target.value;
+  localStorage.setItem('th-lang', LANG);
+  applyLang();
+});
+
 // ========================================================== kinematics
 
 let lastGesture = null;
@@ -96,13 +132,13 @@ async function generateGesture() {
     drawKinematics(lastGesture);
     const g = lastGesture;
     $('#kmeta').innerHTML =
-      `点数 / points <b>${g.steps}</b><br>距离 / distance <b>${g.distance.toFixed(1)}</b> px<br>` +
-      `时长 / duration <b>${g.duration.toFixed(3)}</b> s<br>` +
-      `滑块模式 / slider ${g.for_slider ? '是 / yes' : '否 / no'}<br>` +
-      `首点 / first (${g.points[0].join(', ')})<br>末点 / last (${g.points[g.points.length - 1].join(', ')})`;
+      `${t('点数', 'points')} <b>${g.steps}</b><br>${t('距离', 'distance')} <b>${g.distance.toFixed(1)}</b> px<br>` +
+      `${t('时长', 'duration')} <b>${g.duration.toFixed(3)}</b> s<br>` +
+      `${t('滑块模式', 'slider')} ${g.for_slider ? t('是', 'yes') : t('否', 'no')}<br>` +
+      `${t('首点', 'first')} (${g.points[0].join(', ')})<br>${t('末点', 'last')} (${g.points[g.points.length - 1].join(', ')})`;
     $('#kplay-status').textContent = '';
   } catch (e) {
-    $('#kmeta').textContent = '错误 / Error: ' + e.message;
+    $('#kmeta').textContent = t('错误', 'Error') + ': ' + e.message;
   }
 }
 
@@ -177,11 +213,11 @@ function playGesture() {
   const total = g.intervals.reduce((a, b) => a + b, 0) || 1;
   const speedup = total > 4 ? total / 4 : 1;
   let i = 0;
-  $('#kplay-status').textContent = '播放中… / playing…';
+  $('#kplay-status').textContent = t('播放中…', 'playing…');
   const step = () => {
     drawKinematics(g, i);
     if (i >= g.points.length - 1) {
-      $('#kplay-status').textContent = '播放完成 / done';
+      $('#kplay-status').textContent = t('播放完成', 'done');
       playTimer = null;
       return;
     }
@@ -268,7 +304,7 @@ async function sampleTiming() {
       `median <b>${s.median.toFixed(3)}</b><br>` +
       `stdev <b>${s.stdev.toFixed(3)}</b>`;
   } catch (e) {
-    $('#tmeta').textContent = '错误 / Error: ' + e.message;
+    $('#tmeta').textContent = t('错误', 'Error') + ': ' + e.message;
   }
 }
 
@@ -316,7 +352,7 @@ function drawWindow(info) {
 
   $('#wmeta').textContent =
     `start=${info.start} (${info.start_min}min) · end=${info.end} (${info.end_min}min) · ` +
-    `跨午夜 / cross-midnight ${info.cross_midnight ? '是 / yes' : '否 / no'}`;
+    `${t('跨午夜', 'cross-midnight')} ${info.cross_midnight ? t('是', 'yes') : t('否', 'no')}`;
 }
 
 // Request wake-window segments and draw them.
@@ -328,7 +364,7 @@ async function calcWindow() {
     });
     drawWindow(data);
   } catch (e) {
-    $('#wmeta').textContent = '错误 / Error: ' + e.message;
+    $('#wmeta').textContent = t('错误', 'Error') + ': ' + e.message;
   }
 }
 $('#wgo').addEventListener('click', calcWindow);
@@ -352,11 +388,12 @@ async function simulateCooldown() {
       return `<div class="ev">#${ev.tap}  delay=${ev.delay.toFixed(3)}s${cd}</div>`;
     }).join('');
     $('#cresult').innerHTML =
-      `<p class="muted">共 / taps: ${data.n} · 总耗时 / total <b>${data.total.toFixed(2)}s</b> · ` +
-      `每 / every ${data.cooldown_every} 次长停 / long pause ${data.cooldown_seconds}s</p>` +
+      `<p class="muted">${t('共', 'taps')}: ${data.n} · ${t('总耗时', 'total')} <b>${data.total.toFixed(2)}s</b> · ` +
+      `${t('每 ' + data.cooldown_every + ' 次长停 ' + data.cooldown_seconds + 's',
+          'long pause ' + data.cooldown_seconds + 's every ' + data.cooldown_every + ' taps')}</p>` +
       `<div class="evlist">${rows}</div>`;
   } catch (e) {
-    $('#cresult').textContent = '错误 / Error: ' + e.message;
+    $('#cresult').textContent = t('错误', 'Error') + ': ' + e.message;
   }
 }
 $('#cgo').addEventListener('click', simulateCooldown);
@@ -388,11 +425,11 @@ async function generateSensors() {
     drawSensors(data);
     const s = data.stats;
     const dead = data.is_dead
-      ? '<span style="color:#e5534b"><b>是（死寂）/ yes (dead)</b></span>'
-      : '<span style="color:#2fbf71"><b>否（活着）/ no (alive)</b></span>';
+      ? '<span style="color:#e5534b"><b>' + t('是（死寂）', 'yes (dead)') + '</b></span>'
+      : '<span style="color:#2fbf71"><b>' + t('否（活着）', 'no (alive)') + '</b></span>';
     $('#smeta').innerHTML =
-      `模式 / mode <b>${data.mode}</b> · ${data.sample_count} 采样点 / samples<br>` +
-      `死寂判定 / dead: ${dead}<br>` +
+      `${t('模式', 'mode')} <b>${data.mode}</b> · ${data.sample_count} ${t('采样点', 'samples')}<br>` +
+      `${t('死寂判定', 'dead')}: ${dead}<br>` +
       `acc_x std=${s.acc_x_std.toFixed(4)} zero=${s.acc_x_zero.toFixed(2)}<br>` +
       `acc_y std=${s.acc_y_std.toFixed(4)} zero=${s.acc_y_zero.toFixed(2)}<br>` +
       `acc_z std=${s.acc_z_std.toFixed(4)} zero=${s.acc_z_zero.toFixed(2)}<br>` +
@@ -400,7 +437,7 @@ async function generateSensors() {
       `gyro_y std=${s.gyro_y_std.toFixed(4)} zero=${s.gyro_y_zero.toFixed(2)}<br>` +
       `gyro_z std=${s.gyro_z_std.toFixed(4)} zero=${s.gyro_z_zero.toFixed(2)}`;
   } catch (e) {
-    $('#smeta').textContent = '错误 / Error: ' + e.message;
+    $('#smeta').textContent = t('错误', 'Error') + ': ' + e.message;
   }
 }
 
@@ -493,7 +530,7 @@ async function downloadCSV() {
     a.click();
     setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
   } catch (e) {
-    $('#smeta').textContent = '错误 / Error: ' + e.message;
+    $('#smeta').textContent = t('错误', 'Error') + ': ' + e.message;
   }
 }
 
@@ -504,11 +541,7 @@ $('#scsv').addEventListener('click', downloadCSV);
 
 // Trigger one render for every tab on first paint.
 // 首屏触发每个 tab 的一次渲染。
-generateGesture();
-sampleTiming();
-calcWindow();
-simulateCooldown();
-generateSensors();
+applyLang();
 
 // ========================================================== code generation
 // ========================================================== 代码生成

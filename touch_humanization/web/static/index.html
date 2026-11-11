@@ -9,73 +9,76 @@
 <body>
 <main>
   <header>
-    <h1>touch-humanization</h1>
-    <p class="muted">拟人化手势 · 时序 · 传感器 —— 交互式预览（零第三方依赖）
-      / Human gestures · timing · sensors — interactive preview (zero third-party deps)</p>
+    <div class="head-row">
+      <div>
+        <h1>touch-humanization</h1>
+        <p class="muted"><span class="zh">拟人化手势 · 时序 · 传感器 —— 交互式预览（零第三方依赖）</span><span class="en">Human gestures · timing · sensors — interactive preview (zero third-party deps)</span></p>
+      </div>
+      <select id="lang" class="lang-select" aria-label="language">
+        <option value="zh">中文</option>
+        <option value="en">English</option>
+      </select>
+    </div>
   </header>
 
   <!-- ===================== 安装与下载 / Install & Download ===================== -->
   <section id="install" class="install">
-    <h2>安装与下载 / Install &amp; Download</h2>
+    <h2><span class="zh">安装与下载</span><span class="en">Install &amp; Download</span></h2>
     <div class="install-grid">
 
       <div class="install-card">
-        <h3>Python 包 / Python package</h3>
-        <p class="muted">PyPI 暂不可用（未发布），请从 GitHub Releases 下载 wheel 后安装：
-          / PyPI is not available yet (unpublished); install a wheel from GitHub Releases:</p>
+        <h3><span class="zh">Python 包</span><span class="en">Python package</span></h3>
+        <p class="muted"><span class="zh">PyPI 暂不可用（未发布），请从 GitHub Releases 下载 wheel 后安装：</span><span class="en">PyPI is not available yet (unpublished); install a wheel from GitHub Releases:</span></p>
         <pre class="cmd">pip install touch_humanization-*.whl</pre>
-        <a class="btn-link" href="https://github.com/MassChargeRatio/touch-humanization/releases/latest" target="_blank" rel="noopener">打开最新 Release / Open latest Release →</a>
-        <p class="muted small">安装后 / After install: <code>from touch_humanization import Humanizer</code></p>
+        <a class="btn-link" href="https://github.com/MassChargeRatio/touch-humanization/releases/latest" target="_blank" rel="noopener"><span class="zh">打开最新 Release →</span><span class="en">Open latest Release →</span></a>
+        <p class="muted small"><span class="zh">安装后：</span><span class="en">After install:</span> <code>from touch_humanization import Humanizer</code></p>
       </div>
 
       <div class="install-card">
-        <h3>便携版 / Portable</h3>
-        <p class="muted">免 pip 的 zip 包，解压后运行启动脚本（需系统 Python 3.9+）：
-          / pip-free zip; unzip and run the launcher (needs system Python 3.9+):</p>
+        <h3><span class="zh">便携版</span><span class="en">Portable</span></h3>
+        <p class="muted"><span class="zh">免 pip 的 zip 包，解压后运行启动脚本（需系统 Python 3.9+）：</span><span class="en">pip-free zip; unzip and run the launcher (needs system Python 3.9+):</span></p>
         <ul class="muted small">
           <li><code>touch-humanization-portable-*.zip</code></li>
           <li>Windows: <code>run-web-ui.bat</code> · Linux/macOS: <code>./run-web-ui.sh</code></li>
         </ul>
-        <a class="btn-link" href="https://github.com/MassChargeRatio/touch-humanization/releases/latest" target="_blank" rel="noopener">下载便携版 / Download portable →</a>
+        <a class="btn-link" href="https://github.com/MassChargeRatio/touch-humanization/releases/latest" target="_blank" rel="noopener"><span class="zh">下载便携版 →</span><span class="en">Download portable →</span></a>
       </div>
 
       <div class="install-card">
-        <h3>其他语言调用 / Call from other languages</h3>
-        <p class="muted">启动本地服务后，任意语言通过 HTTP 调用：
-          / Start the local server, then call it over HTTP from any language:</p>
+        <h3><span class="zh">其他语言调用</span><span class="en">Call from other languages</span></h3>
+        <p class="muted"><span class="zh">启动本地服务后，任意语言通过 HTTP 调用：</span><span class="en">Start the local server, then call it over HTTP from any language:</span></p>
         <pre class="cmd">touch-humanization-web --port 8765</pre>
         <pre class="cmd">curl -X POST http://127.0.0.1:8765/api/gesture \
   -H "Content-Type: application/json" \
   -d '{"start":[100,1800],"end":[900,400],"seed":42}'</pre>
-        <p class="muted small">Node.js / Go / Rust 同理，只需 HTTP POST JSON。完整 API 见 README。
-          / Same for Node.js / Go / Rust — just HTTP POST JSON. Full API list in the README.</p>
+        <p class="muted small"><span class="zh">Node.js / Go / Rust 同理，只需 HTTP POST JSON。完整 API 见 README。</span><span class="en">Same for Node.js / Go / Rust — just HTTP POST JSON. Full API list in the README.</span></p>
       </div>
 
     </div>
   </section>
 
   <nav class="tabs">
-    <button data-tab="kinematics" class="on">手势轨迹 / Kinematics</button>
-    <button data-tab="timing">时序 / Timing</button>
-    <button data-tab="sensors">传感器 / Sensors</button>
+    <button data-tab="kinematics" class="on"><span class="zh">手势轨迹</span><span class="en">Kinematics</span></button>
+    <button data-tab="timing"><span class="zh">时序</span><span class="en">Timing</span></button>
+    <button data-tab="sensors"><span class="zh">传感器</span><span class="en">Sensors</span></button>
   </nav>
 
   <!-- ===================== 手势轨迹 / Kinematics ===================== -->
   <section id="tab-kinematics" class="tab on">
     <div class="form">
-      <label>起点 x / start x<input id="kx0" type="number" value="100"></label>
-      <label>起点 y / start y<input id="ky0" type="number" value="1800"></label>
-      <label>终点 x / end x<input id="kx1" type="number" value="900"></label>
-      <label>终点 y / end y<input id="ky1" type="number" value="400"></label>
-      <label>seed<input id="kseed" type="number" placeholder="留空=随机 / blank=random"></label>
+      <label><span class="zh">起点 x</span><span class="en">start x</span><input id="kx0" type="number" value="100"></label>
+      <label><span class="zh">起点 y</span><span class="en">start y</span><input id="ky0" type="number" value="1800"></label>
+      <label><span class="zh">终点 x</span><span class="en">end x</span><input id="kx1" type="number" value="900"></label>
+      <label><span class="zh">终点 y</span><span class="en">end y</span><input id="ky1" type="number" value="400"></label>
+      <label>seed<input id="kseed" type="number" data-ph-zh="留空=随机" data-ph-en="blank=random"></label>
       <label class="chk"><input id="k_enabled" type="checkbox" checked> enabled</label>
-      <label class="chk"><input id="kslider" type="checkbox"> 滑块模式 / slider</label>
-      <label class="chk"><input id="kexact" type="checkbox" checked> 终点精确 / exact end</label>
+      <label class="chk"><input id="kslider" type="checkbox"> <span class="zh">滑块模式</span><span class="en">slider</span></label>
+      <label class="chk"><input id="kexact" type="checkbox" checked> <span class="zh">终点精确</span><span class="en">exact end</span></label>
       <button id="kgo">Generate</button>
     </div>
 
     <details class="advanced">
-      <summary>高级参数（与 Python Kinematics 对齐）/ Advanced params (aligned with Python Kinematics)</summary>
+      <summary><span class="zh">高级参数（与 Python Kinematics 对齐）</span><span class="en">Advanced params (aligned with Python Kinematics)</span></summary>
       <div class="form">
         <label>steps_min<input id="k_steps_min" type="number" value="20"></label>
         <label>steps_max<input id="k_steps_max" type="number" value="60"></label>
@@ -96,28 +99,28 @@
       <canvas id="cv-kinematics" width="1000" height="720"></canvas>
       <aside class="meta">
         <div id="kmeta"></div>
-        <button id="kplay" class="small">播放动画 / Play</button>
+        <button id="kplay" class="small"><span class="zh">播放动画</span><span class="en">Play</span></button>
         <div id="kplay-status" class="muted"></div>
       </aside>
     </div>
 
     <div class="codegen">
-      <button id="k-codegen" class="btn-link">生成 Python 代码 / Generate Python code</button>
+      <button id="k-codegen" class="btn-link"><span class="zh">生成 Python 代码</span><span class="en">Generate Python code</span></button>
       <pre id="k-code" class="codeblock hidden"></pre>
-      <button id="k-copy" class="btn-link small hidden">复制 / Copy</button>
+      <button id="k-copy" class="btn-link small hidden"><span class="zh">复制</span><span class="en">Copy</span></button>
     </div>
   </section>
 
   <!-- ===================== 时序 / Timing ===================== -->
   <section id="tab-timing" class="tab">
-    <h2>分布参数 / Distribution params</h2>
+    <h2><span class="zh">分布参数</span><span class="en">Distribution params</span></h2>
     <div class="form">
       <label>mu_ratio<input id="t_mu_ratio" type="number" step="0.01" value="0.18"></label>
       <label>sigma_lo<input id="t_sigma_lo" type="number" step="0.01" value="0.45"></label>
       <label>sigma_hi<input id="t_sigma_hi" type="number" step="0.01" value="0.75"></label>
     </div>
 
-    <h2>延迟区间（秒）/ Delay ranges (s)</h2>
+    <h2><span class="zh">延迟区间（秒）</span><span class="en">Delay ranges (s)</span></h2>
     <div class="form">
       <label>delay_between lo<input id="t_db_lo" type="number" step="0.1" value="0.6"></label>
       <label>delay_between hi<input id="t_db_hi" type="number" step="0.1" value="2.2"></label>
@@ -129,60 +132,60 @@
       <label>start_jitter hi<input id="t_sj_hi" type="number" step="10" value="600"></label>
     </div>
 
-    <h2>延迟分布 / Delay distribution</h2>
+    <h2><span class="zh">延迟分布</span><span class="en">Delay distribution</span></h2>
     <div class="form">
-      <label>采样数 n / samples n<input id="t_n" type="number" value="3000"></label>
+      <label><span class="zh">采样数 n</span><span class="en">samples n</span><input id="t_n" type="number" value="3000"></label>
       <label>lo<input id="t_lo" type="number" step="0.1" value="0.6"></label>
       <label>hi<input id="t_hi" type="number" step="0.1" value="2.2"></label>
-      <label>seed<input id="t_seed" type="number" placeholder="留空=随机 / blank=random"></label>
-      <label class="chk"><input id="t_ln" type="checkbox" checked> 对数正态 / lognormal</label>
-      <button id="tgo">采样 / Sample</button>
+      <label>seed<input id="t_seed" type="number" data-ph-zh="留空=随机" data-ph-en="blank=random"></label>
+      <label class="chk"><input id="t_ln" type="checkbox" checked> <span class="zh">对数正态</span><span class="en">lognormal</span></label>
+      <button id="tgo"><span class="zh">采样</span><span class="en">Sample</span></button>
     </div>
     <div class="row">
       <canvas id="cv-timing" width="1000" height="360"></canvas>
       <aside class="meta"><div id="tmeta"></div></aside>
     </div>
     <div class="codegen">
-      <button id="t-codegen" class="btn-link">生成 Python 代码 / Generate Python code</button>
+      <button id="t-codegen" class="btn-link"><span class="zh">生成 Python 代码</span><span class="en">Generate Python code</span></button>
       <pre id="t-code" class="codeblock hidden"></pre>
-      <button id="t-copy" class="btn-link small hidden">复制 / Copy</button>
+      <button id="t-copy" class="btn-link small hidden"><span class="zh">复制</span><span class="en">Copy</span></button>
     </div>
 
-    <h2>作息窗口 / Wake window</h2>
+    <h2><span class="zh">作息窗口</span><span class="en">Wake window</span></h2>
     <div class="form">
       <label>start<input id="w_start" value="07:30"></label>
       <label>end<input id="w_end" value="23:00"></label>
-      <button id="wgo">计算 / Calc</button>
+      <button id="wgo"><span class="zh">计算</span><span class="en">Calc</span></button>
     </div>
     <canvas id="cv-window" width="1000" height="120"></canvas>
     <div id="wmeta" class="meta"></div>
     <div class="codegen">
-      <button id="w-codegen" class="btn-link">生成 Python 代码 / Generate Python code</button>
+      <button id="w-codegen" class="btn-link"><span class="zh">生成 Python 代码</span><span class="en">Generate Python code</span></button>
       <pre id="w-code" class="codeblock hidden"></pre>
-      <button id="w-copy" class="btn-link small hidden">复制 / Copy</button>
+      <button id="w-copy" class="btn-link small hidden"><span class="zh">复制</span><span class="en">Copy</span></button>
     </div>
 
-    <h2>冷却模拟 / Cooldown simulation</h2>
+    <h2><span class="zh">冷却模拟</span><span class="en">Cooldown simulation</span></h2>
     <div class="form">
-      <label>点击次数 / taps<input id="c_n" type="number" value="40"></label>
+      <label><span class="zh">点击次数</span><span class="en">taps</span><input id="c_n" type="number" value="40"></label>
       <label>cooldown_every<input id="c_every" type="number" value="12"></label>
       <label>cooldown_seconds<input id="c_seconds" type="number" step="0.5" value="20"></label>
       <label>cooldown_on_captcha<input id="c_on_captcha" type="number" step="10" value="300"></label>
-      <label>seed<input id="c_seed" type="number" placeholder="留空=随机 / blank=random"></label>
-      <button id="cgo">模拟 / Simulate</button>
+      <label>seed<input id="c_seed" type="number" data-ph-zh="留空=随机" data-ph-en="blank=random"></label>
+      <button id="cgo"><span class="zh">模拟</span><span class="en">Simulate</span></button>
     </div>
     <div id="cresult"></div>
     <div class="codegen">
-      <button id="c-codegen" class="btn-link">生成 Python 代码 / Generate Python code</button>
+      <button id="c-codegen" class="btn-link"><span class="zh">生成 Python 代码</span><span class="en">Generate Python code</span></button>
       <pre id="c-code" class="codeblock hidden"></pre>
-      <button id="c-copy" class="btn-link small hidden">复制 / Copy</button>
+      <button id="c-copy" class="btn-link small hidden"><span class="zh">复制</span><span class="en">Copy</span></button>
     </div>
   </section>
 
   <!-- ===================== 传感器 / Sensors ===================== -->
   <section id="tab-sensors" class="tab">
     <div class="form">
-      <label>模式 / mode
+      <label><span class="zh">模式</span><span class="en">mode</span>
         <select id="s_mode">
           <option value="resting">resting</option>
           <option value="walking">walking</option>
@@ -192,19 +195,19 @@
       </label>
       <label>fs<input id="s_fs" type="number" step="10" value="100"></label>
       <label>duration(s)<input id="s_duration" type="number" step="0.5" value="3"></label>
-      <label>seed<input id="s_seed" type="number" placeholder="留空=随机 / blank=random"></label>
+      <label>seed<input id="s_seed" type="number" data-ph-zh="留空=随机" data-ph-en="blank=random"></label>
       <label>dead_std<input id="s_dead_std" type="number" step="0.001" value="0.02"></label>
       <label>gyro_dead_std<input id="s_gyro_dead" type="number" step="0.0001" value="0.001"></label>
       <label>dead_zero_ratio<input id="s_dead_zero" type="number" step="0.05" value="0.9"></label>
       <button id="sgo">Generate</button>
-      <button id="scsv">下载 CSV / CSV</button>
+      <button id="scsv"><span class="zh">下载 CSV</span><span class="en">CSV</span></button>
     </div>
     <canvas id="cv-sensors" width="1000" height="480"></canvas>
     <aside class="meta"><div id="smeta"></div></aside>
     <div class="codegen">
-      <button id="s-codegen" class="btn-link">生成 Python 代码 / Generate Python code</button>
+      <button id="s-codegen" class="btn-link"><span class="zh">生成 Python 代码</span><span class="en">Generate Python code</span></button>
       <pre id="s-code" class="codeblock hidden"></pre>
-      <button id="s-copy" class="btn-link small hidden">复制 / Copy</button>
+      <button id="s-copy" class="btn-link small hidden"><span class="zh">复制</span><span class="en">Copy</span></button>
     </div>
   </section>
 </main>

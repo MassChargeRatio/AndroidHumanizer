@@ -167,3 +167,15 @@ code { font: 12px ui-monospace, Consolas, monospace; color: #c9d6ea; }
   margin: 8px 0 0;
 }
 .codeblock.hidden { display: none; }
+
+/* ============================================================
+   Language switch. 语言切换：body[data-lang] 控制 zh/en 显隐。
+   ============================================================ */
+body[data-lang="en"] .zh { display: none; }
+body:not([data-lang="en"]) .en { display: none; }
+
+.lang-select {
+  background: var(--panel2); color: var(--fg);
+  border: 1px solid var(--line); border-radius: 8px;
+  padding: 5px 10px; font-size: 12.5px; cursor: pointer;
+}

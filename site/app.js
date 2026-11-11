@@ -35,6 +35,28 @@ const DEFAULTS = {
 };
 
 const $ = s => document.querySelector(s);
+
+// ---------------------------------------------------------- language
+// ---------------------------------------------------------- 语言切换
+let LANG = localStorage.getItem('th-lang') || 'zh';
+
+function t(zh, en) {
+  return LANG === 'en' ? en : zh;
+}
+
+function applyLang() {
+  document.body.dataset.lang = LANG;
+  const sel = $('#lang');
+  if (sel) sel.value = LANG;
+  render();
+}
+
+$('#lang').addEventListener('change', e => {
+  LANG = e.target.value;
+  localStorage.setItem('th-lang', LANG);
+  applyLang();
+});
+
 // Clamp helper. 区间钳制辅助函数。
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 
@@ -283,13 +305,13 @@ function render() {
   const ivs = g.intervals.slice().sort((a, b) => a - b);
   const p = q => ivs[Math.min(ivs.length - 1, Math.round(q * (ivs.length - 1)))] || 0;
   $('#meta').innerHTML =
-    `<span>点数 / points <b>${g.steps}</b></span>` +
-    `<span>直线距离 / distance <b>${g.distance.toFixed(1)}px</b></span>` +
-    `<span>总时长 / duration <b>${g.duration.toFixed(3)}s</b></span>` +
-    `<span>步间隔 / step gap p50 <b>${(p(0.5) * 1000).toFixed(0)}ms</b></span>` +
+    `<span>${t('点数', 'points')} <b>${g.steps}</b></span>` +
+    `<span>${t('直线距离', 'distance')} <b>${g.distance.toFixed(1)}px</b></span>` +
+    `<span>${t('总时长', 'duration')} <b>${g.duration.toFixed(3)}s</b></span>` +
+    `<span>${t('步间隔', 'step gap')} p50 <b>${(p(0.5) * 1000).toFixed(0)}ms</b></span>` +
     `<span>p95 <b>${(p(0.95) * 1000).toFixed(0)}ms</b></span>` +
-    `<span>模式 / mode <b>${g.slider ? '滑块 / slider' : '滑动 / swipe'}</b></span>` +
-    `<span class="ok">生成 / gen ${ms.toFixed(1)}ms</span>`;
+    `<span>${t('模式', 'mode')} <b>${g.slider ? t('滑块', 'slider') : t('滑动', 'swipe')}</b></span>` +
+    `<span class="ok">${t('生成', 'gen')} ${ms.toFixed(1)}ms</span>`;
 }
 
 $('#go').addEventListener('click', render);
@@ -367,3 +389,5 @@ for (x, y), dt in zip(g.points, g.intervals):
 }
 
 $('#code-btn').addEventListener('click', codeTrajectory);
+
+applyLang();
