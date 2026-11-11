@@ -96,13 +96,13 @@ async function generateGesture() {
     drawKinematics(lastGesture);
     const g = lastGesture;
     $('#kmeta').innerHTML =
-      `点数 <b>${g.steps}</b><br>距离 <b>${g.distance.toFixed(1)}</b> px<br>` +
-      `时长 <b>${g.duration.toFixed(3)}</b> s<br>` +
-      `滑块模式 ${g.for_slider ? '是' : '否'}<br>` +
-      `首点 (${g.points[0].join(', ')})<br>末点 (${g.points[g.points.length - 1].join(', ')})`;
+      `点数 / points <b>${g.steps}</b><br>距离 / distance <b>${g.distance.toFixed(1)}</b> px<br>` +
+      `时长 / duration <b>${g.duration.toFixed(3)}</b> s<br>` +
+      `滑块模式 / slider ${g.for_slider ? '是 / yes' : '否 / no'}<br>` +
+      `首点 / first (${g.points[0].join(', ')})<br>末点 / last (${g.points[g.points.length - 1].join(', ')})`;
     $('#kplay-status').textContent = '';
   } catch (e) {
-    $('#kmeta').textContent = '错误：' + e.message;
+    $('#kmeta').textContent = '错误 / Error: ' + e.message;
   }
 }
 
@@ -177,11 +177,11 @@ function playGesture() {
   const total = g.intervals.reduce((a, b) => a + b, 0) || 1;
   const speedup = total > 4 ? total / 4 : 1;
   let i = 0;
-  $('#kplay-status').textContent = '播放中…';
+  $('#kplay-status').textContent = '播放中… / playing…';
   const step = () => {
     drawKinematics(g, i);
     if (i >= g.points.length - 1) {
-      $('#kplay-status').textContent = '播放完成';
+      $('#kplay-status').textContent = '播放完成 / done';
       playTimer = null;
       return;
     }
@@ -268,7 +268,7 @@ async function sampleTiming() {
       `median <b>${s.median.toFixed(3)}</b><br>` +
       `stdev <b>${s.stdev.toFixed(3)}</b>`;
   } catch (e) {
-    $('#tmeta').textContent = '错误：' + e.message;
+    $('#tmeta').textContent = '错误 / Error: ' + e.message;
   }
 }
 
@@ -316,7 +316,7 @@ function drawWindow(info) {
 
   $('#wmeta').textContent =
     `start=${info.start} (${info.start_min}min) · end=${info.end} (${info.end_min}min) · ` +
-    `跨午夜 ${info.cross_midnight ? '是' : '否'}`;
+    `跨午夜 / cross-midnight ${info.cross_midnight ? '是 / yes' : '否 / no'}`;
 }
 
 // Request wake-window segments and draw them.
@@ -328,7 +328,7 @@ async function calcWindow() {
     });
     drawWindow(data);
   } catch (e) {
-    $('#wmeta').textContent = '错误：' + e.message;
+    $('#wmeta').textContent = '错误 / Error: ' + e.message;
   }
 }
 $('#wgo').addEventListener('click', calcWindow);
@@ -352,11 +352,11 @@ async function simulateCooldown() {
       return `<div class="ev">#${ev.tap}  delay=${ev.delay.toFixed(3)}s${cd}</div>`;
     }).join('');
     $('#cresult').innerHTML =
-      `<p class="muted">共 ${data.n} 次点击 · 总耗时 <b>${data.total.toFixed(2)}s</b> · ` +
-      `每 ${data.cooldown_every} 次长停 ${data.cooldown_seconds}s</p>` +
+      `<p class="muted">共 / taps: ${data.n} · 总耗时 / total <b>${data.total.toFixed(2)}s</b> · ` +
+      `每 / every ${data.cooldown_every} 次长停 / long pause ${data.cooldown_seconds}s</p>` +
       `<div class="evlist">${rows}</div>`;
   } catch (e) {
-    $('#cresult').textContent = '错误：' + e.message;
+    $('#cresult').textContent = '错误 / Error: ' + e.message;
   }
 }
 $('#cgo').addEventListener('click', simulateCooldown);
@@ -388,11 +388,11 @@ async function generateSensors() {
     drawSensors(data);
     const s = data.stats;
     const dead = data.is_dead
-      ? '<span style="color:#e5534b"><b>是（死寂）</b></span>'
-      : '<span style="color:#2fbf71"><b>否（活着）</b></span>';
+      ? '<span style="color:#e5534b"><b>是（死寂）/ yes (dead)</b></span>'
+      : '<span style="color:#2fbf71"><b>否（活着）/ no (alive)</b></span>';
     $('#smeta').innerHTML =
-      `模式 <b>${data.mode}</b> · ${data.sample_count} 采样点<br>` +
-      `死寂判定：${dead}<br>` +
+      `模式 / mode <b>${data.mode}</b> · ${data.sample_count} 采样点 / samples<br>` +
+      `死寂判定 / dead: ${dead}<br>` +
       `acc_x std=${s.acc_x_std.toFixed(4)} zero=${s.acc_x_zero.toFixed(2)}<br>` +
       `acc_y std=${s.acc_y_std.toFixed(4)} zero=${s.acc_y_zero.toFixed(2)}<br>` +
       `acc_z std=${s.acc_z_std.toFixed(4)} zero=${s.acc_z_zero.toFixed(2)}<br>` +
@@ -400,7 +400,7 @@ async function generateSensors() {
       `gyro_y std=${s.gyro_y_std.toFixed(4)} zero=${s.gyro_y_zero.toFixed(2)}<br>` +
       `gyro_z std=${s.gyro_z_std.toFixed(4)} zero=${s.gyro_z_zero.toFixed(2)}`;
   } catch (e) {
-    $('#smeta').textContent = '错误：' + e.message;
+    $('#smeta').textContent = '错误 / Error: ' + e.message;
   }
 }
 
@@ -493,7 +493,7 @@ async function downloadCSV() {
     a.click();
     setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
   } catch (e) {
-    $('#smeta').textContent = '错误：' + e.message;
+    $('#smeta').textContent = '错误 / Error: ' + e.message;
   }
 }
 

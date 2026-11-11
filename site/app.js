@@ -283,13 +283,13 @@ function render() {
   const ivs = g.intervals.slice().sort((a, b) => a - b);
   const p = q => ivs[Math.min(ivs.length - 1, Math.round(q * (ivs.length - 1)))] || 0;
   $('#meta').innerHTML =
-    `<span>点数 <b>${g.steps}</b></span>` +
-    `<span>直线距离 <b>${g.distance.toFixed(1)}px</b></span>` +
-    `<span>总时长 <b>${g.duration.toFixed(3)}s</b></span>` +
-    `<span>步间隔 p50 <b>${(p(0.5) * 1000).toFixed(0)}ms</b></span>` +
+    `<span>点数 / points <b>${g.steps}</b></span>` +
+    `<span>直线距离 / distance <b>${g.distance.toFixed(1)}px</b></span>` +
+    `<span>总时长 / duration <b>${g.duration.toFixed(3)}s</b></span>` +
+    `<span>步间隔 / step gap p50 <b>${(p(0.5) * 1000).toFixed(0)}ms</b></span>` +
     `<span>p95 <b>${(p(0.95) * 1000).toFixed(0)}ms</b></span>` +
-    `<span>模式 <b>${g.slider ? '滑块' : '滑动'}</b></span>` +
-    `<span class="ok">生成 ${ms.toFixed(1)}ms</span>`;
+    `<span>模式 / mode <b>${g.slider ? '滑块 / slider' : '滑动 / swipe'}</b></span>` +
+    `<span class="ok">生成 / gen ${ms.toFixed(1)}ms</span>`;
 }
 
 $('#go').addEventListener('click', render);
