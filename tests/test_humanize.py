@@ -3,7 +3,7 @@
 # Humanizer 门面单元测试。
 import time
 
-from touch_humanization import Humanizer
+from android_humanizer import Humanizer
 
 
 def _local(h: int, m: int = 0) -> float:

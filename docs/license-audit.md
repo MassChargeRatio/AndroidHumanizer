@@ -40,7 +40,7 @@
 | 处理 | 说明 |
 |---|---|
 | 算法参考 | 读取上游算法思想，不复制上游代码 |
-| 独立实现 | 在 `touch_humanization/kinematics/trajectory.py` 中以纯 Python 重写 |
+| 独立实现 | 在 `android_humanizer/kinematics/trajectory.py` 中以纯 Python 重写 |
 | 函数命名 | 使用本项目自有的函数名（`_bezier3` / `_control_points` / `_smoothstep` / `_ease_out_quad` / `_gauss`），与原仓同名但非复制 |
 | 版权声明 | 在 `LICENSE` 末尾保留对三个上游项目的致谢，并声明其原始版权归属 |
 

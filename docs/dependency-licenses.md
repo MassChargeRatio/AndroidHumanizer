@@ -2,7 +2,7 @@
 
 ## 运行时依赖
 
-**无。** `touch_humanization` 仅使用 Python 标准库（`random`、`math`、`csv`、`json`、`http.server`、`urllib`、`statistics`、`dataclasses`、`argparse`、`webbrowser`、`posixpath`、`io`、`os`、`sys`）。
+**无。** `android_humanizer` 仅使用 Python 标准库（`random`、`math`、`csv`、`json`、`http.server`、`urllib`、`statistics`、`dataclasses`、`argparse`、`webbrowser`、`posixpath`、`io`、`os`、`sys`）。
 
 **依据**：`pyproject.toml` 的 `[project]` 节无 `dependencies` 字段；源码 `import` 全部来自标准库。
 
@@ -25,4 +25,4 @@
 - 运行时依赖：**0 个**，无任何许可证兼容性风险。
 - 开发依赖：全部 MIT，与 MIT 兼容。
 - 不存在 GPL/AGPL/LGPL 等 copyleft 依赖。
-- **不阻塞** `touch-humanization` 以 MIT 发布。
+- **不阻塞** `android-humanizer` 以 MIT 发布。

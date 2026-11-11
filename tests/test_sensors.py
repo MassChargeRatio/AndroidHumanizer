@@ -5,7 +5,7 @@ import os
 import random
 import tempfile
 
-from touch_humanization.sensors import Sensors, SensorProfile
+from android_humanizer.sensors import Sensors, SensorProfile
 
 
 def test_all_modes_alive():

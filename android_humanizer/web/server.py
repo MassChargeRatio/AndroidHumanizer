@@ -154,7 +154,7 @@ def _window_segments(start_min: int, end_min: int) -> list:
 
 
 class Handler(BaseHTTPRequestHandler):
-    server_version = "touch-humanization-web"
+    server_version = "AndroidHumanizer-web"
     protocol_version = "HTTP/1.1"
 
     def log_message(self, fmt, *args):
@@ -437,7 +437,7 @@ def make_server(host: str = "127.0.0.1", port: int = 8765) -> ThreadingHTTPServe
 
 
 def main(argv=None) -> int:
-    ap = argparse.ArgumentParser(description="touch-humanization Web UI")
+    ap = argparse.ArgumentParser(description="android-humanizer Web UI")
     ap.add_argument("--host", default="127.0.0.1")
     ap.add_argument("--port", type=int, default=8765)
     ap.add_argument("--no-browser", action="store_true")
@@ -446,7 +446,7 @@ def main(argv=None) -> int:
     httpd = make_server(args.host, args.port)
     host, port = httpd.server_address[0], httpd.server_address[1]
     url = f"http://{host}:{port}/"
-    print(f"touch-humanization Web UI: {url}")
+    print(f"android-humanizer Web UI: {url}")
     if not args.no_browser:
         try:
             webbrowser.open(url)

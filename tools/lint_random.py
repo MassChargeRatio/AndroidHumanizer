@@ -87,7 +87,7 @@ def scan(path: Path) -> list:
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(
         description="Forbid random.seed / global random.* / numpy.random")
-    ap.add_argument("paths", nargs="*", default=["touch_humanization"])
+    ap.add_argument("paths", nargs="*", default=["android_humanizer"])
     args = ap.parse_args(argv)
 
     total = 0

@@ -25,7 +25,7 @@ jobs:
           python -m build
       - name: Verify wheel contents
         run: |
-          python -c "import glob,zipfile,sys; n=zipfile.ZipFile(glob.glob('dist/*.whl')[0]).namelist(); need=['touch_humanization/web/static/index.html','touch_humanization/web/static/app.js','touch_humanization/web/static/style.css']; miss=[x for x in need if x not in n]; print('static OK') if not miss else sys.exit('missing %s' % miss)"
+          python -c "import glob,zipfile,sys; n=zipfile.ZipFile(glob.glob('dist/*.whl')[0]).namelist(); need=['android_humanizer/web/static/index.html','android_humanizer/web/static/app.js','android_humanizer/web/static/style.css']; miss=[x for x in need if x not in n]; print('static OK') if not miss else sys.exit('missing %s' % miss)"
 
       # Portable zip: pip install -t into a folder + launcher scripts.
       # Unzip and run; requires a system Python 3.9+ (project is stdlib-only).
@@ -37,19 +37,19 @@ jobs:
       - name: Build portable zip
         run: |
           V=$(python -c "import tomllib,glob; print(tomllib.load(open('pyproject.toml','rb'))['project']['version'])")
-          python -m pip install --quiet dist/*.whl -t _portable/touch-humanization
-          printf '#!/bin/sh\ncd "$(dirname "$0")"\nexec python3 -m touch_humanization.web.server "$@"\n' > _portable/touch-humanization/run-web-ui.sh
-          printf '@echo off\r\ncd /d %%~dp0\r\npython -m touch_humanization.web.server %%*\r\n' > _portable/touch-humanization/run-web-ui.bat
-          chmod +x _portable/touch-humanization/run-web-ui.sh
+          python -m pip install --quiet dist/*.whl -t _portable/android-humanizer
+          printf '#!/bin/sh\ncd "$(dirname "$0")"\nexec python3 -m android_humanizer.web.server "$@"\n' > _portable/android-humanizer/run-web-ui.sh
+          printf '@echo off\r\ncd /d %%~dp0\r\npython -m android_humanizer.web.server %%*\r\n' > _portable/android-humanizer/run-web-ui.bat
+          chmod +x _portable/android-humanizer/run-web-ui.sh
           find _portable -name '__pycache__' -type d -exec rm -rf {} + || true
-          cd _portable && zip -qr "../dist/touch-humanization-portable-$V.zip" touch-humanization && cd ..
+          cd _portable && zip -qr "../dist/android-humanizer-portable-$V.zip" android-humanizer && cd ..
 
       - name: Smoke test portable zip
         run: |
           V=$(python -c "import tomllib,glob; print(tomllib.load(open('pyproject.toml','rb'))['project']['version'])")
-          unzip -q "dist/touch-humanization-portable-$V.zip" -d _smoke
+          unzip -q "dist/android-humanizer-portable-$V.zip" -d _smoke
           ok=0
-          _smoke/touch-humanization/run-web-ui.sh --port 8901 --no-browser & SRV=$!
+          _smoke/android-humanizer/run-web-ui.sh --port 8901 --no-browser & SRV=$!
           for i in 1 2 3 4 5; do
             sleep 1
             if curl -sf http://127.0.0.1:8901/api/health > /dev/null; then ok=1; break; fi

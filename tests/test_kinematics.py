@@ -5,8 +5,8 @@ import random
 
 import pytest
 
-from touch_humanization.kinematics import Kinematics
-from touch_humanization.kinematics.trajectory import (
+from android_humanizer.kinematics import Kinematics
+from android_humanizer.kinematics.trajectory import (
     _bezier3, _control_points, _smoothstep, _ease_out_quad, _gauss,
 )
 

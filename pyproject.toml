@@ -3,14 +3,14 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "touch-humanization"
-version = "0.2.4"
+name = "android-humanizer"
+version = "0.3.0"
 description = "Human-like touch trajectory, timing and sensor simulation for Android automation."
 readme = "README.md"
 requires-python = ">=3.9"
 license = "MIT"
 license-files = ["LICENSE"]
-authors = [{name = "touch-humanization contributors"}]
+authors = [{name = "android-humanizer contributors"}]
 keywords = ["android", "automation", "humanization", "bezier", "fitts", "sensor"]
 classifiers = [
     "Programming Language :: Python :: 3",
@@ -24,13 +24,13 @@ classifiers = [
 dev = ["pytest>=7"]
 
 [project.scripts]
-touch-humanization-web = "touch_humanization.web.server:main"
+android-humanizer-web = "android_humanizer.web.server:main"
 
 [tool.setuptools.packages.find]
-include = ["touch_humanization*"]
+include = ["android_humanizer*"]
 
 [tool.setuptools.package-data]
-"touch_humanization.web" = ["static/*"]
+"android_humanizer.web" = ["static/*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

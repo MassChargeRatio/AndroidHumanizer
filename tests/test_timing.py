@@ -6,7 +6,7 @@ import time
 
 import pytest
 
-from touch_humanization.timing import Timing
+from android_humanizer.timing import Timing
 
 
 def _local(h: int, m: int = 0) -> float:

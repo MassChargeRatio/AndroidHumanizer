@@ -28,7 +28,7 @@
 
 ## 本项目实现
 
-`touch_humanization/kinematics/trajectory.py` 中：
+`android_humanizer/kinematics/trajectory.py` 中：
 
 - `_bezier3` / `_control_points` / `_smoothstep` / `_ease_out_quad` / `_gauss` **保留同名**，便于与原仓对照审计。
 - `_control_points` 改为接收 `rng: random.Random` 参数（原仓使用全局 `random`），满足 V6.1 的"实例级随机源"约定。

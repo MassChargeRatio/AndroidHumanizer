@@ -59,9 +59,9 @@ jobs:
           python -m build --wheel
       - name: Assert static assets in wheel
         run: |
-          python -c "import glob,zipfile,sys; n=zipfile.ZipFile(glob.glob('dist/*.whl')[0]).namelist(); need=['touch_humanization/web/static/index.html','touch_humanization/web/static/app.js','touch_humanization/web/static/style.css']; miss=[x for x in need if x not in n]; print('static assets OK:', len(need)) if not miss else sys.exit('missing: %s' % miss)"
+          python -c "import glob,zipfile,sys; n=zipfile.ZipFile(glob.glob('dist/*.whl')[0]).namelist(); need=['android_humanizer/web/static/index.html','android_humanizer/web/static/app.js','android_humanizer/web/static/style.css']; miss=[x for x in need if x not in n]; print('static assets OK:', len(need)) if not miss else sys.exit('missing: %s' % miss)"
       - name: Smoke install from wheel
         run: |
           python -m pip install --force-reinstall dist/*.whl
           cd "$RUNNER_TEMP"
-          python -c "import os, touch_humanization as t; from touch_humanization.web.server import STATIC_DIR; assert os.path.isfile(os.path.join(STATIC_DIR, 'index.html')), STATIC_DIR; g=t.Humanizer(seed=1).gesture((0,0),(100,100)); print('version', t.__version__, 'steps', g.steps)"
+          python -c "import os, android_humanizer as t; from android_humanizer.web.server import STATIC_DIR; assert os.path.isfile(os.path.join(STATIC_DIR, 'index.html')), STATIC_DIR; g=t.Humanizer(seed=1).gesture((0,0),(100,100)); print('version', t.__version__, 'steps', g.steps)"

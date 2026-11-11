@@ -1,7 +1,7 @@
 'use strict';
 
 /* ------------------------------------------------------------------
- * touch-humanization · browser demo
+ * android-humanizer · browser demo
  * Same algorithms as the Python kinematics module:
  *   cubic bezier + Fitts steps + smoothstep profile + tail Gaussian
  *   tremor + overshoot pull-back
@@ -10,7 +10,7 @@
  *   give bit-identical output; statistical characteristics
  *   (mean / quantiles / shape) do match.
  *
- * touch-humanization · 浏览器演示
+ * AndroidHumanizer · 浏览器演示
  * 与 Python 版 kinematics 同一套算法：
  *   三次贝塞尔 + Fitts 步数 + smoothstep 速度轮廓 + 末段高斯微颤 + 过冲回拉
  * 随机源：mulberry32（实例级 PRNG，seed 可复现）。
@@ -364,7 +364,7 @@ function codeTrajectory() {
     overshoot_prob: readNum('#overshoot', 0.25),
   };
   const code =
-`from touch_humanization import Humanizer
+`from android_humanizer import Humanizer
 
 # 同 seed 可复现整条轨迹（JS 演示与 Python 的 PRNG 实现不同，
 # 统计特征一致但同 seed 不逐位一致）/ same seed reproduces in Python;

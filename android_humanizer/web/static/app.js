@@ -1,10 +1,10 @@
 'use strict';
 
 /* =========================================================
-   touch-humanization Web UI frontend logic.
+   android-humanizer Web UI frontend logic.
    Zero framework, zero CDN.
 
-   touch-humanization Web UI 前端逻辑。
+   android-humanizer Web UI 前端逻辑。
    零框架、零 CDN。
    ========================================================= */
 
@@ -591,7 +591,7 @@ function codeKinematics() {
     use_ease_in_out: body.use_ease_in_out,
   };
   const code =
-`from touch_humanization import Humanizer
+`from android_humanizer import Humanizer
 
 # 同 seed 可复现整条轨迹 / same seed reproduces the same trajectory
 h = Humanizer(seed=${_fmt(body.seed)})
@@ -625,7 +625,7 @@ function codeTimingSample() {
     sigma_range: [Number($('#t_sigma_lo').value), Number($('#t_sigma_hi').value)],
   };
   const code =
-`from touch_humanization import Humanizer
+`from android_humanizer import Humanizer
 
 h = Humanizer(
     config={"timing": ${JSON.stringify(tcfg)}},
@@ -643,7 +643,7 @@ function codeTimingWindow() {
   const start = $('#w_start').value || '07:30';
   const end = $('#w_end').value || '23:00';
   const code =
-`from touch_humanization import Humanizer
+`from android_humanizer import Humanizer
 
 h = Humanizer(config={"timing": {"wake_window": {"start": "${start}", "end": "${end}"}}})
 print("in window now:", h.in_wake_window())
@@ -658,7 +658,7 @@ function codeTimingCooldown() {
   const seconds = Number($('#c_seconds').value);
   const seed = seedOf($('#c_seed'));
   const code =
-`from touch_humanization import Humanizer
+`from android_humanizer import Humanizer
 
 h = Humanizer(
     config={"timing": {"cooldown_every": ${_fmt(every)}, "cooldown_seconds": ${_fmt(seconds)}, "cooldown_on_captcha": ${_fmt(Number($('#c_on_captcha').value))}}},
@@ -681,7 +681,7 @@ function codeSensors() {
     dead_zero_ratio_max: body.dead_zero_ratio_max,
   };
   const code =
-`from touch_humanization import Humanizer
+`from android_humanizer import Humanizer
 
 h = Humanizer(
     config={"sensors": ${JSON.stringify(scfg)}},

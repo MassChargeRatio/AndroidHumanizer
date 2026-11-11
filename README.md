@@ -1,9 +1,9 @@
-# touch-humanization
+# AndroidHumanizer
 
-[![CI](https://github.com/MassChargeRatio/touch-humanization/actions/workflows/ci.yml/badge.svg)](https://github.com/MassChargeRatio/touch-humanization/actions/workflows/ci.yml)
+[![CI](https://github.com/MassChargeRatio/android-humanizer/actions/workflows/ci.yml/badge.svg)](https://github.com/MassChargeRatio/android-humanizer/actions/workflows/ci.yml)
 ![Python](https://img.shields.io/badge/python-3.9%20%7C%203.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue)
 
-**在线演示（交互式轨迹预览）**：<https://masschargeratio.github.io/touch-humanization/>
+**在线演示（交互式轨迹预览）**：<https://masschargeratio.github.io/android-humanizer/>
 
 拟人化触摸轨迹、时序与传感器模拟，供 Android 自动化项目复用。
 
@@ -28,7 +28,7 @@ pip install -e .[dev]
 ## 快速使用 / Quick start
 
 ```python
-from touch_humanization import Humanizer
+from android_humanizer import Humanizer
 
 h = Humanizer(seed=42)
 
@@ -51,7 +51,7 @@ print(h.sensors.is_dead(rows))  # False
 
 浏览器直接打开：
 
-**https://masschargeratio.github.io/touch-humanization/**
+**https://masschargeratio.github.io/android-humanizer/**
 
 这是 GitHub Pages 托管的静态演示页（`site/` 目录），轨迹 tab 覆盖：
 
@@ -69,8 +69,8 @@ print(h.sensors.is_dead(rows))  # False
 pip install -e .[dev]
 
 # 2. 启动本地 Web 服务 / Start the local web server
-touch-humanization-web --port 8765
-# 或 / or: python -m touch_humanization.web.server --port 8765
+android-humanizer-web --port 8765
+# 或 / or: python -m android_humanizer.web.server --port 8765
 
 # 3. 浏览器打开 / Open in a browser
 #    http://127.0.0.1:8765/
@@ -113,12 +113,12 @@ python -m http.server 8000 --directory site
 
 注意：`site/` 是纯静态页，不包含 Python 后端，因此没有 CSV 导出和 POST API。
 
-**`site/` 与 `touch_humanization/web/static/` 的分工**（两者是不同的前端，不是同步副本）：
+**`site/` 与 `android_humanizer/web/static/` 的分工**（两者是不同的前端，不是同步副本）：
 
 | 目录 | 定位 | 依赖 |
 |---|---|---|
 | `site/` | GitHub Pages 在线演示：纯前端移植同一套算法，开箱即用 | 零依赖，不调用任何 API |
-| `touch_humanization/web/static/` | 本地 Web GUI（`touch-humanization-web`）的三 tab 控制台前端 | 必须配合 Python 后端的 `/api/*` 端点 |
+| `android_humanizer/web/static/` | 本地 Web GUI（`android-humanizer-web`）的三 tab 控制台前端 | 必须配合 Python 后端的 `/api/*` 端点 |
 
 修改算法展示逻辑时两处可能都需要调整；`web/static/` 的改动随包分发（wheel 内含），`site/` 的改动由 Pages 工作流自动部署。
 

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>touch-humanization · 全功能预览 / full preview</title>
+<title>AndroidHumanizer · 全功能预览 / full preview</title>
 <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
@@ -11,7 +11,7 @@
   <header>
     <div class="head-row">
       <div>
-        <h1>touch-humanization</h1>
+        <h1>AndroidHumanizer</h1>
         <p class="muted"><span class="zh">拟人化手势 · 时序 · 传感器 —— 交互式预览（零第三方依赖）</span><span class="en">Human gestures · timing · sensors — interactive preview (zero third-party deps)</span></p>
       </div>
       <select id="lang" class="lang-select" aria-label="language">
@@ -29,25 +29,25 @@
       <div class="install-card">
         <h3><span class="zh">Python 包</span><span class="en">Python package</span></h3>
         <p class="muted"><span class="zh">PyPI 暂不可用（未发布），请从 GitHub Releases 下载 wheel 后安装：</span><span class="en">PyPI is not available yet (unpublished); install a wheel from GitHub Releases:</span></p>
-        <pre class="cmd">pip install touch_humanization-*.whl</pre>
-        <a class="btn-link" href="https://github.com/MassChargeRatio/touch-humanization/releases/latest" target="_blank" rel="noopener"><span class="zh">打开最新 Release →</span><span class="en">Open latest Release →</span></a>
-        <p class="muted small"><span class="zh">安装后：</span><span class="en">After install:</span> <code>from touch_humanization import Humanizer</code></p>
+        <pre class="cmd">pip install android_humanizer-*.whl</pre>
+        <a class="btn-link" href="https://github.com/MassChargeRatio/android-humanizer/releases/latest" target="_blank" rel="noopener"><span class="zh">打开最新 Release →</span><span class="en">Open latest Release →</span></a>
+        <p class="muted small"><span class="zh">安装后：</span><span class="en">After install:</span> <code>from android_humanizer import Humanizer</code></p>
       </div>
 
       <div class="install-card">
         <h3><span class="zh">便携版</span><span class="en">Portable</span></h3>
         <p class="muted"><span class="zh">免 pip 的 zip 包，解压后运行启动脚本（需系统 Python 3.9+）：</span><span class="en">pip-free zip; unzip and run the launcher (needs system Python 3.9+):</span></p>
         <ul class="muted small">
-          <li><code>touch-humanization-portable-*.zip</code></li>
+          <li><code>android-humanizer-portable-*.zip</code></li>
           <li>Windows: <code>run-web-ui.bat</code> · Linux/macOS: <code>./run-web-ui.sh</code></li>
         </ul>
-        <a class="btn-link" href="https://github.com/MassChargeRatio/touch-humanization/releases/latest" target="_blank" rel="noopener"><span class="zh">下载便携版 →</span><span class="en">Download portable →</span></a>
+        <a class="btn-link" href="https://github.com/MassChargeRatio/android-humanizer/releases/latest" target="_blank" rel="noopener"><span class="zh">下载便携版 →</span><span class="en">Download portable →</span></a>
       </div>
 
       <div class="install-card">
         <h3><span class="zh">其他语言调用</span><span class="en">Call from other languages</span></h3>
         <p class="muted"><span class="zh">启动本地服务后，任意语言通过 HTTP 调用：</span><span class="en">Start the local server, then call it over HTTP from any language:</span></p>
-        <pre class="cmd">touch-humanization-web --port 8765</pre>
+        <pre class="cmd">android-humanizer-web --port 8765</pre>
         <pre class="cmd">curl -X POST http://127.0.0.1:8765/api/gesture \
   -H "Content-Type: application/json" \
   -d '{"start":[100,1800],"end":[900,400],"seed":42}'</pre>

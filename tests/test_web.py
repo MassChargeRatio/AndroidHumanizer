@@ -8,7 +8,7 @@ import urllib.request
 
 import pytest
 
-from touch_humanization.web.server import make_server
+from android_humanizer.web.server import make_server
 
 
 @pytest.fixture()
@@ -41,7 +41,7 @@ def test_health_and_index(server):
         assert json.loads(r.read())["ok"] is True
     with urllib.request.urlopen(server + "/", timeout=5) as r:
         body = r.read()
-    assert b"touch-humanization" in body
+    assert b"android-humanizer" in body
     assert b"tab-kinematics" in body
     assert b"tab-timing" in body
     assert b"tab-sensors" in body
