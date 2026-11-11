@@ -1,4 +1,1 @@
-# -*- coding: utf-8 -*-
-from .trajectory import Kinematics, Gesture
-
-__all__ = ["Kinematics", "Gesture"]
+IyAtKi0gY29kaW5nOiB1dGYtOCAtKi0KIyBLaW5lbWF0aWNzIHN1Yi1wYWNrYWdlIGV4cG9ydHMuCiMga2luZW1hdGljcyDlrZDljIXlr7zlh7rjgIIKZnJvbSAudHJhamVjdG9yeSBpbXBvcnQgS2luZW1hdGljcywgR2VzdHVyZQoKX19hbGxfXyA9IFsiS2luZW1hdGljcyIsICJHZXN0dXJlIl0K
