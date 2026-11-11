@@ -13,6 +13,42 @@
     <p class="muted">拟人化手势 · 时序 · 传感器 —— 交互式预览（零第三方依赖）</p>
   </header>
 
+  <!-- ===================== 安装与下载 / Install & Download ===================== -->
+  <section id="install" class="install">
+    <h2>安装与下载 / Install &amp; Download</h2>
+    <div class="install-grid">
+
+      <div class="install-card">
+        <h3>Python 包（pip）</h3>
+        <pre class="cmd">pip install touch-humanization</pre>
+        <p class="muted">从 PyPI 安装；安装后可在任意 Python 项目里 <code>from touch_humanization import Humanizer</code>。</p>
+        <a class="btn-link" href="https://pypi.org/project/touch-humanization/" target="_blank" rel="noopener">打开 PyPI 页面 →</a>
+      </div>
+
+      <div class="install-card">
+        <h3>安装包 / 便携版下载</h3>
+        <p class="muted">wheel、sdist、便携版由 CI 构建后挂到 GitHub Releases。</p>
+        <a class="btn-link" href="https://github.com/MassChargeRatio/touch-humanization/releases/latest" target="_blank" rel="noopener">打开最新 Release →</a>
+        <ul class="muted small">
+          <li><code>touch_humanization-*.whl</code> — 任意平台，pip 可装</li>
+          <li><code>touch_humanization-*.tar.gz</code> — sdist 源码包</li>
+          <li><code>touch-humanization-portable-*.zip</code> — 免 pip 便携包，解压后运行启动脚本（需系统 Python 3.9+）</li>
+        </ul>
+      </div>
+
+      <div class="install-card">
+        <h3>其他语言调用</h3>
+        <p class="muted">启动本地服务后，任意语言通过 HTTP 调用：</p>
+        <pre class="cmd">touch-humanization-web --port 8765</pre>
+        <pre class="cmd">curl -X POST http://127.0.0.1:8765/api/gesture \
+  -H "Content-Type: application/json" \
+  -d '{"start":[100,1800],"end":[900,400],"seed":42}'</pre>
+        <p class="muted small">Node.js / Go / Rust 同理，只需 HTTP POST JSON。完整 API 见 README。</p>
+      </div>
+
+    </div>
+  </section>
+
   <nav class="tabs">
     <button data-tab="kinematics" class="on">手势轨迹</button>
     <button data-tab="timing">时序</button>
@@ -58,6 +94,12 @@
         <div id="kplay-status" class="muted"></div>
       </aside>
     </div>
+
+    <div class="codegen">
+      <button id="k-codegen" class="btn-link">生成 Python 代码</button>
+      <pre id="k-code" class="codeblock hidden"></pre>
+      <button id="k-copy" class="btn-link small hidden">复制</button>
+    </div>
   </section>
 
   <!-- ===================== 时序 ===================== -->
@@ -75,6 +117,11 @@
       <canvas id="cv-timing" width="1000" height="360"></canvas>
       <aside class="meta"><div id="tmeta"></div></aside>
     </div>
+    <div class="codegen">
+      <button id="t-codegen" class="btn-link">生成 Python 代码</button>
+      <pre id="t-code" class="codeblock hidden"></pre>
+      <button id="t-copy" class="btn-link small hidden">复制</button>
+    </div>
 
     <h2>作息窗口</h2>
     <div class="form">
@@ -84,6 +131,11 @@
     </div>
     <canvas id="cv-window" width="1000" height="120"></canvas>
     <div id="wmeta" class="meta"></div>
+    <div class="codegen">
+      <button id="w-codegen" class="btn-link">生成 Python 代码</button>
+      <pre id="w-code" class="codeblock hidden"></pre>
+      <button id="w-copy" class="btn-link small hidden">复制</button>
+    </div>
 
     <h2>冷却模拟</h2>
     <div class="form">
@@ -94,6 +146,11 @@
       <button id="cgo">模拟</button>
     </div>
     <div id="cresult"></div>
+    <div class="codegen">
+      <button id="c-codegen" class="btn-link">生成 Python 代码</button>
+      <pre id="c-code" class="codeblock hidden"></pre>
+      <button id="c-copy" class="btn-link small hidden">复制</button>
+    </div>
   </section>
 
   <!-- ===================== 传感器 ===================== -->
@@ -115,6 +172,11 @@
     </div>
     <canvas id="cv-sensors" width="1000" height="480"></canvas>
     <aside class="meta"><div id="smeta"></div></aside>
+    <div class="codegen">
+      <button id="s-codegen" class="btn-link">生成 Python 代码</button>
+      <pre id="s-code" class="codeblock hidden"></pre>
+      <button id="s-copy" class="btn-link small hidden">复制</button>
+    </div>
   </section>
 </main>
 <script src="/static/app.js"></script>

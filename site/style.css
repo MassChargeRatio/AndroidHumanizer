@@ -95,3 +95,75 @@ code { font: 12px ui-monospace, Consolas, monospace; color: #c9d6ea; }
   color: var(--fg2); font-size: 12px; text-align: center;
   border-top: 1px solid var(--line); padding-top: 16px; margin-top: 8px;
 }
+
+/* ============================================================
+   Install & Download + code generation
+   安装与下载 + 代码生成
+   ============================================================ */
+
+.install {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 18px;
+}
+.install h2 { margin: 0 0 12px; font-size: 15px; }
+.install-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+}
+.install-card {
+  background: var(--panel2);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px;
+}
+.install-card h3 { margin: 0 0 8px; font-size: 13px; }
+.install-card p { margin: 6px 0; }
+.install-card ul { margin: 6px 0 0; padding-left: 18px; }
+.install-card .small { font-size: 11.5px; }
+
+.btn-link {
+  display: inline-block;
+  background: var(--acc);
+  color: #fff;
+  border: 0;
+  border-radius: 8px;
+  padding: 7px 12px;
+  font-size: 12.5px;
+  cursor: pointer;
+  text-decoration: none;
+  margin: 6px 0;
+}
+.btn-link:hover { filter: brightness(1.1); }
+.btn-link.small { padding: 4px 10px; font-size: 12px; }
+
+.cmd {
+  background: #07090d;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font: 12px/1.5 ui-monospace, monospace;
+  color: #c3cddd;
+  white-space: pre-wrap;
+  word-break: break-all;
+  margin: 6px 0;
+}
+
+/* Code generation block. 代码生成区。 */
+.codegen { margin: 12px 0 4px; }
+.codeblock {
+  background: #07090d;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font: 12.5px/1.6 ui-monospace, monospace;
+  color: #c3cddd;
+  white-space: pre;
+  overflow: auto;
+  max-height: 360px;
+  margin: 8px 0 0;
+}
+.codeblock.hidden { display: none; }

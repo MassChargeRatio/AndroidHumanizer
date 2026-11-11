@@ -12,7 +12,7 @@
   <div class="wrap">
     <h1>touch-humanization</h1>
     <p class="sub">拟人化触摸轨迹 · 交互式演示
-      <span class="tag">v0.2.0</span>
+      <span class="tag">v0.2.1</span>
       <span class="tag">纯前端</span>
       <span class="tag">零依赖</span>
       <span class="tag">seed 可复现</span>
@@ -26,6 +26,36 @@
 </header>
 
 <main class="wrap">
+  <section class="install" id="install">
+    <h2>安装与下载 / Install &amp; Download</h2>
+    <div class="install-grid">
+      <div class="install-card">
+        <h3>Python 包（pip）</h3>
+        <pre class="cmd">pip install touch-humanization</pre>
+        <p class="muted">安装后：<code>from touch_humanization import Humanizer</code></p>
+        <a class="btn-link" href="https://pypi.org/project/touch-humanization/" target="_blank" rel="noopener">打开 PyPI 页面 →</a>
+      </div>
+      <div class="install-card">
+        <h3>安装包 / 便携版下载</h3>
+        <p class="muted">wheel、sdist、便携版由 CI 构建后挂到 GitHub Releases。</p>
+        <a class="btn-link" href="https://github.com/MassChargeRatio/touch-humanization/releases/latest" target="_blank" rel="noopener">打开最新 Release →</a>
+        <ul class="muted small">
+          <li><code>touch_humanization-*.whl</code> — 任意平台，pip 可装</li>
+          <li><code>touch_humanization-*.tar.gz</code> — sdist 源码包</li>
+          <li><code>touch-humanization-portable-*.zip</code> — 免 pip 便携包（需系统 Python 3.9+）</li>
+        </ul>
+      </div>
+      <div class="install-card">
+        <h3>其他语言调用</h3>
+        <p class="muted">启动本地服务后，任意语言通过 HTTP 调用：</p>
+        <pre class="cmd">touch-humanization-web --port 8765</pre>
+        <pre class="cmd">curl -X POST http://127.0.0.1:8765/api/gesture \
+  -H "Content-Type: application/json" \
+  -d '{"start":[100,1800],"end":[900,400],"seed":42}'</pre>
+      </div>
+    </div>
+  </section>
+
   <section class="card">
     <div class="row">
       <label>起点 x<input id="sx" type="number" value="100"></label>
@@ -52,6 +82,11 @@
 
     <div class="meta" id="meta"></div>
     <canvas id="cv" width="1000" height="620"></canvas>
+    <div class="codegen">
+      <button id="code-btn" class="btn-link">生成 Python 代码</button>
+      <pre id="code-out" class="codeblock hidden"></pre>
+      <button id="code-copy" class="btn-link small hidden">复制</button>
+    </div>
     <p class="hint">
       起点 <span class="dot g"></span> 终点 <span class="dot r"></span>
       · 轨迹由三次贝塞尔 + Fitts 步数 + smoothstep 速度轮廓 + 末段高斯微颤 + 过冲回拉生成

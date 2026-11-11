@@ -498,3 +498,154 @@ sampleTiming();
 calcWindow();
 simulateCooldown();
 generateSensors();
+
+// ========================================================== code generation
+// ========================================================== 代码生成
+//
+// Generate a runnable Python snippet from the current form values.
+// Pure frontend string building: no backend call, no new library features.
+// 根据当前 tab 的表单值生成一段可直接运行的 Python 代码。
+// 纯前端拼接当前选项，不调用后端，不新增库功能。
+
+// Reasonable precision for numbers; empty seed -> None.
+// 数字保留合理精度；空 seed 用 None。
+function _fmt(v) {
+  if (v === '' || v === null || v === undefined) return 'None';
+  const n = Number(v);
+  if (!isFinite(n)) return 'None';
+  return Number.isInteger(n) ? String(n) : String(Number(n.toFixed(6)));
+}
+
+// Show the code block and its copy button.
+// 显示代码块与复制按钮。
+function _showCode(id, code) {
+  const box = $('#' + id);
+  const btn = $('#' + id.replace('-code', '-copy'));
+  box.textContent = code;
+  box.classList.remove('hidden');
+  btn.classList.remove('hidden');
+  btn.onclick = () => navigator.clipboard.writeText(code);
+}
+
+// Trajectory codegen: mirrors kBody().
+// 轨迹代码生成：与 kBody() 对应。
+function codeKinematics() {
+  const body = kBody();
+  const cfg = {
+    steps_min: body.steps_min,
+    steps_max: body.steps_max,
+    px_per_step: body.px_per_step,
+    duration_per_px: body.duration_per_px,
+    duration_min: body.duration_min,
+    duration_max: body.duration_max,
+    perpendicular_ratio: body.perpendicular_ratio,
+    jitter_sigma: body.jitter_sigma,
+    jitter_tail_fraction: body.jitter_tail_fraction,
+    overshoot_prob: body.overshoot_prob,
+    overshoot_ratio: body.overshoot_ratio,
+    use_ease_in_out: body.use_ease_in_out,
+  };
+  const code =
+`from touch_humanization import Humanizer
+
+# 同 seed 可复现整条轨迹 / same seed reproduces the same trajectory
+h = Humanizer(seed=${_fmt(body.seed)})
+g = h.gesture(
+    (${_fmt(body.start[0])}, ${_fmt(body.start[1])}),
+    (${_fmt(body.end[0])}, ${_fmt(body.end[1])}),
+    for_slider=${body.for_slider ? 'True' : 'False'},
+    exact_end=${body.exact_end ? 'True' : 'False'},
+)
+for (x, y), dt in zip(g.points, g.intervals):
+    print(x, y, dt)
+
+# 若要覆盖高级参数 / to override advanced params:
+# h = Humanizer(
+#     config={"kinematics": ${JSON.stringify(cfg)}},
+#     seed=${_fmt(body.seed)},
+# )
+`;
+  _showCode('k-code', code);
+}
+
+// Timing sample codegen. 延迟分布采样代码生成。
+function codeTimingSample() {
+  const n = Number($('#t_n').value);
+  const lo = Number($('#t_lo').value);
+  const hi = Number($('#t_hi').value);
+  const ln = $('#t_ln').checked;
+  const seed = seedOf($('#t_seed'));
+  const code =
+`from touch_humanization import Humanizer
+
+h = Humanizer(seed=${_fmt(seed)})
+samples = [h.timing.sample(${_fmt(lo)}, ${_fmt(hi)}, lognormal=${ln ? 'True' : 'False'})
+           for _ in range(${_fmt(n)})]
+print(min(samples), max(samples), sum(samples) / len(samples))
+`;
+  _showCode('t-code', code);
+}
+
+// Wake-window codegen. 作息窗口代码生成。
+function codeTimingWindow() {
+  const start = $('#w_start').value || '07:30';
+  const end = $('#w_end').value || '23:00';
+  const code =
+`from touch_humanization import Humanizer
+
+h = Humanizer(config={"timing": {"wake_window": {"start": "${start}", "end": "${end}"}}})
+print("in window now:", h.in_wake_window())
+`;
+  _showCode('w-code', code);
+}
+
+// Cooldown codegen. 冷却模拟代码生成。
+function codeTimingCooldown() {
+  const n = Number($('#c_n').value);
+  const every = Number($('#c_every').value);
+  const seconds = Number($('#c_seconds').value);
+  const seed = seedOf($('#c_seed'));
+  const code =
+`from touch_humanization import Humanizer
+
+h = Humanizer(
+    config={"timing": {"cooldown_every": ${_fmt(every)}, "cooldown_seconds": ${_fmt(seconds)}}},
+    seed=${_fmt(seed)},
+)
+for i in range(1, ${_fmt(n)} + 1):
+    d = h.timing.delay_between_actions()
+    cd = h.timing.tap()
+    print(i, d, cd)
+`;
+  _showCode('c-code', code);
+}
+
+// Sensors codegen (incl. CSV export). 传感器代码生成（含 CSV 导出）。
+function codeSensors() {
+  const body = sBody();
+  const code =
+`from touch_humanization import Humanizer
+
+h = Humanizer(seed=${_fmt(body.seed)})
+rows = h.sensors.generate(mode=${JSON.stringify(body.mode)}, fs=${_fmt(body.fs)}, duration=${_fmt(body.duration)})
+print("samples:", len(rows))
+print("dead:", h.sensors.is_dead(rows))
+
+# 导出 CSV / export CSV
+import csv
+with open("sensors_${body.mode}.csv", "w", newline="", encoding="utf-8") as f:
+    w = csv.writer(f)
+    w.writerow(["t", "acc_x", "acc_y", "acc_z", "lin_x", "lin_y", "lin_z",
+                "gyro_x", "gyro_y", "gyro_z", "mag_x", "mag_y", "mag_z"])
+    for r in rows:
+        w.writerow([r["t"], *r["acc"], *r["lin"], *r["gyro"], *r["mag"]])
+`;
+  _showCode('s-code', code);
+}
+
+// Bind buttons. 绑定按钮。
+$('#k-codegen').addEventListener('click', codeKinematics);
+$('#t-codegen').addEventListener('click', codeTimingSample);
+$('#w-codegen').addEventListener('click', codeTimingWindow);
+$('#c-codegen').addEventListener('click', codeTimingCooldown);
+$('#s-codegen').addEventListener('click', codeSensors);

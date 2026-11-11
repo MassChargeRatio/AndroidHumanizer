@@ -302,3 +302,68 @@ $('#slider').addEventListener('change', render);
   $(id).addEventListener('change', render));
 
 render();
+
+// ========================================================== code generation
+// ========================================================== 代码生成
+//
+// Build a runnable Python snippet from the current demo form values.
+// Pure frontend string building; no backend call.
+// 根据当前演示表单值拼接可直接运行的 Python 代码；纯前端，无后端调用。
+
+function fmtV(v) {
+  if (v === '' || v === null || v === undefined) return 'None';
+  const n = Number(v);
+  if (!isFinite(n)) return 'None';
+  return Number.isInteger(n) ? String(n) : String(Number(n.toFixed(6)));
+}
+
+function showCode(code) {
+  const box = $('#code-out');
+  const btn = $('#code-copy');
+  box.textContent = code;
+  box.classList.remove('hidden');
+  btn.classList.remove('hidden');
+  btn.onclick = () => navigator.clipboard.writeText(code);
+}
+
+// Trajectory codegen adapted to this page's form ids.
+// 轨迹代码生成：适配本页的表单 id。
+function codeTrajectory() {
+  const sx = readNum('#sx', 100), sy = readNum('#sy', 1800);
+  const ex = readNum('#ex', 900), ey = readNum('#ey', 400);
+  const seed = $('#seed').value.trim() === '' ? 'None' : $('#seed').value.trim();
+  const forSlider = $('#slider').checked;
+  const cfg = {
+    steps_min: readNum('#stepsMin', 20),
+    steps_max: readNum('#stepsMax', 60),
+    px_per_step: readNum('#pxPerStep', 15),
+    perpendicular_ratio: readNum('#perpH', 0.12),
+    jitter_sigma: readNum('#jitter', 1.2),
+    overshoot_prob: readNum('#overshoot', 0.25),
+  };
+  const code =
+`from touch_humanization import Humanizer
+
+# 同 seed 可复现整条轨迹（JS 演示与 Python 的 PRNG 实现不同，
+# 统计特征一致但同 seed 不逐位一致）/ same seed reproduces in Python;
+# note the JS demo PRNG differs from Python's, statistics match.
+h = Humanizer(seed=${seed})
+g = h.gesture(
+    (${fmtV(sx)}, ${fmtV(sy)}),
+    (${fmtV(ex)}, ${fmtV(ey)}),
+    for_slider=${forSlider ? 'True' : 'False'},
+    exact_end=True,
+)
+for (x, y), dt in zip(g.points, g.intervals):
+    print(x, y, dt)
+
+# 若要覆盖高级参数 / to override advanced params:
+# h = Humanizer(
+#     config={"kinematics": ${JSON.stringify(cfg)}},
+#     seed=${seed},
+# )
+`;
+  showCode(code);
+}
+
+$('#code-btn').addEventListener('click', codeTrajectory);
