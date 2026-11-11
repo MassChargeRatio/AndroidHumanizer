@@ -1,4 +1,6 @@
-name: Deploy Pages
+# Deploy Web UI demo to GitHub Pages.
+# 部署 Web UI 演示到 GitHub Pages。
+name: Deploy Web UI to Pages
 
 on:
   push:
@@ -6,16 +8,28 @@ on:
     paths:
       - "site/**"
       - ".github/workflows/pages.yml"
+    tags:
+      - "v*"
   workflow_dispatch:
 
+# Permissions:
+#   contents: read    - checkout the repo
+#   pages: write      - deploy to Pages
+#   id-token: write   - verify the deployment origin (OIDC)
+# 权限：
+#   contents: read    - 检出仓库
+#   pages: write      - 部署到 Pages
+#   id-token: write   - 验证部署来源（OIDC）
 permissions:
   contents: read
   pages: write
   id-token: write
 
+# Only one Pages deployment at a time; do not cancel in-progress.
+# 同一时间只允许一个 Pages 部署；不取消进行中的部署。
 concurrency:
-  group: pages
-  cancel-in-progress: true
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
   deploy:
@@ -25,10 +39,69 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Generate CNAME only when a custom domain is configured.
+      # Set the repo variable PAGES_CUSTOM_DOMAIN
+      # (Settings -> Secrets and variables -> Actions -> Variables).
+      # GitHub Pages reads site/CNAME; keep it in sync with Settings -> Pages.
+      # 仅在配置了自定义域名时生成 CNAME。
+      # 设置仓库变量 PAGES_CUSTOM_DOMAIN
+      # （Settings -> Secrets and variables -> Actions -> Variables）。
+      # GitHub Pages 会读取 site/CNAME；需与 Settings -> Pages 中的自定义域名一致。
+      - name: Generate CNAME (optional)
+        if: vars.PAGES_CUSTOM_DOMAIN != ''
+        run: echo "${{ vars.PAGES_CUSTOM_DOMAIN }}" > site/CNAME
+
+      # robots.txt: allow all crawlers by default.
+      # To keep the demo out of search engines, replace the printf line with:
+      #   printf 'User-agent: *\nDisallow: /\n' > site/robots.txt
+      # robots.txt：默认允许所有爬虫。
+      # 如需禁止搜索引擎收录，把 printf 行替换为：
+      #   printf 'User-agent: *\nDisallow: /\n' > site/robots.txt
+      - name: Generate robots.txt
+        run: |
+          printf 'User-agent: *\nAllow: /\n' > site/robots.txt
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      # upload-pages-artifact inputs:
+      #   path                 - static asset directory (required, default _site/)
+      #   name                 - artifact name (default github-pages)
+      #   retention-days       - artifact retention in days (default 1)
+      #   include-hidden-files - include dotfiles such as .nojekyll (default false)
+      # upload-pages-artifact 输入：
+      #   path                 - 静态资源目录（必填，默认 _site/）
+      #   name                 - artifact 名称（默认 github-pages）
+      #   retention-days       - artifact 保留天数（默认 1）
+      #   include-hidden-files - 是否包含 .nojekyll 等隐藏文件（默认 false）
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
           path: site
-      - id: deployment
+          name: github-pages
+          retention-days: 1
+          # .nojekyll disables Jekyll processing; keep it included.
+          # .nojekyll 用于关闭 Jekyll 处理；需保留在 artifact 中。
+          include-hidden-files: true
+
+      # deploy-pages inputs:
+      #   token              - GitHub token (default ${{ github.token }})
+      #   timeout            - deployment timeout in ms (default 600000 = 10 min)
+      #   error_count        - max status report errors (default 10)
+      #   reporting_interval - status polling interval in ms (default 5000)
+      # deploy-pages 输入：
+      #   token              - GitHub token（默认 ${{ github.token }}）
+      #   timeout            - 部署超时毫秒数（默认 600000 = 10 分钟）
+      #   error_count        - 最大状态上报错误数（默认 10）
+      #   reporting_interval - 状态轮询间隔毫秒数（默认 5000）
+      - name: Deploy to GitHub Pages
+        id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          token: ${{ github.token }}
+          timeout: 600000
+          error_count: 10
+          reporting_interval: 5000

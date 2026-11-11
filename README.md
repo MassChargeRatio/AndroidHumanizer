@@ -45,13 +45,97 @@ rows = h.sensors.generate(mode="walking", fs=100.0, duration=2.0)
 print(h.sensors.is_dead(rows))  # False
 ```
 
-## Web UI（三模块交互控制台：轨迹 / 时序 / 传感器）
-## Web UI (interactive console: kinematics / timing / sensors)
+## Web GUI（交互式：手势轨迹 / 时序 / 传感器）
+
+### 方式一：在线演示（无需安装）
+
+浏览器直接打开：
+
+**https://masschargeratio.github.io/touch-humanization/**
+
+这是 GitHub Pages 托管的静态演示页（`site/` 目录），轨迹 tab 覆盖：
+
+| 能力 | 说明 | 对应后端 |
+|---|---|---|
+| 起终点 / seed / 滑块模式 / 高级参数 | 与 Python `Kinematics` 参数对齐 | `kinematics` |
+| Canvas 绘制 + 步间隔统计 | p50 / p95 实时展示 | `kinematics` |
+
+在线演示是**纯前端静态页**（JS 移植同一套算法），不依赖 Python 后端；所有计算在浏览器内完成。时序与传感器 tab 请用本地服务（方式二）。
+
+### 方式二：本地启动（完整功能，含三 tab、CSV 导出与 POST API）
 
 ```bash
+# 1. 安装（含测试依赖）/ Install (with test deps)
+pip install -e .[dev]
+
+# 2. 启动本地 Web 服务 / Start the local web server
 touch-humanization-web --port 8765
-# 浏览器打开 http://127.0.0.1:8765/
-# Open http://127.0.0.1:8765/ in a browser.
+# 或 / or: python -m touch_humanization.web.server --port 8765
+
+# 3. 浏览器打开 / Open in a browser
+#    http://127.0.0.1:8765/
+```
+
+**启动参数 / CLI options**：
+
+| 参数 | 默认 | 说明 |
+|---|---|---|
+| `--host` | `127.0.0.1` | 监听地址；改成 `0.0.0.0` 会暴露到局域网，不建议 |
+| `--port` | `8765` | 监听端口 |
+| `--no-browser` | 关闭 | 加此参数不自动打开浏览器 |
+
+**三个 tab**：
+
+| Tab | 能力 |
+|---|---|
+| 手势轨迹 | 起终点、seed、滑块模式、高级参数、Canvas 绘制、**逐点动画播放** |
+| 时序 | 延迟分布直方图、作息窗口 24h 时间轴、冷却事件模拟 |
+| 传感器 | 四种模式生成、三轴波形图、死寂判定明细、CSV 导出 |
+
+**在线演示与本地服务的区别**：
+
+| 能力 | 在线演示 | 本地服务 |
+|---|---|---|
+| 手势轨迹交互预览 | ✅ | ✅ |
+| 时序 / 传感器 tab | ❌ | ✅ |
+| 传感器 CSV 导出（`/api/sensors/csv`） | ❌ | ✅ 真实后端生成 |
+| 通过 HTTP API 从其他程序调用 | ❌ | ✅ |
+
+### 方式三：本地预览与线上一致的静态页
+
+仓库根目录的 `site/` 是 Pages 的部署源。如需在本地查看与线上完全一致的静态页：
+
+```bash
+# 任选一个静态文件服务器 / any static file server
+python -m http.server 8000 --directory site
+# 浏览器打开 http://127.0.0.1:8000/
+```
+
+注意：`site/` 是纯静态页，不包含 Python 后端，因此没有 CSV 导出和 POST API。
+
+### Web GUI 的 API（本地服务）
+
+如果希望用脚本调用 Web GUI 背后的能力：
+
+| 方法 | 路径 | 作用 |
+|---|---|---|
+| GET | `/api/health` | 健康检查 |
+| POST | `/api/gesture` | 生成手势轨迹 |
+| POST | `/api/timing/sample` | 采样延迟分布 |
+| POST | `/api/timing/window` | 计算作息窗口区间 |
+| POST | `/api/timing/cooldown` | 模拟冷却事件 |
+| POST | `/api/sensors/generate` | 生成传感器序列 + 死寂判定 |
+| POST | `/api/sensors/csv` | 导出 CSV（`text/csv`） |
+
+请求体示例（`/api/gesture`）：
+
+```json
+{
+  "start": [100, 1800],
+  "end": [900, 400],
+  "seed": 42,
+  "for_slider": false
+}
 ```
 
 ## 测试与 lint / Tests & lint
