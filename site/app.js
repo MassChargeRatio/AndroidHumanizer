@@ -1,6 +1,15 @@
 'use strict';
 
 /* ------------------------------------------------------------------
+ * touch-humanization · browser demo
+ * Same algorithms as the Python kinematics module:
+ *   cubic bezier + Fitts steps + smoothstep profile + tail Gaussian
+ *   tremor + overshoot pull-back
+ * Random source: mulberry32 (instance-level PRNG, seed-reproducible).
+ * Note: the JS PRNG differs from Python's, so the same seed does NOT
+ *   give bit-identical output; statistical characteristics
+ *   (mean / quantiles / shape) do match.
+ *
  * touch-humanization · 浏览器演示
  * 与 Python 版 kinematics 同一套算法：
  *   三次贝塞尔 + Fitts 步数 + smoothstep 速度轮廓 + 末段高斯微颤 + 过冲回拉
@@ -9,6 +18,8 @@
  *     但统计特征（均值/分位/形态）一致。
  * ------------------------------------------------------------------ */
 
+// Tunable defaults, mirroring config.py DEFAULTS.kinematics.
+// 可调默认值，与 config.py 的 DEFAULTS.kinematics 对齐。
 const DEFAULTS = {
   stepsMin: 20,
   stepsMax: 60,
@@ -24,8 +35,11 @@ const DEFAULTS = {
 };
 
 const $ = s => document.querySelector(s);
+// Clamp helper. 区间钳制辅助函数。
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 
+// mulberry32: tiny 32-bit seeded PRNG.
+// mulberry32：微型 32 位带种子 PRNG。
 function mulberry32(seed) {
   let a = seed >>> 0;
   return function () {
@@ -36,6 +50,8 @@ function mulberry32(seed) {
   };
 }
 
+// Box-Muller Gaussian sample (no numpy equivalent needed in JS).
+// Box-Muller 高斯采样。
 function gauss(rnd, mu = 0, sigma = 1) {
   let u1 = rnd();
   if (u1 < 1e-12) u1 = 1e-12;
@@ -43,11 +59,15 @@ function gauss(rnd, mu = 0, sigma = 1) {
   return mu + sigma * Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
 }
 
+// Slow-fast-slow profile: 3t^2 - 2t^3.
+// 慢-快-慢速度轮廓：3t^2 - 2t^3。
 const smoothstep = t => {
   t = clamp(t, 0, 1);
   return t * t * (3 - 2 * t);
 };
 
+// Sample a point on a cubic bezier curve.
+// 三次贝塞尔曲线采样。
 function bezier3(p0, p1, p2, p3, t) {
   const u = 1 - t;
   const x = u * u * u * p0[0] + 3 * u * u * t * p1[0] +
@@ -57,11 +77,15 @@ function bezier3(p0, p1, p2, p3, t) {
   return [x, y];
 }
 
+// Control points: one-sided offset perpendicular to the main direction.
+// 控制点：沿垂直于主方向的单侧随机偏移。
 function controlPoints(rnd, start, end, dist, ratio) {
   const dx = end[0] - start[0];
   const dy = end[1] - start[1];
   if (dist < 1e-6) return [start, end];
+  // Unit normal vector. 单位法向量。
   const nx = -dy / dist, ny = dx / dist;
+  // Random side (left or right). 随机取正/负侧。
   const side = rnd() < 0.5 ? 1 : -1;
   const amp = dist * ratio * (0.5 + rnd() * 0.9);
   const mx = (start[0] + end[0]) / 2;
@@ -73,6 +97,8 @@ function controlPoints(rnd, start, end, dist, ratio) {
   ];
 }
 
+// Generate one human-like trajectory (main entry).
+// 生成一条拟人轨迹（主入口）。
 function generate(start, end, opts) {
   const o = Object.assign({}, DEFAULTS, opts || {});
   const rnd = mulberry32(o.seed >>> 0);
@@ -81,20 +107,26 @@ function generate(start, end, opts) {
   const dx = p3[0] - p0[0], dy = p3[1] - p0[1];
   const dist = Math.hypot(dx, dy);
 
+  // Degenerate distance: just two points. 距离过短：只返回两个点。
   if (dist < 1.0) {
     return { points: [p0, p3], intervals: [0.02], duration: 0.02,
              distance: dist, steps: 2, slider: !!o.forSlider, seed: o.seed };
   }
 
+  // Fitts-style step count and duration. Fitts 风格步数与总时长。
   const steps = Math.round(clamp(dist / o.pxPerStep, o.stepsMin, o.stepsMax));
   const duration = clamp(dist * o.durationPerPx, o.durationMin, o.durationMax);
 
+  // Slider drag branch: near-horizontal, head/tail pinned.
+  // 滑块拖拽分支：近乎纯水平、头尾贴轨道。
   if (o.forSlider) {
     const ts = [];
     for (let i = 0; i < steps; i++) ts.push(smoothstep(i / (steps - 1)));
     const pts = [];
     for (let i = 0; i < steps; i++) {
       const x = p0[0] + dx * ts[i];
+      // Tiny vertical jitter only in the middle; head/tail stay on track.
+      // 仅中段有极小 y 抖动；头尾保持贴轨道。
       const y = (i >= 2 && i <= steps - 3) ? p0[1] + gauss(rnd, 0, 0.5)
                                            : p0[1];
       pts.push([x, y]);
@@ -109,6 +141,7 @@ function generate(start, end, opts) {
              distance: dist, steps: pts.length, slider: true, seed: o.seed };
   }
 
+  // Overshoot: pass the target then pull back. 过冲：先越过终点再回拉。
   let overshoot = 0;
   if (rnd() < o.overshootProb) overshoot = dist * o.overshootRatio * (0.6 + rnd() * 0.6);
   const s = overshoot > 0 ? overshoot / dist : 0;
@@ -118,6 +151,7 @@ function generate(start, end, opts) {
   const pts = [];
   for (let i = 0; i < steps; i++) pts.push(bezier3(p0, p1, p2, p3o, i / (steps - 1)));
 
+  // Append pull-back points after overshoot. 过冲后追加回拉点。
   if (overshoot > 0) {
     const backN = Math.max(3, Math.floor(steps / 6));
     for (let i = 1; i <= backN; i++) {
@@ -126,12 +160,15 @@ function generate(start, end, opts) {
     }
   }
 
+  // Speed profile + per-step jitter. 速度轮廓 + 每步随机扰动。
   const n = pts.length;
   const ts = [];
   for (let i = 0; i < n; i++) ts.push(smoothstep(i / (n - 1)));
   const ivs = [];
   for (let i = 1; i < n; i++) ivs.push(duration * (ts[i] - ts[i - 1]) * (0.6 + rnd() * 0.8));
 
+  // Tail jitter: human finger tremor at the end of the move.
+  // 末段微颤：动作结尾的手指生理抖动。
   if (o.jitterSigma > 0) {
     const tailFrom = Math.floor(n * (1 - o.jitterTailFraction));
     for (let i = tailFrom; i < n - 1; i++) {
@@ -141,6 +178,7 @@ function generate(start, end, opts) {
     }
   }
 
+  // Force exact end + small "settle" delay. 强制终点精确 + 末段落定延迟。
   if (o.exactEnd !== false) {
     pts[pts.length - 1] = p3;
     ivs[ivs.length - 1] += 0.05 + rnd() * 0.15;
@@ -151,9 +189,10 @@ function generate(start, end, opts) {
            distance: dist, steps: pts.length, slider: false, seed: o.seed };
 }
 
+// Round a point to integer coords. 坐标取整。
 const roundPt = p => [Math.round(p[0]), Math.round(p[1])];
 
-/* ---------------- 绘图 ---------------- */
+/* ---------------- drawing / 绘图 ---------------- */
 function draw(g) {
   const cv = $('#cv');
   const ctx = cv.getContext('2d');
@@ -173,7 +212,7 @@ function draw(g) {
   const tx = x => ox + (x - minX) * scale;
   const ty = y => oy + (y - minY) * scale;
 
-  // 网格
+  // Grid. 网格。
   ctx.strokeStyle = 'rgba(255,255,255,0.06)';
   ctx.lineWidth = 1;
   for (let i = 0; i <= 10; i++) {
@@ -183,7 +222,7 @@ function draw(g) {
     ctx.beginPath(); ctx.moveTo(ox, gy); ctx.lineTo(ox + w * scale, gy); ctx.stroke();
   }
 
-  // 轨迹
+  // Trajectory. 轨迹。
   ctx.strokeStyle = '#4c8dff';
   ctx.lineWidth = 2;
   ctx.lineJoin = 'round';
@@ -194,7 +233,7 @@ function draw(g) {
   });
   ctx.stroke();
 
-  // 采样点
+  // Sample points. 采样点。
   ctx.fillStyle = 'rgba(76,141,255,0.45)';
   pts.forEach(p => {
     ctx.beginPath();
@@ -202,7 +241,7 @@ function draw(g) {
     ctx.fill();
   });
 
-  // 起终点
+  // Start / end markers. 起终点标记。
   ctx.fillStyle = '#2fbf71';
   ctx.beginPath(); ctx.arc(tx(pts[0][0]), ty(pts[0][1]), 7, 0, Math.PI * 2); ctx.fill();
   ctx.fillStyle = '#e5534b';
@@ -211,12 +250,14 @@ function draw(g) {
   ctx.fill();
 }
 
-/* ---------------- 交互 ---------------- */
+/* ---------------- interaction / 交互 ---------------- */
 function readNum(id, dflt) {
   const v = $(id).value;
   return v === '' ? dflt : Number(v);
 }
 
+// Regenerate and redraw; also show step-interval stats.
+// 重新生成并重绘；同时展示步间隔统计。
 function render() {
   const start = [readNum('#sx', 100), readNum('#sy', 1800)];
   const end = [readNum('#ex', 900), readNum('#ey', 400)];
