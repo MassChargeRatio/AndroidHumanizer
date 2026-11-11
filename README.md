@@ -113,6 +113,15 @@ python -m http.server 8000 --directory site
 
 注意：`site/` 是纯静态页，不包含 Python 后端，因此没有 CSV 导出和 POST API。
 
+**`site/` 与 `touch_humanization/web/static/` 的分工**（两者是不同的前端，不是同步副本）：
+
+| 目录 | 定位 | 依赖 |
+|---|---|---|
+| `site/` | GitHub Pages 在线演示：纯前端移植同一套算法，开箱即用 | 零依赖，不调用任何 API |
+| `touch_humanization/web/static/` | 本地 Web GUI（`touch-humanization-web`）的三 tab 控制台前端 | 必须配合 Python 后端的 `/api/*` 端点 |
+
+修改算法展示逻辑时两处可能都需要调整；`web/static/` 的改动随包分发（wheel 内含），`site/` 的改动由 Pages 工作流自动部署。
+
 ### Web GUI 的 API（本地服务）
 
 如果希望用脚本调用 Web GUI 背后的能力：

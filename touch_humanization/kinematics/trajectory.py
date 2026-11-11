@@ -201,12 +201,15 @@ class Kinematics:
             return Gesture(tuple((int(round(x)), int(round(y))) for x, y in pts),
                            tuple(intervals), sum(intervals), dist, n, for_slider)
 
-        # Degenerate distance: just two points.
-        # 距离过短：只返回两个点。
+        # Degenerate distance: just two points. The slider branch does not
+        # apply below 1 px, so always report a plain (non-slider) gesture
+        # to avoid returning slider=True without slider semantics.
+        # 距离过短：只返回两个点。极短距离下滑块分支无意义，
+        # 一律按普通两点手势返回，避免出现 slider=True 却无滑块语义的歧义。
         if dist < 1.0:
             pts = [(int(round(p0[0])), int(round(p0[1]))),
                    (int(round(p3[0])), int(round(p3[1])))]
-            return Gesture(tuple(pts), (0.02,), 0.02, dist, 2, for_slider)
+            return Gesture(tuple(pts), (0.02,), 0.02, dist, 2, False)
 
         # Fitts-style step count and duration.
         # Fitts 风格步数与总时长。

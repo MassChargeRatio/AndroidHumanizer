@@ -48,22 +48,40 @@ class Humanizer:
                                         exact_end=exact_end)
 
     def delay(self) -> float:
-        # Sample then sleep for inter-action delay.
-        # 采样动作间隔并真实 sleep。
+        """Sample then **sleep** for the inter-action delay.
+
+        Returns the sampled seconds; blocks the caller for that duration.
+
+        采样动作间隔并**真实 sleep**。
+
+        返回采样秒数；调用方会被阻塞相应时长。
+        """
         v = self.timing.delay_between_actions()
         time.sleep(v)
         return v
 
     def think(self) -> float:
-        # Sample then sleep for "thinking" pause.
-        # 采样思考停顿并真实 sleep。
+        """Sample then **sleep** for the "thinking" pause.
+
+        Returns the sampled seconds; blocks the caller for that duration.
+
+        采样思考停顿并**真实 sleep**。
+
+        返回采样秒数；调用方会被阻塞相应时长。
+        """
         v = self.timing.think()
         time.sleep(v)
         return v
 
     def after_open(self) -> float:
-        # Sample then sleep for post-launch pause.
-        # 采样启动后停留并真实 sleep。
+        """Sample then **sleep** for the post-launch pause.
+
+        Returns the sampled seconds; blocks the caller for that duration.
+
+        采样启动后停留并**真实 sleep**。
+
+        返回采样秒数；调用方会被阻塞相应时长。
+        """
         v = self.timing.after_open()
         time.sleep(v)
         return v

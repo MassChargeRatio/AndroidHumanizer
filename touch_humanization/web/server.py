@@ -37,6 +37,7 @@ import statistics
 import sys
 import urllib.parse
 import webbrowser
+from collections.abc import Iterable
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 from ..humanize import Humanizer
@@ -63,7 +64,7 @@ def _parse_xy(v, default):
     return default
 
 
-def _pick(body: dict, keys) -> dict:
+def _pick(body: dict, keys: Iterable[str]) -> dict:
     # Pick only the known keys from a request body.
     # 只取请求体里已知的键。
     out = {}
