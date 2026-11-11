@@ -109,6 +109,103 @@ def test_gesture_bad_body(server):
         raise AssertionError("应返回 400 / 400 expected")
 
 
+def test_rejects_non_loopback_bind():
+    # The unauthenticated API must never bind to a LAN/public interface.
+    # 无认证 API 不得绑定到局域网或公网网卡。
+    with pytest.raises(ValueError, match="127.0.0.1"):
+        make_server("0.0.0.0", 0)
+
+
+def test_rejects_invalid_host_header(server):
+    # DNS-rebinding / foreign Host headers must not reach the API.
+    # 外部 Host 不得访问本地服务。
+    req = urllib.request.Request(server + "/api/health", headers={"Host": "attacker.example"})
+    try:
+        urllib.request.urlopen(req, timeout=5)
+    except urllib.error.HTTPError as exc:
+        assert exc.code == 403
+    else:
+        raise AssertionError("expected 403 for invalid Host")
+
+
+def test_post_requires_json_content_type(server):
+    # Non-JSON request bodies are rejected explicitly.
+    # 非 JSON 请求体必须被明确拒绝。
+    req = urllib.request.Request(
+        server + "/api/gesture", data=b"{}",
+        method="POST", headers={"Content-Type": "text/plain"},
+    )
+    try:
+        urllib.request.urlopen(req, timeout=5)
+    except urllib.error.HTTPError as exc:
+        assert exc.code == 415
+    else:
+        raise AssertionError("expected 415 for non-JSON content type")
+
+
+def test_post_requires_json_object(server):
+    # JSON arrays are not valid API request objects.
+    # JSON 数组不是合法的 API 请求对象。
+    req = urllib.request.Request(
+        server + "/api/gesture", data=b"[]",
+        method="POST", headers={"Content-Type": "application/json"},
+    )
+    try:
+        urllib.request.urlopen(req, timeout=5)
+    except urllib.error.HTTPError as exc:
+        assert exc.code == 400
+    else:
+        raise AssertionError("expected 400 for a non-object JSON body")
+
+
+def test_post_rejects_oversized_body(server):
+    # Oversized requests must be rejected before JSON decoding.
+    # 超大请求体必须在 JSON 解码前拒绝。
+    from touch_humanization.web.server import MAX_REQUEST_BODY
+    req = urllib.request.Request(
+        server + "/api/gesture", data=b" " * (MAX_REQUEST_BODY + 1),
+        method="POST", headers={"Content-Type": "application/json"},
+    )
+    try:
+        urllib.request.urlopen(req, timeout=5)
+    except urllib.error.HTTPError as exc:
+        assert exc.code == 413
+    else:
+        raise AssertionError("expected 413 for oversized body")
+
+
+def test_wake_window_rejects_invalid_time(server):
+    # Invalid time strings must not silently become midnight.
+    # 无效时间不得静默回退成午夜。
+    req = urllib.request.Request(
+        server + "/api/timing/window",
+        data=json.dumps({"wake_window": {"start": "25:90", "end": "23:00"}}).encode(),
+        method="POST", headers={"Content-Type": "application/json"},
+    )
+    try:
+        urllib.request.urlopen(req, timeout=5)
+    except urllib.error.HTTPError as exc:
+        assert exc.code == 400
+    else:
+        raise AssertionError("expected 400 for invalid HH:MM")
+
+
+def test_sensor_generation_has_resource_bounds(server):
+    # Sampling must be finite and bounded before rows are allocated.
+    # 必须在分配数据前限制传感器采样规模。
+    req = urllib.request.Request(
+        server + "/api/sensors/generate",
+        data=json.dumps({"fs": 500, "duration": 61}).encode(),
+        method="POST", headers={"Content-Type": "application/json"},
+    )
+    try:
+        urllib.request.urlopen(req, timeout=5)
+    except urllib.error.HTTPError as exc:
+        assert exc.code == 400
+    else:
+        raise AssertionError("expected 400 for oversized sensor request")
+
+
 # ------------------------------------------------------------ timing
 # ------------------------------------------------------------ 时序
 
